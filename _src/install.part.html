@@ -110,7 +110,7 @@ Permanent link · channel · certification
   const SYM = [
     ['速度掉到 100M', ['1000BASE-T 以上要四對全通；有一對斷或接觸不良，設備會自動降速到 100M（只用兩對）', '檢查兩端 RJ45 與模組是否有芯線沒壓到', '用測線器看 Wire Map，或在交換器查該埠協商速率']],
     ['時好時壞', ['靠近強電、馬達、影印機等干擾源（見上方案例）', '退絞太長、接頭壓接不良，晃動時接觸不穩', '線材被壓扁、彎折或進水；用認證測試儀測 NEXT、RL']],
-    ['PoE 設備重開', ['CCA 線或線太細，迴路電阻大，壓降讓設備欠壓', '線太長或接觸不良；大量線束溫升使電阻增加', '交換器 PoE 總預算不足（見 PoE PD 系列 05 頁）']],
+    ['PoE 設備重開', ['CCA 線或線太細，迴路電阻大，壓降讓設備欠壓', '線太長或接觸不良；大量線束溫升使電阻增加', '交換器 PoE 總預算不足（見 <a href="https://poe-pd-series.vercel.app/pse-switch.html" target="_blank" rel="noopener">PoE PD 系列 05 頁 ↗</a>）']],
     ['完全不通', ['線序錯、斷線、短路：先用測線器看 Wire Map', '檢查交換器埠是否關閉或 VLAN 設定', '換一條已知正常的跳線，區分是跳線還是永久鏈路']],
   ];
   function sym(i){ const s = SYM[i]; $('symInfo').innerHTML = `<h3>${s[0]}：先查這些</h3><ul>${s[1].map(x => `<li>${x}</li>`).join('')}</ul>`; abbrify(null, '#symInfo'); }
