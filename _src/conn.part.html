@@ -1,0 +1,137 @@
+<!--#TITLE-->
+08 接頭與維護｜網路線材系列
+<!--#H1-->
+光纖接頭、清潔與損耗預算
+<!--#H1_EN-->
+Connectors · UPC / APC · cleaning · loss budget
+<!--#CHIP-->
+0.75 <span>dB</span>
+<!--#LEDE-->
+<p class="lede">光纖鏈路出問題，很多時候不是光纖斷掉，而是接頭髒了。這頁整理常見接頭、UPC 與 APC 的差別、正確的清潔流程，以及用損耗預算判斷一條光纖「夠不夠力」。
+  <span class="en">Most fiber faults are dirty connectors. Inspect, clean, inspect — then check the loss budget.</span></p>
+<!--#STYLE-->
+.cg{display:grid;grid-template-columns:repeat(auto-fit,minmax(170px,1fr));gap:12px}
+.cg .phase svg{width:100%;height:90px;display:block;margin:4px 0 6px}
+<!--#BODY-->
+  <section class="panel" aria-labelledby="h1">
+    <h2 id="h1"><span class="step">1</span>常見接頭 <span class="en">Connector types (front view, schematic)</span></h2>
+    <div class="cg" id="cg"></div>
+    <p class="note-key" style="margin-top:8px">正面示意圖，非實際比例的外殼造型；插芯直徑為標準值。</p>
+  </section>
+
+  <section class="panel" aria-labelledby="h2">
+    <h2 id="h2"><span class="step">2</span>UPC 與 APC <span class="en">End-face polish</span></h2>
+    <div class="controls"><div class="seg" id="pol"><button data-v="upc" aria-pressed="true">UPC 平面（藍）</button><button data-v="apc">APC 8° 斜面（綠）</button><button data-v="mix">混插會怎樣</button></div></div>
+    <div class="grid-2">
+      <div><svg style="width:100%;height:auto;display:block" id="pf" viewBox="0 0 460 170" role="img" aria-label="研磨面示意"></svg></div>
+      <div class="infobox" id="pinfo" style="--c:var(--accent)"></div>
+    </div>
+  </section>
+
+  <section class="panel" aria-labelledby="h3">
+    <h2 id="h3"><span class="step">3</span>清潔流程：先看、再清、再看 <span class="en">Inspect · clean · inspect</span></h2>
+    <div class="steps">
+      <div><h3>檢查</h3><p>用光纖顯微鏡（Fiber scope）看端面，依 IEC 61300-3-35 判定纖芯區是否有髒污或刮傷。模組端與跳線端都要看。</p></div>
+      <div><h3>乾式清潔</h3><p>用一按式清潔筆（插座用）或清潔卡匣（跳線頭用）。MPO 要用專用清潔筆。</p></div>
+      <div><h3>濕式清潔（必要時）</h3><p>頑固污漬用光纖專用清潔液或高純度 IPA 沾無塵紙擦，<b>接著一定要再乾擦</b>，不可殘留液體。</p></div>
+      <div><h3>再檢查後連接</h3><p>確認乾淨才插上；拔下來的接頭與空埠立刻蓋防塵蓋。</p></div>
+    </div>
+    <div class="grid-2" style="margin-top:12px">
+      <div class="errata"><b class="t">不要做</b>：用衛生紙、衣服擦；用嘴吹；不清潔就重插（灰塵會在插芯間被壓碎、刮傷端面）；直視模組或光纖端面。</div>
+      <div class="infobox" style="--c:var(--on);min-height:0"><h3>MPO 極性</h3><p>40G／100G SR4 用 MPO 多芯接頭，主幹光纜與跳線的極性（Type A／B／C）要搭配，否則收發對不上。採購時整條鏈路一起選型。</p></div>
+    </div>
+  </section>
+
+  <section class="panel" aria-labelledby="h4">
+    <h2 id="h4"><span class="step">4</span>損耗預算計算器 <span class="en">Loss budget calculator</span></h2>
+    <div class="controls"><div class="seg" id="app" style="flex-wrap:wrap"></div></div>
+    <div class="grid-2">
+      <div><div class="params" id="lprm"></div>
+        <div class="grp-title">每對接頭損耗</div>
+        <div class="seg" id="cl"><button data-v="0.75" aria-pressed="true">0.75 dB（TIA 上限）</button><button data-v="0.5">0.5 dB（一般）</button><button data-v="0.3">0.3 dB（低損耗）</button></div></div>
+      <div><div class="badges" id="lbad"></div><div class="formulas" id="lres"></div>
+        <div class="bars" id="lbar" style="margin-top:12px"></div></div>
+    </div>
+    <p class="note-key" style="margin-top:8px">光纖衰減採設計常用值：多模 850 nm 3.0 dB/km、單模 1310 nm 0.4 dB/km；熔接點 0.3 dB。預算為 IEEE 802.3 的通道插入損耗上限，已內含部分接頭損耗配額。實際驗收以光源光功率計（OLTS）量測為準。</p>
+  </section>
+<!--#FOOTER-->
+依據 ANSI/TIA-568.3-D（接頭 0.75 dB、熔接 0.3 dB）、IEC 61300-3-35（端面檢查）、IEEE 802.3 各規格通道插入損耗。UPC／APC 回波損耗為常見產品規格。
+<!--#SCRIPT-->
+(function(){
+  // connector gallery (front view schematics)
+  const C = [
+    ['LC', '1.25 mm 插芯，卡扣式、常見雙芯。SFP／SFP+ 光模組標配，機房高密度主流。', s => {
+      [60, 120].forEach(x => { svgEl('rect', {x:x - 22, y:20, width:44, height:50, rx:4, fill:'var(--paper-2)', stroke:'var(--wire)', 'stroke-width':1.5}, s); svgEl('circle', {cx:x, cy:45, r:6, fill:'#e8e2d4', stroke:'var(--wire)'}, s); }); }],
+    ['SC', '2.5 mm 插芯，方形推拉式。傳統電信、FTTH 光纖到府常見。', s => {
+      svgEl('rect', {x:55, y:10, width:70, height:70, rx:6, fill:'var(--paper-2)', stroke:'var(--wire)', 'stroke-width':1.5}, s); svgEl('circle', {cx:90, cy:45, r:12, fill:'#e8e2d4', stroke:'var(--wire)'}, s); }],
+    ['MPO／MTP', '一個接頭 12 或 24 芯排成一列，兩側導針孔。40G／100G SR4 與高密度主幹。', s => {
+      svgEl('rect', {x:15, y:28, width:150, height:34, rx:5, fill:'var(--paper-2)', stroke:'var(--wire)', 'stroke-width':1.5}, s);
+      for (let i = 0; i < 12; i++) svgEl('circle', {cx:43 + i * 8.6, cy:45, r:3, fill:'#e8e2d4', stroke:'var(--wire)', 'stroke-width':.8}, s);
+      [26, 154].forEach(x => svgEl('circle', {cx:x, cy:45, r:4.5, fill:'var(--wire)'}, s)); }],
+    ['FC', '2.5 mm 插芯，螺牙鎖固、抗震動。量測儀器與工業設備。', s => {
+      svgEl('circle', {cx:90, cy:45, r:36, fill:'var(--paper-2)', stroke:'var(--wire)', 'stroke-width':1.5, 'stroke-dasharray':'4 3'}, s); svgEl('circle', {cx:90, cy:45, r:12, fill:'#e8e2d4', stroke:'var(--wire)'}, s); }],
+  ];
+  $('cg').innerHTML = C.map((c, i) => `<div class="phase" style="--c:var(--p${i + 1})"><h3>${c[0]}</h3><svg id="cg${i}" viewBox="0 0 180 90" role="img" aria-label="${c[0]} 正面示意"></svg><p>${c[1]}</p></div>`).join('');
+  C.forEach((c, i) => c[2]($('cg' + i)));
+  // polish
+  function pol(v){
+    const s = $('pf'); s.innerHTML = '';
+    const aL = v === 'apc' ? 8 : 0, aR = v === 'upc' ? 0 : 8, h = 40;
+    const dL = Math.tan(aL * Math.PI / 180) * h, dR = Math.tan(aR * Math.PI / 180) * h;
+    const xf = 228, g = v === 'mix' ? dR + 1 : 2;
+    const colA = v === 'apc' ? '#2fa155' : '#2d6bd8', colB = v === 'upc' ? '#2d6bd8' : '#2fa155';
+    svgEl('polygon', {points:`20,45 ${xf - dL},45 ${xf + dL},125 20,125`, fill:'#e8e2d4', stroke:colA, 'stroke-width':3}, s);
+    svgEl('polygon', {points:`${xf + g - dR},45 440,45 440,125 ${xf + g + dR},125`, fill:'#e8e2d4', stroke:colB, 'stroke-width':3}, s);
+    svgEl('line', {x1:20, x2:440, y1:85, y2:85, stroke:'#c43d22', 'stroke-width':2, 'stroke-dasharray':'6 4'}, s);
+    svgEl('text', {x:20, y:22, class:'lbl-sm'}, s, '插芯 Ferrule（側面剖視）');
+    svgEl('text', {x:20, y:150, class:'lbl-sm'}, s, '紅虛線＝纖芯');
+    svgEl('text', {x:440, y:22, 'text-anchor':'end', class:'tag-t'}, s, v === 'mix' ? '端面間有空隙 → 損耗與反射大增' : v === 'apc' ? '8° 斜面：反射光斜射出纖芯' : '平面：少量反射光沿纖芯折返');
+    const I = {
+      upc:['UPC 平面研磨', '藍色接頭。端面微凸平面，回波損耗約 ≥ 50 dB。一般資料通訊（乙太網路光模組）多用 UPC。'],
+      apc:['APC 8° 斜面研磨', '綠色接頭。斜面讓反射光斜射出纖芯，回波損耗約 ≥ 60 dB。CATV、PON（FTTH）與對反射敏感的應用使用。'],
+      mix:['不可混插', 'UPC 與 APC 接在一起，端面角度不合會留下空隙：插入損耗大增、反射嚴重，還可能永久損傷端面。看顏色：藍配藍、綠配綠。'],
+    }[v];
+    $('pinfo').innerHTML = `<h3>${I[0]}</h3><p>${I[1]}</p>`; $('pinfo').style.setProperty('--c', v === 'mix' ? 'var(--warn)' : v === 'apc' ? '#2fa155' : '#2d6bd8');
+    abbrify(null, '#pinfo');
+  }
+  segGroup('pol', pol); pol('upc');
+  // loss budget
+  const A = [
+    {n:'10G-SR OM3', att:3.0, max:300, bud:2.6, def:150},
+    {n:'10G-SR OM4', att:3.0, max:400, bud:2.9, def:200},
+    {n:'1G-SX OM3', att:3.0, max:550, bud:3.56, def:300},
+    {n:'40G-SR4 OM4', att:3.0, max:150, bud:1.5, def:100},
+    {n:'100G-SR4 OM4', att:3.0, max:100, bud:1.9, def:70},
+    {n:'10G-LR OS2', att:0.4, max:10000, bud:6.2, def:3000},
+    {n:'1G-LX OS2', att:0.4, max:5000, bud:4.57, def:2000},
+  ];
+  let ai = 0, cl = 0.75; const P = {L:150, c:2, sp:0};
+  $('app').innerHTML = A.map((a, i) => `<button data-v="${i}"${i ? '' : ' aria-pressed="true"'}>${a.n}</button>`).join('');
+  const defs = [{k:'L', zh:'光纖長度', en:'m'}, {k:'c', zh:'接頭對數（含配線架）', en:'mated pairs'}, {k:'sp', zh:'熔接點', en:'splices'}];
+  defs.forEach(d => { const w = document.createElement('div'); w.className = 'param';
+    w.innerHTML = `<div class="top"><label for="l_${d.k}">${d.zh}<span class="en">${d.en}</span></label><output id="lo_${d.k}"></output></div><input type="range" id="l_${d.k}">`;
+    $('lprm').appendChild(w); $('l_' + d.k).addEventListener('input', e => { P[d.k] = +e.target.value; lb(); }); });
+  function ranges(){ const a = A[ai]; const r = {L:[10, a.max * 1.5, a.max > 1000 ? 100 : 5], c:[0, 6, 1], sp:[0, 6, 1]};
+    defs.forEach(d => { const e = $('l_' + d.k); e.min = r[d.k][0]; e.max = r[d.k][1]; e.step = r[d.k][2]; }); }
+  segGroup('app', v => { ai = +v; P.L = A[ai].def; ranges(); lb(); });
+  segGroup('cl', v => { cl = +v; lb(); });
+  function lb(){
+    const a = A[ai];
+    defs.forEach(d => { $('l_' + d.k).value = P[d.k]; $('lo_' + d.k).textContent = d.k === 'L' ? (P.L >= 1000 ? (P.L / 1000).toFixed(1) + ' km' : P.L + ' m') : P[d.k]; });
+    const fib = a.att * P.L / 1000, con = cl * P.c, spl = 0.3 * P.sp, tot = fib + con + spl, mar = a.bud - tot;
+    $('lres').innerHTML = [
+      ['光纖衰減', `${a.att} dB/km × ${(P.L / 1000).toFixed(3)} km`, fib], ['接頭損耗', `${cl} dB × ${P.c}`, con], ['熔接損耗', `0.3 dB × ${P.sp}`, spl],
+      ['總損耗', '', tot], ['規範預算（IEEE 通道插入損耗）', a.n, a.bud], ['剩餘餘裕', '', mar],
+    ].map(r => `<div class="f-row"><span class="name">${r[0]}</span><span class="eq">${r[1]}</span><span class="res"${r[0] === '剩餘餘裕' ? ` style="color:${mar < 0 ? 'var(--warn)' : 'var(--ok)'}"` : ''}>${r[2].toFixed(2)} dB</span></div>`).join('');
+    const b = [];
+    b.push(mar >= 0 ? ['ok', '損耗在預算內'] : ['warn', '超過損耗預算']);
+    if (P.L > a.max) b.push(['warn', `超過規範距離 ${a.max >= 1000 ? a.max / 1000 + ' km' : a.max + ' m'}`]);
+    if (mar >= 0 && mar < 0.5) b.push(['warn', '餘裕很小：減少接頭或用低損耗接頭']);
+    $('lbad').innerHTML = b.map(x => `<span class="badge ${x[0]}">${x[1]}</span>`).join('');
+    const mx = Math.max(a.bud, tot) * 1.1;
+    $('lbar').innerHTML = [['光纖', fib, 'var(--accent)'], ['接頭', con, 'var(--on)'], ['熔接', spl, 'var(--teal)'], ['預算', a.bud, 'var(--ok)']].map(r =>
+      `<div class="bar-row"><span class="bl">${r[0]}</span><div class="bar-track"><div class="bar-fill" style="width:${r[1] / mx * 100}%;background:${r[2]}"></div></div><span class="bv">${r[1].toFixed(2)}</span></div>`).join('');
+  }
+  ranges(); lb();
+  abbrify(null);
+})();

@@ -1,0 +1,136 @@
+<!--#TITLE-->
+04 線徑、外被與線序｜網路線材系列
+<!--#H1-->
+線徑、外被與線序
+<!--#H1_EN-->
+AWG · jacket · fire rating · T568A/B
+<!--#CHIP-->
+23AWG <span>×</span> 4P
+<!--#LEDE-->
+<p class="lede">外被上那串印字其實都有意義：遮蔽代碼、等級、線徑 AWG、依循標準、外被材質、米數。這頁把線徑、外被材質、防火等級和 RJ45 線序一次講清楚。
+  <span class="en">Decode the jacket print: gauge, material, fire rating — plus the T568A/B pinout.</span></p>
+<!--#STYLE-->
+.awg-vis{display:flex;gap:18px;align-items:center;flex-wrap:wrap}
+.awg-vis svg{width:200px;height:200px;flex:none}
+<!--#BODY-->
+  <section class="panel" aria-labelledby="h1">
+    <h2 id="h1"><span class="step">1</span>AWG 線徑：數字越大，線越細 <span class="en">American Wire Gauge</span></h2>
+    <div class="grid-2">
+      <div>
+        <div class="params" id="prm"><div class="param"><div class="top"><label for="awg">線徑 AWG<span class="en">gauge</span></label><output id="awgO"></output></div><input type="range" id="awg" min="22" max="32" step="1" value="23"></div></div>
+        <div class="awg-vis" style="margin-top:10px">
+          <svg id="awgSvg" viewBox="-1 -1 2 2" role="img" aria-label="線徑大小比較"></svg>
+          <div class="bigres" style="flex:1;min-width:200px">
+            <div style="--c:var(--cu)"><span>銅徑 Diameter</span><b id="dia"></b><small>單股實心</small></div>
+            <div style="--c:var(--accent)"><span>截面積 Area</span><b id="area"></b></div>
+            <div style="--c:var(--on)"><span>每 100 m 電阻（單芯，20 °C）</span><b id="res"></b><small id="loop"></small></div>
+          </div>
+        </div>
+        <p class="note-key">虛線圓為 23 AWG 參考大小。電阻依純銅電阻率 0.01724 Ω·mm²/m 計算；TIA 通道 DC 迴路電阻上限 25 Ω。</p>
+      </div>
+      <div class="infobox" id="awgUse" style="--c:var(--accent)"></div>
+    </div>
+  </section>
+
+  <section class="panel" aria-labelledby="h2">
+    <h2 id="h2"><span class="step">2</span>外被印字怎麼讀 <span class="en">Reading the jacket print</span></h2>
+    <div class="strip" id="strip" role="group" aria-label="外被印字"></div>
+    <div class="infobox" id="stripInfo" style="--c:var(--accent);margin-top:12px;min-height:0"></div>
+    <p class="note-key" style="margin-top:6px">點印字的每一段。印字格式依廠牌而異，此為示意。</p>
+  </section>
+
+  <section class="panel" aria-labelledby="h3">
+    <h2 id="h3"><span class="step">3</span>外被材質 <span class="en">Jacket materials</span></h2>
+    <div class="phases">
+      <div class="phase" style="--c:var(--on)"><h3>PVC 聚氯乙烯</h3><p>室內一般用途、成本低，表面較亮滑。燃燒時濃煙多，並釋出含鹵素（氯化氫）的腐蝕性氣體。</p></div>
+      <div class="phase" style="--c:var(--accent)"><h3>LSZH 低煙無鹵</h3><p>也印作 LSOH／LS0H。燃燒時煙少、不產生鹵素毒氣，用在捷運、隧道、地下室、機房與公共場所。表面霧面；現場經驗法則是指甲刮易留痕，但仍以印字為準。</p></div>
+      <div class="phase" style="--c:var(--muted)"><h3>PE 聚乙烯（戶外）</h3><p>無配管的戶外、架空：抗 UV、耐候、耐磨，通常為黑色。多數不具室內防火等級，進入建物後應轉接室內線。</p></div>
+    </div>
+    <p style="font-size:14px;margin:12px 0 0">外被<b>不是越厚越好</b>：太鬆剝線時芯線會整段滑出，太厚則不好彎折。另外，芯線絕緣層多為 PE，和外被是不同材料。</p>
+  </section>
+
+  <section class="panel" aria-labelledby="h4">
+    <h2 id="h4"><span class="step">4</span>防火等級 <span class="en">Fire ratings (high → low)</span></h2>
+    <div class="grp-title">美國 NEC（NFPA 70 Article 800）</div>
+    <div class="ladder"><span class="top">CMP 風管 Plenum</span><i>›</i><span>CMR 豎井 Riser</span><i>›</i><span>CM／CMG 一般</span><i>›</i><span>CMX 住宅</span></div>
+    <div class="grp-title">歐盟 CPR（EN 50575，常見等級）</div>
+    <div class="ladder"><span class="top">B2ca</span><i>›</i><span>Cca</span><i>›</i><span>Dca</span><i>›</i><span>Eca</span></div>
+    <p class="note-key" style="margin-top:10px">CPR 另有煙霧（s1–s3）、燃燒滴落（d0–d2）、酸性（a1–a3）附加等級。高等級可取代低等級使用。</p>
+    <div class="errata" style="border-color:var(--accent);background:color-mix(in srgb,var(--accent) 6%,transparent)"><b style="color:var(--accent)">LSZH ≠ 防火等級</b>：LSZH 是「材料特性」（低煙、無鹵），CM／CMP 與 CPR 是「燃燒等級」。兩者是不同維度，規格書要分開寫。</div>
+  </section>
+
+  <section class="panel" aria-labelledby="h5">
+    <h2 id="h5"><span class="step">5</span>RJ45 線序 T568A／T568B <span class="en">Pinout</span></h2>
+    <div class="controls"><div class="seg" id="std"><button data-v="B" aria-pressed="true">T568B</button><button data-v="A">T568A</button></div><span style="font-size:13px;color:var(--muted)">從 RJ45 頭的金屬片那一面看，卡榫朝下，左邊是第 1 腳。</span></div>
+    <div class="pins" id="pins"></div>
+    <div class="grid-2" style="margin-top:12px">
+      <ul style="margin:0;padding-left:18px;font-size:14px">
+        <li>A 與 B 只差在<b>橙、綠兩對互換</b>（腳 1-2 與 3-6）。</li>
+        <li>線對分配：1-2、3-6、4-5、7-8；1000BASE-T 以上四對全用。</li>
+        <li>兩端同一種＝直通線；一端 A、一端 B＝交叉線。現在設備多有 <b>Auto-MDIX</b>，直通線即可。</li>
+      </ul>
+      <ul style="margin:0;padding-left:18px;font-size:14px">
+        <li>同一個案場要統一用 A 或 B，配線架與模組也要一致。</li>
+        <li>商用案場多用 T568B；美國聯邦政府案與住宅佈線標準則採 T568A。以案場規範為準。</li>
+        <li>端接時每對退絞不超過 13 mm（見 05 頁）。</li>
+      </ul>
+    </div>
+  </section>
+<!--#FOOTER-->
+依據 ANSI/TIA-568.2-D、NFPA 70（NEC）Article 800、EU CPR (EU) No 305/2011 與 EN 50575。AWG 銅徑以標準公式 d = 0.127 × 92^((36−n)/39) mm 計算。
+<!--#SCRIPT-->
+(function(){
+  const dia = n => 0.127 * Math.pow(92, (36 - n) / 39);
+  const USE = {
+    22:['22 AWG 單股','部分 Cat 6A／Cat 8 水平線使用，線較粗。'],
+    23:['23 AWG 單股','Cat 6／6A 水平線最常見，永久鏈路標準選擇。'],
+    24:['24 AWG 單股／多股','Cat 5e 水平線常見；也是標準跳線線徑。'],
+    25:['25 AWG','較少見。'],
+    26:['26 AWG 多股','標準跳線，柔軟好彎。'],
+    27:['27 AWG','較少見。'],
+    28:['28 AWG 細跳線','TIA-568.2-D 允許，但通道長度要折減；機櫃大量整線好用。大量 PoE 時注意溫升。'],
+    29:['29 AWG','較少見。'],
+    30:['30 AWG 超細跳線','高密度機櫃用；不建議高功率 PoE（電阻大、溫升高）。'],
+    31:['31 AWG','較少見。'],
+    32:['32 AWG 超細跳線','極高密度場合；僅短跳線、不建議 PoE。'],
+  };
+  function awg(){
+    const n = +$('awg').value, d = dia(n), A = Math.PI * d * d / 4, R = 0.017241 * 100 / A;
+    $('awgO').textContent = n + ' AWG';
+    $('dia').textContent = d.toFixed(3) + ' mm';
+    $('area').textContent = A.toFixed(3) + ' mm²';
+    $('res').textContent = R.toFixed(2) + ' Ω';
+    $('loop').textContent = '一對迴路（去＋回）' + (2 * R).toFixed(1) + ' Ω／100 m';
+    const s = $('awgSvg'); s.innerHTML = '';
+    const sc = 0.9 / dia(22);
+    svgEl('circle', {r:d / 2 * sc * 2, fill:'var(--cu)'}, s);
+    svgEl('circle', {r:dia(23) / 2 * sc * 2, fill:'none', stroke:'var(--ink)', 'stroke-width':.015, 'stroke-dasharray':'.05 .04'}, s);
+    const u = USE[n]; $('awgUse').innerHTML = `<h3>${u[0]}</h3><p>${u[1]}</p><table class="spec" style="margin-top:8px"><tbody>` +
+      [22, 23, 24, 26, 28, 30, 32].map(k => `<tr${k === n ? ' style="outline:2px solid var(--accent)"' : ''}><th>${k} AWG</th><td class="num">${dia(k).toFixed(3)} mm</td></tr>`).join('') + '</tbody></table>';
+    abbrify(null, '#awgUse');
+  }
+  $('awg').addEventListener('input', awg); awg();
+  const SEG = [
+    ['U/UTP', '遮蔽代碼', '依 ISO/IEC 11801：無整體遮蔽、無線對遮蔽。見 03 頁。'],
+    ['CAT.6', '等級', 'Category 6，頻寬 250 MHz。見 02 頁。'],
+    ['23AWG×4P', '線徑 × 對數', '23 AWG 單股實心銅、4 對（8 芯）。'],
+    ['ANSI/TIA-568.2-D', '依循標準', '美國 TIA 平衡雙絞線纜與元件標準。'],
+    ['ISO/IEC 11801', '依循標準', '國際通用佈線標準（Class D～II）。'],
+    ['LSZH', '外被材質', '低煙無鹵；若印 PVC 就是聚氯乙烯。'],
+    ['CMR', '防火等級', 'NEC 豎井級；有的會印 CM、CMP 或 CPR 等級。'],
+    ['0125 m', '米數標記', '每公尺遞增或遞減，相減就知道用了幾米、剩幾米。'],
+  ];
+  $('strip').innerHTML = SEG.map((s, i) => `<button type="button" data-i="${i}">${s[0]}</button>`).join('');
+  function seg(i){ const s = SEG[i]; $('strip').querySelectorAll('button').forEach((b, k) => b.setAttribute('aria-pressed', k === i)); $('stripInfo').innerHTML = `<h3><span class="tag">${s[1]}</span>${s[0]}</h3><p>${s[2]}</p>`; abbrify(null, '#stripInfo'); }
+  $('strip').addEventListener('click', e => { const b = e.target.closest('button'); if (b) seg(+b.dataset.i); });
+  seg(2);
+  const C = {wo:['#f08a24', 1, '白橙'], o:['#f08a24', 0, '橙'], wg:['#2fa155', 1, '白綠'], g:['#2fa155', 0, '綠'], wb:['#2d6bd8', 1, '白藍'], b:['#2d6bd8', 0, '藍'], wbr:['#8a5a33', 1, '白棕'], br:['#8a5a33', 0, '棕']};
+  const STD = {B:['wo', 'o', 'wg', 'b', 'wb', 'g', 'wbr', 'br'], A:['wg', 'g', 'wo', 'b', 'wb', 'o', 'wbr', 'br']};
+  function pins(k){
+    $('pins').innerHTML = STD[k].map((c, i) => { const [col, w, zh] = C[c];
+      const bg = w ? `repeating-linear-gradient(0deg, ${WHITE} 0 7px, ${col} 7px 11px)` : col;
+      return `<div class="pin"><span class="w" style="background:${bg}"></span>${i + 1}<small>${zh}</small></div>`; }).join('');
+  }
+  segGroup('std', pins); pins('B');
+  abbrify(null);
+})();

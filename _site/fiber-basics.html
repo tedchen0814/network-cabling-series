@@ -1,0 +1,140 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>06 光纖基礎｜網路線材系列</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@600;700;800&family=Noto+Sans+TC:wght@400;500;700;900&family=JetBrains+Mono:wght@400;600&display=swap">
+<link rel="stylesheet" href="assets/series.css">
+<style>
+.core-cmp{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px;text-align:center}
+.core-cmp svg{width:100%;max-width:150px;height:auto}
+.core-cmp b{display:block;font-size:14px}
+.core-cmp small{color:var(--muted);font-size:12.5px}
+.sw{display:inline-block;width:14px;height:14px;border-radius:3px;vertical-align:-2px;margin-right:6px;border:1px solid var(--line)}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <nav class="series" aria-label="系列 Series"><span class="lab">系列 Series</span><a href="./"><b>HOME</b>選型首頁</a><a href="copper-basics.html"><b>01 BASICS</b>構造與雙絞</a><a href="cat-grades.html"><b>02 CATEGORY</b>Cat 等級</a><a href="shielding.html"><b>03 SHIELDING</b>遮蔽代碼</a><a href="awg-jacket.html"><b>04 AWG · JACKET</b>線徑外被線序</a><a href="install-test.html"><b>05 INSTALL</b>佈線與驗收</a><span class="cur" aria-current="page"><b>06 FIBER</b>光纖基礎</span><a href="transceivers.html"><b>07 MODULE</b>光模組</a><a href="connectors.html"><b>08 CONNECTOR</b>接頭與維護</a><a href="reference.html"><b>09 APPENDIX</b>選型總表與辭典</a><a href="https://poe-pd-series.vercel.app/" target="_blank" rel="noopener"><b>↗ PoE PD</b>受電端系列</a></nav>
+  <header>
+    <div>
+      <div class="eyebrow">Network Cabling Series · 06</div>
+      <h1>光纖基礎：多模與單模<small>Multimode vs single-mode · OM1–OM5 · OS2</small></h1>
+    </div>
+    <div class="chip-dc">50 <span>vs</span> 9 µm</div>
+    <p class="lede">超過 100 m、跨建物、或 25G 以上，就要考慮光纖。光纖分兩大類：纖芯粗、光以多條路徑反射前進的<b>多模（MMF）</b>，適合建物內短距；纖芯極細、光幾乎筆直前進的<b>單模（SMF）</b>，可以跑數公里到數十公里。
+  <span class="en">Multimode for in-building runs, single-mode for kilometres.</span></p>
+  </header>
+
+  <section class="panel" aria-labelledby="h1">
+    <h2 id="h1"><span class="step">1</span>光在光纖裡怎麼走 <span class="en">How light travels</span></h2>
+    <div class="controls"><div class="seg" id="mode"><button data-v="mm" aria-pressed="true">多模 MMF</button><button data-v="sm">單模 SMF</button></div><button type="button" id="play" class="primary">暫停</button></div>
+    <div class="scroll-x"><svg id="ray" viewBox="0 0 760 180" role="img" aria-label="光路動畫"></svg></div>
+    <div class="grid-2" style="margin-top:8px">
+      <div class="infobox" id="rayInfo" style="--c:var(--accent);min-height:0"></div>
+      <div class="core-cmp" id="cores"></div>
+    </div>
+  </section>
+
+  <section class="panel" aria-labelledby="h2">
+    <h2 id="h2"><span class="step">2</span>光纖等級 <span class="en">Fiber grades (ISO/IEC 11801, TIA-598 colours)</span></h2>
+    <div class="scroll-x"><table class="tbl">
+      <thead><tr><th>等級</th><th>類型</th><th>纖芯／包層</th><th>常用波長</th><th>頻寬（850 nm EMB）</th><th>外被色（TIA-598）</th><th>現況</th></tr></thead>
+      <tbody>
+        <tr><td><b>OM1</b></td><td>多模</td><td class="m">62.5／125 µm</td><td class="m">850／1300 nm</td><td class="m">200 MHz·km*</td><td><span class="sw" style="background:#f08a24"></span>橙</td><td>舊建物，不建議新設</td></tr>
+        <tr><td><b>OM2</b></td><td>多模</td><td class="m">50／125 µm</td><td class="m">850／1300 nm</td><td class="m">500 MHz·km*</td><td><span class="sw" style="background:#f08a24"></span>橙</td><td>舊建物，不建議新設</td></tr>
+        <tr><td><b>OM3</b></td><td>多模（雷射最佳化）</td><td class="m">50／125 µm</td><td class="m">850 nm</td><td class="m">2000 MHz·km</td><td><span class="sw" style="background:#36c3cf"></span>水藍</td><td>常見</td></tr>
+        <tr><td><b>OM4</b></td><td>多模（雷射最佳化）</td><td class="m">50／125 µm</td><td class="m">850 nm</td><td class="m">4700 MHz·km</td><td><span class="sw" style="background:#36c3cf"></span>水藍（亦有紫色）</td><td>新建主流</td></tr>
+        <tr><td><b>OM5</b></td><td>寬頻多模</td><td class="m">50／125 µm</td><td class="m">850–953 nm</td><td class="m">4700 MHz·km</td><td><span class="sw" style="background:#9ccc3a"></span>萊姆綠</td><td>SWDM 用，較少見</td></tr>
+        <tr><td><b>OS2</b></td><td>單模</td><td class="m">≈9／125 µm</td><td class="m">1310／1550 nm</td><td class="m">—</td><td><span class="sw" style="background:#f2c230"></span>黃</td><td>長距與骨幹主流</td></tr>
+      </tbody></table></div>
+    <p class="note-key" style="margin-top:6px">* OM1／OM2 為滿注入（OFL）頻寬。單模纖芯約 9 µm，實際以模場直徑（約 9.2 µm @1310 nm）描述。</p>
+  </section>
+
+  <section class="panel" aria-labelledby="h3">
+    <h2 id="h3"><span class="step">3</span>這個速率能跑多遠 <span class="en">Reach by speed</span></h2>
+    <div class="controls"><div class="seg" id="spd" style="flex-wrap:wrap"><button data-v="0" aria-pressed="true">1G SX／LX</button><button data-v="1">10G SR／LR</button><button data-v="2">25G SR／LR</button><button data-v="3">40G SR4／LR4</button><button data-v="4">100G SR4／LR4</button></div></div>
+    <div class="grid-2">
+      <div><div class="grp-title" id="mmT"></div><div class="rbars" id="bars"></div></div>
+      <div class="infobox" id="smInfo" style="--c:#c9a400;min-height:0"></div>
+    </div>
+    <p class="note-key" style="margin-top:8px">依 IEEE 802.3 規範距離；廠商「延長型」模組可能更遠。—＝規範未支援。40G／100G SR4 使用 MPO 接頭（4 收 4 發，8 芯）。</p>
+  </section>
+
+  <section class="panel" aria-labelledby="h4">
+    <h2 id="h4"><span class="step">4</span>銅纜還是光纖 <span class="en">Copper or fiber</span></h2>
+    <div class="grid-2">
+      <div class="infobox" style="--c:var(--on)"><h3><span class="tag">銅纜</span>RJ45／DAC</h3><ul><li>≤ 100 m（10G 以下），可沿用既有網路線，設備便宜</li><li>可以 PoE 供電</li><li>受電磁干擾影響；跨建物有地電位差風險</li></ul></div>
+      <div class="infobox" style="--c:var(--accent)"><h3><span class="tag">光纖</span>MMF／SMF</h3><ul><li>300 m～數十 km，頻寬升級空間大</li><li>完全不受電磁干擾、沒有接地問題</li><li>需光模組；接頭怕髒、光纖怕折（見 08 頁）</li></ul></div>
+    </div>
+  </section>
+
+  <footer>
+依據 ISO/IEC 11801-1、ANSI/TIA-568.3-D、TIA-598-D（色碼）與 IEEE 802.3（1000BASE-SX／LX、10GBASE-SR／LR、25GBASE-SR／LR、40GBASE-SR4／LR4、100GBASE-SR4／LR4）。
+  </footer>
+</div>
+<script src="assets/common.js"></script>
+<script>
+(function(){
+  let mode = 'mm', playing = true, t0 = performance.now();
+  const ray = $('ray');
+  function frame(now){
+    const t = ((now - t0) / 1000) % 3;
+    ray.innerHTML = '';
+    const mm = mode === 'mm', yc = 90, core = mm ? 38 : 8;
+    svgEl('rect', {x:20, y:yc - 70, width:720, height:140, rx:10, fill:'var(--paper-2)', stroke:'var(--line)'}, ray);
+    svgEl('rect', {x:20, y:yc - core, width:720, height:2 * core, fill:mm ? 'color-mix(in srgb,#36c3cf 30%,transparent)' : 'color-mix(in srgb,#f2c230 35%,transparent)'}, ray);
+    svgEl('text', {x:30, y:yc - 52, class:'lbl-sm'}, ray, '包層 Cladding 125 µm');
+    svgEl('text', {x:30, y:yc + core + 16 > yc + 62 ? yc + 62 : yc + core + 16, class:'lbl-sm'}, ray, mm ? '纖芯 Core 50 µm' : '纖芯 Core ≈ 9 µm');
+    const head = 20 + (t / 3) * 720;
+    const paths = mm ? [[core * .95, 6], [core * .8, 4], [core * .5, 2.5]] : [[0, 1]];
+    const cols = mm ? ['#2d6bd8', '#e57410', '#16827c'] : ['#c43d22'];
+    paths.forEach(([amp, cyc], i) => {
+      let d = '';
+      for (let x = 20; x <= head; x += 3){
+        const u = (x - 20) / 720 * cyc, tri = 4 * Math.abs(u - Math.floor(u + 0.5)) - 1;
+        d += (x === 20 ? 'M' : 'L') + x + ' ' + (yc + amp * tri).toFixed(1);
+      }
+      svgEl('path', {d, fill:'none', stroke:cols[i], 'stroke-width':2.4}, ray);
+    });
+    if (playing) requestAnimationFrame(frame);
+  }
+  function info(){
+    $('rayInfo').innerHTML = mode === 'mm'
+      ? '<h3>多模 MMF</h3><p>纖芯 50 µm（舊式 62.5 µm），光以多個模態反射前進，各路徑長度不同，脈衝會被拉寬（模態色散），所以距離受限，10G 約 300–400 m。</p><p>光源用便宜的 850 nm VCSEL，模組成本低。</p>'
+      : '<h3>單模 SMF</h3><p>纖芯約 9 µm，只容許一個模態，幾乎沒有模態色散，10G 可跑 10 km 以上。</p><p>光源用 1310／1550 nm 的 FP 或 DFB 雷射，模組較貴，但光纖本身不比多模貴。</p>';
+    abbrify(null, '#rayInfo');
+  }
+  segGroup('mode', v => { mode = v; info(); if (!playing){ playing = true; $('play').textContent = '暫停'; requestAnimationFrame(frame); } });
+  $('play').addEventListener('click', () => { playing = !playing; $('play').textContent = playing ? '暫停' : '播放'; if (playing) requestAnimationFrame(frame); });
+  if (matchMedia('(prefers-reduced-motion: reduce)').matches){ playing = false; $('play').textContent = '播放'; t0 = performance.now() - 2990; frame(performance.now()); }
+  else requestAnimationFrame(frame);
+  info();
+  // core comparison to scale (cladding 125 µm)
+  $('cores').innerHTML = [['62.5', '#f08a24', 'OM1'], ['50', '#36c3cf', 'OM2–OM5'], ['9', '#f2c230', 'OS2']].map(c =>
+    `<div><svg viewBox="-70 -70 140 140"><circle r="62.5" fill="var(--paper-2)" stroke="var(--line)" stroke-width="1.5"/><circle r="${+c[0] / 2}" fill="${c[1]}"/></svg><b>${c[2]}</b><small>纖芯 ${c[0]} µm／包層 125 µm（等比例）</small></div>`).join('');
+  // reach data (m): [OM1, OM2, OM3, OM4, OM5]
+  const R = [
+    {mm:'1000BASE-SX（850 nm）', r:[275, 550, 550, 550, 550], sm:'1000BASE-LX：單模 5 km（市售多標 10 km）'},
+    {mm:'10GBASE-SR（850 nm）', r:[33, 82, 300, 400, 400], sm:'10GBASE-LR：單模 10 km；10GBASE-ER：40 km'},
+    {mm:'25GBASE-SR（850 nm）', r:[0, 0, 70, 100, 100], sm:'25GBASE-LR：單模 10 km'},
+    {mm:'40GBASE-SR4（MPO，8 芯）', r:[0, 0, 100, 150, 150], sm:'40GBASE-LR4：單模 10 km，LC 雙芯（4 波長 WDM）'},
+    {mm:'100GBASE-SR4（MPO，8 芯）', r:[0, 0, 70, 100, 100], sm:'100GBASE-LR4：單模 10 km，LC 雙芯（4 波長 WDM）'},
+  ];
+  const CL = ['#f08a24', '#f08a24', '#36c3cf', '#36c3cf', '#9ccc3a'];
+  function reach(i){
+    const x = R[i];
+    $('mmT').textContent = '多模：' + x.mm;
+    $('bars').innerHTML = x.r.map((v, k) => `<div class="rbar"><span>OM${k + 1}</span><div class="t"><div class="f" style="width:${v / 550 * 100}%;background:${CL[k]}"></div></div><b>${v ? v + ' m' : '—'}</b></div>`).join('');
+    $('smInfo').innerHTML = `<h3><span class="tag">單模 OS2</span></h3><p>${x.sm}</p><p style="color:var(--muted);font-size:13px">單模距離由光功率預算決定，見 08 頁損耗預算計算器。</p>`;
+    abbrify(null, '#smInfo, #mmT');
+  }
+  segGroup('spd', v => reach(+v)); reach(0);
+  abbrify(null);
+})();
+</script>
+</body>
+</html>

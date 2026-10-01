@@ -1,0 +1,179 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>網路線材系列｜銅纜與光纖選型</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@600;700;800&family=Noto+Sans+TC:wght@400;500;700;900&family=JetBrains+Mono:wght@400;600&display=swap">
+<link rel="stylesheet" href="assets/series.css">
+<style>
+.path{display:flex;flex-wrap:wrap;gap:8px 10px;align-items:center;font-size:14px}
+.path b{font-family:var(--display);font-size:17px;letter-spacing:.05em}
+.path .arr{color:var(--muted)}
+.dist-row{display:flex;gap:10px;align-items:center;flex-wrap:wrap}
+.dist-row input[type=range]{flex:1;min-width:180px;accent-color:var(--accent)}
+.dist-row output{font:700 18px var(--mono);color:var(--accent);min-width:90px}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <nav class="series" aria-label="系列 Series"><span class="lab">系列 Series</span><span class="cur" aria-current="page"><b>HOME</b>選型首頁</span><a href="copper-basics.html"><b>01 BASICS</b>構造與雙絞</a><a href="cat-grades.html"><b>02 CATEGORY</b>Cat 等級</a><a href="shielding.html"><b>03 SHIELDING</b>遮蔽代碼</a><a href="awg-jacket.html"><b>04 AWG · JACKET</b>線徑外被線序</a><a href="install-test.html"><b>05 INSTALL</b>佈線與驗收</a><a href="fiber-basics.html"><b>06 FIBER</b>光纖基礎</a><a href="transceivers.html"><b>07 MODULE</b>光模組</a><a href="connectors.html"><b>08 CONNECTOR</b>接頭與維護</a><a href="reference.html"><b>09 APPENDIX</b>選型總表與辭典</a><a href="https://poe-pd-series.vercel.app/" target="_blank" rel="noopener"><b>↗ PoE PD</b>受電端系列</a></nav>
+  <header>
+    <div>
+      <div class="eyebrow">Network Cabling Series</div>
+      <h1>這段線，該拉什麼？<small>Network Cabling Series · copper &amp; fiber</small></h1>
+    </div>
+    <div class="chip-dc">Cat <span>↔</span> Fiber</div>
+    <p class="lede">從 Cat 5e 到 Cat 8 的網路線，到多模、單模光纖與 SFP 光模組，整理成 9 頁可以互動操作的參考資料。先用下面的決策器輸入距離、速率與環境，看建議用哪一種線材；想知道為什麼，再點進各頁。
+  <span class="en">Pick distance, speed and environment to get a cabling recommendation, then dive into the nine reference pages for the why.</span></p>
+  </header>
+
+  <section class="panel" aria-labelledby="h-sel">
+    <h2 id="h-sel"><span class="step">1</span>選型決策器 <span class="en">Cabling selector</span></h2>
+    <div class="grid-2">
+      <div>
+        <div class="grp-title">距離（單段，兩台設備之間）Distance</div>
+        <div class="dist-row"><input type="range" id="dist" min="0" max="100" step="1" aria-label="距離"><output id="distO"></output></div>
+        <div class="presets" style="margin-top:6px">常用：<button type="button" data-d="2">同機櫃 2 m</button><button type="button" data-d="45">辦公室 45 m</button><button type="button" data-d="90">樓層 90 m</button><button type="button" data-d="250">同棟跨樓 250 m</button><button type="button" data-d="2000">跨棟 2 km</button></div>
+        <div class="grp-title">速率 Speed</div>
+        <div class="seg" id="spd" style="flex-wrap:wrap"><button data-v="1" aria-pressed="true">1G</button><button data-v="2.5">2.5G</button><button data-v="5">5G</button><button data-v="10">10G</button><button data-v="25">25G</button><button data-v="40">40G</button><button data-v="100">100G</button></div>
+        <div class="grp-title">環境 Environment（可複選）</div>
+        <div class="chk" id="env">
+          <label><input type="checkbox" value="emi">附近有強電、馬達、變頻器等干擾源<small>工廠、機電房、與電力線共用線架</small></label>
+          <label><input type="checkbox" value="poe">大量 PoE 線束（AP、攝影機）<small>整把線同時供電，會有溫升</small></label>
+          <label><input type="checkbox" value="crit">重要機房或關鍵設備<small>銀行、產線機台、斷線就出事</small></label>
+          <label><input type="checkbox" value="out">戶外、無配管或架空</label>
+          <label><input type="checkbox" value="bld">跨建築物<small>兩棟各自接地，可能有地電位差與雷擊突波</small></label>
+          <label><input type="checkbox" value="pub">捷運、隧道、地下室等密閉公共空間</label>
+        </div>
+      </div>
+      <div class="rec" id="rec" aria-live="polite"></div>
+    </div>
+    <p class="note-key" style="margin-top:12px">建議依 IEEE 802.3 各規格的標準距離與 TIA／ISO 佈線規範整理，屬一般原則；實際案場請再依設備規格書、預算與業主需求確認。</p>
+  </section>
+
+  <section class="panel" aria-labelledby="h-path">
+    <h2 id="h-path"><span class="step">2</span>閱讀路徑 <span class="en">Reading path</span></h2>
+    <div class="path">
+      <span><b>01–02</b> 網路線怎麼做、等級怎麼分</span><span class="arr">→</span>
+      <span><b>03–04</b> 遮蔽、線徑、外被、線序</span><span class="arr">→</span>
+      <span><b>05</b> 佈線與驗收</span><span class="arr">→</span>
+      <span><b>06–08</b> 光纖、光模組、接頭</span><span class="arr">→</span>
+      <span><b>09</b> 總表與辭典</span>
+    </div>
+  </section>
+  <div class="cards" id="cards"></div>
+
+  <section class="panel" aria-labelledby="h-rel">
+    <h2 id="h-rel">相關系列 <span class="en">Related series</span></h2>
+    <div class="cards">
+      <a class="card" href="https://poe-pd-series.vercel.app/" target="_blank" rel="noopener" style="--c:var(--on)"><span class="no">SERIES · PoE PD</span><h2>PoE PD 受電端<small>Power over Ethernet</small></h2><p>網路線同時送電：架構、握手、功率預算、PSE 端與 LLDP 協商。線材的線徑與 CCA 問題直接影響 PoE 壓降。</p><span class="go">開啟 Open ↗</span></a>
+    </div>
+  </section>
+
+  <footer>
+內容依據 ISO/IEC 11801-1、ANSI/TIA-568.2-D／568.3-D、IEEE 802.3 與 TIA-598；銅纜部分參考弱電通 × 越祥光電〈網路線規格與網路線種類樣板大公開〉影片並經查證修正。實際設計與採購請以規範原文與產品規格書為準。
+<br>Compiled from public standards summaries; verify against the standards and datasheets.
+  </footer>
+</div>
+<script src="assets/common.js"></script>
+<script>
+(function(){
+  const S = [
+    ['01', '構造與雙絞', 'Construction & twisting', 'copper-basics.html', '一條網路線由哪些部分組成，為什麼要雙絞、絞距為什麼都不一樣。', ['可點選的剖面圖', '雙絞抵消雜訊模擬']],
+    ['02', 'Cat 等級', 'Category 5e – 8', 'cat-grades.html', 'Cat 5e、6、6A、7、8 的頻寬、速率與距離，Cat 7 為什麼不規劃。', ['五種等級剖面切換', '速率 × 等級對照表']],
+    ['03', '遮蔽代碼', 'Shielding codes', 'shielding.html', '看懂 U/UTP、F/UTP、S/FTP，什麼時候需要遮蔽線。', ['代碼解碼器', '要不要用遮蔽線']],
+    ['04', '線徑、外被與線序', 'AWG · jacket · pinout', 'awg-jacket.html', 'AWG 與電阻、PVC／LSZH／PE、防火等級、T568A／B。', ['AWG 滑桿', '外被印字解讀', '線序切換']],
+    ['05', '佈線與驗收', 'Installation & testing', 'install-test.html', '永久鏈路與通道長度、施工要點、認證測試看什麼。', ['鏈路長度檢查器', '故障對照表']],
+    ['06', '光纖基礎', 'Fiber basics', 'fiber-basics.html', '多模與單模、OM1～OM5 與 OS2，各速率能跑多遠。', ['光路動畫', '距離查詢器']],
+    ['07', '光模組', 'Transceivers', 'transceivers.html', 'SFP 與 SFP+、Base-T／SR／LR、BiDi，DDM 光功率怎麼判讀。', ['模組選擇', 'DDM 判讀器']],
+    ['08', '接頭與維護', 'Connectors & care', 'connectors.html', 'LC、SC、MPO、FC，UPC 與 APC，光纖清潔與損耗預算。', ['損耗預算計算器', '清潔流程']],
+    ['09', '選型總表與辭典', 'Reference', 'reference.html', '銅纜／DAC／AOC／光纖總表、名詞辭典、參考標準與勘誤說明。', ['縮寫全名對照', '原簡報勘誤']],
+  ];
+  const cols = ['var(--p1)', 'var(--p2)', 'var(--p3)', 'var(--p4)', 'var(--p5)', 'var(--p6)', 'var(--p7)', 'var(--p8)', 'var(--accent)'];
+  $('cards').innerHTML = S.map((s, i) => `<a class="card" style="--c:${cols[i]}" href="${s[3]}">
+      <span class="no">PAGE ${s[0]}</span><h2>${s[1]}<small>${s[2]}</small></h2><p>${s[4]}</p>
+      <ul>${s[5].map(x => `<li>${x}</li>`).join('')}</ul><span class="go">進入 →</span></a>`).join('');
+
+  // distance slider: 0..100 mapped log-ish 1 m .. 40 km
+  const toM = v => Math.round(Math.pow(10, v / 100 * Math.log10(40000)));
+  const toV = m => Math.round(Math.log10(Math.max(1, m)) / Math.log10(40000) * 100);
+  const st = {d:45, spd:1, env:new Set()};
+  const fmt = m => m >= 1000 ? f1(m / 1000, m >= 10000 ? 0 : 1) + ' km' : m + ' m';
+  $('dist').addEventListener('input', e => { st.d = toM(+e.target.value); run(); });
+  document.querySelectorAll('[data-d]').forEach(b => b.addEventListener('click', () => { st.d = +b.dataset.d; $('dist').value = toV(st.d); run(); }));
+  segGroup('spd', v => { st.spd = +v; run(); });
+  $('env').addEventListener('change', e => { e.target.checked ? st.env.add(e.target.value) : st.env.delete(e.target.value); run(); });
+  $('dist').value = toV(st.d);
+
+  // IEEE reach (m): [OM3, OM4, SMF] and module names
+  const FIB = {
+    1:   {mm:'1000BASE-SX（SFP）', om3:550, om4:550, sm:'1000BASE-LX（SFP）', smr:5000},
+    2.5: {mm:'1000BASE-SX 或 10GBASE-SR（依設備支援）', om3:300, om4:400, sm:'10GBASE-LR（SFP+）', smr:10000},
+    5:   {mm:'10GBASE-SR（SFP+，依設備支援）', om3:300, om4:400, sm:'10GBASE-LR（SFP+）', smr:10000},
+    10:  {mm:'10GBASE-SR（SFP+）', om3:300, om4:400, sm:'10GBASE-LR（SFP+）', smr:10000},
+    25:  {mm:'25GBASE-SR（SFP28）', om3:70, om4:100, sm:'25GBASE-LR（SFP28）', smr:10000},
+    40:  {mm:'40GBASE-SR4（QSFP+，MPO）', om3:100, om4:150, sm:'40GBASE-LR4（QSFP+，LC）', smr:10000},
+    100: {mm:'100GBASE-SR4（QSFP28，MPO）', om3:70, om4:100, sm:'100GBASE-LR4（QSFP28，LC）', smr:10000},
+  };
+  function card(c, tag, title, lines, link){
+    return `<div class="rec-card" style="--c:${c}"><h3><span class="tag">${tag}</span>${title}</h3><ul>${lines.map(l => `<li>${l}</li>`).join('')}</ul>${link ? `<p style="margin-top:6px"><a href="${link[0]}">${link[1]} →</a></p>` : ''}</div>`;
+  }
+  function run(){
+    $('distO').textContent = fmt(st.d);
+    const d = st.d, s = st.spd, E = st.env, out = [];
+    const bld = E.has('bld'), out_ = E.has('out');
+    const shield = E.has('emi') || E.has('crit');
+    const jacket = out_ ? '戶外段用黑色 PE 外被（抗 UV），進建物後轉接室內線' : E.has('pub') ? '外被選 LSZH 低煙無鹵' : '室內一般用 PVC；公共或密閉空間改用 LSZH';
+    const copperRange = s <= 10 ? 100 : (s <= 40 ? 30 : 0);
+    const copperOK = !bld && copperRange && d <= copperRange;
+    // copper
+    if (copperOK && s <= 10){
+      let grade = s <= 5 ? 'Cat 6' : 'Cat 6A';
+      const lines = [];
+      if (s <= 2.5) lines.push('Cat 5e 也能跑 ' + s + 'G、100 m；新案建議直接用 Cat 6');
+      if (s === 5) lines.push('5GBASE-T 以 Cat 6 為設計目標；Cat 5e 要看環境');
+      if (s === 10) lines.push(d <= 55 ? 'Cat 6 在 55 m 內也可能跑 10G（依外部串音環境），要保證 100 m 用 Cat 6A' : '距離超過 55 m，Cat 6 不保證 10G，請用 Cat 6A');
+      if (E.has('poe') && grade === 'Cat 6') { grade = 'Cat 6A（或 Cat 6）'; lines.push('大量 PoE 線束：線徑較粗的 Cat 6A 溫升較低，並注意每束線數量（TIA TSB-184-A）'); }
+      lines.push(shield ? '有干擾或屬重要場域：用遮蔽線 F/UTP 或 U/FTP，搭配金屬模組並接地' : '一般環境用 U/UTP 即可');
+      lines.push(jacket);
+      out.push(card('var(--ok)', '建議', `${grade} 網路線（RJ45）`, lines, ['cat-grades.html', '看 Cat 等級']));
+      if (s >= 10 && d <= 5) out.push(card('var(--accent)', '可選', '同機櫃：SFP+ DAC 直連銅纜', ['10G Base-T 電口模組耗電、發熱較高；交換器與伺服器都有 SFP+ 埠時，DAC 更省電、延遲更低'], ['transceivers.html', '看光模組']));
+    }
+    if (copperOK && s > 10){
+      out.push(card('var(--accent)', '可行但少用', 'Cat 8（' + (s === 25 ? '25GBASE-T' : '40GBASE-T') + '），通道 ≤ 30 m', ['設備端支援 25G／40GBASE-T 的很少', '實務多改用下方的 DAC、AOC 或光纖'], ['cat-grades.html', '看 Cat 8']));
+    }
+    if (!bld && s > 10 && d <= 5) out.unshift(card('var(--ok)', '建議', '同機櫃：DAC 直連銅纜', ['被動 DAC 不耗電、成本最低，適合同機櫃短距（約 3 m 內最常見）', `${s}G 選對應的 ${s === 25 ? 'SFP28' : s === 40 ? 'QSFP+' : 'QSFP28'} DAC`], ['transceivers.html', '看光模組']));
+    else if (!bld && s > 10 && d <= 30) out.push(card('var(--accent)', '可選', '相鄰機櫃：AOC 主動光纜', ['兩端模組與光纖一體，免清潔接頭、抗干擾', '長度固定，日後改長度要整條換'], null));
+    // fiber
+    const F = FIB[s];
+    const needFiber = !copperOK || bld || s === 100 || (s > 10 && d > 5);
+    if (needFiber || d > 80){
+      const lines = [], mmOK = d <= F.om4;
+      if (mmOK){
+        lines.push(`${F.mm}：OM3 約 ${F.om3} m、OM4 約 ${F.om4} m`);
+        lines.push('多模光纖 OM4（水藍色），LC 接頭' + (s >= 40 ? '；SR4 用 MPO-12' : ''));
+        out.push(card(copperOK ? 'var(--accent)' : 'var(--ok)', copperOK ? '也可以' : '建議', '多模光纖（MMF）', lines.concat(bld ? ['跨建物用光纖：沒有地電位差與雷擊突波問題'] : []), ['fiber-basics.html', '看光纖基礎']));
+      }
+      if (d <= F.smr){
+        const sl = [`${F.sm}：最遠約 ${fmt(F.smr)}`, '單模光纖 OS2（黃色），LC 接頭'];
+        if (s === 1 && d > 5000) sl.push('超過 5 km 需選廠商標示 10 km 的 LX／LH 模組');
+        if (mmOK) sl.push('距離短時多模較便宜；預留未來升級可直接佈單模');
+        out.push(card(mmOK ? 'var(--accent)' : 'var(--ok)', mmOK ? '可選' : '建議', '單模光纖（SMF）', sl.concat(bld && !mmOK ? ['跨建物用光纖：沒有地電位差與雷擊突波問題'] : []), ['transceivers.html', '看光模組']));
+      } else {
+        out.push(card('var(--warn)', '超出一般模組', '距離超過 10 km', ['10G 可選 10GBASE-ER（40 km）；更遠需 ZR 或 DWDM 等長距方案，請洽廠商評估光功率預算'], ['connectors.html', '看損耗預算']));
+      }
+    }
+    if (bld && copperRange) out.push(card('var(--warn)', '不建議', '跨建物拉網路線', ['兩棟接地電位不同，可能燒毀網路埠；戶外也易受雷擊突波影響', '若非用不可，需戶外線＋突波保護器，並由專業人員規劃接地'], null));
+    if (s === 100) out.push(card('var(--warn)', '沒有銅纜方案', '100G 沒有 BASE-T（RJ45）規格', ['只能用 DAC、AOC 或光纖'], null));
+    $('rec').innerHTML = out.join('');
+    abbrify(null, '#rec');
+  }
+  run();
+  abbrify(null);
+})();
+</script>
+</body>
+</html>

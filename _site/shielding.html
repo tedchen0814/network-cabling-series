@@ -1,0 +1,140 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>03 遮蔽代碼｜網路線材系列</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@600;700;800&family=Noto+Sans+TC:wght@400;500;700;900&family=JetBrains+Mono:wght@400;600&display=swap">
+<link rel="stylesheet" href="assets/series.css">
+<style>
+.code-big{font-family:var(--display);font-weight:800;font-size:clamp(40px,7vw,64px);letter-spacing:.04em;line-height:1}
+.code-big .o{color:var(--on)} .code-big .p{color:var(--accent)} .code-big .s{color:var(--muted)}
+.gal{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px}
+@media (min-width:1000px){.gal{grid-template-columns:repeat(6,minmax(0,1fr))}}
+.gal button{display:flex;flex-direction:column;align-items:center;gap:4px;padding:10px;background:var(--paper-2)}
+.gal button svg{width:100%;max-width:120px;height:auto}
+.gal button b{font-family:var(--display);font-size:20px;letter-spacing:.04em}
+.gal button[aria-pressed="true"]{border-color:var(--accent);box-shadow:0 0 0 3px color-mix(in srgb,var(--accent) 25%,transparent)}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <nav class="series" aria-label="系列 Series"><span class="lab">系列 Series</span><a href="./"><b>HOME</b>選型首頁</a><a href="copper-basics.html"><b>01 BASICS</b>構造與雙絞</a><a href="cat-grades.html"><b>02 CATEGORY</b>Cat 等級</a><span class="cur" aria-current="page"><b>03 SHIELDING</b>遮蔽代碼</span><a href="awg-jacket.html"><b>04 AWG · JACKET</b>線徑外被線序</a><a href="install-test.html"><b>05 INSTALL</b>佈線與驗收</a><a href="fiber-basics.html"><b>06 FIBER</b>光纖基礎</a><a href="transceivers.html"><b>07 MODULE</b>光模組</a><a href="connectors.html"><b>08 CONNECTOR</b>接頭與維護</a><a href="reference.html"><b>09 APPENDIX</b>選型總表與辭典</a><a href="https://poe-pd-series.vercel.app/" target="_blank" rel="noopener"><b>↗ PoE PD</b>受電端系列</a></nav>
+  <header>
+    <div>
+      <div class="eyebrow">Network Cabling Series · 03</div>
+      <h1>看懂遮蔽代碼 XX/YTP<small>Shielding codes per ISO/IEC 11801</small></h1>
+    </div>
+    <div class="chip-dc">U · F · S</div>
+    <p class="lede">斜線前是「整體遮蔽」（包住全部 4 對），斜線後是「線對遮蔽」（每對各自包），最後的 TP 是雙絞線。U＝無遮蔽、F＝鋁箔、S＝編織網。看懂這個規則，就不會再被 FTP、STP 這些舊稱搞混。
+  <span class="en">Before the slash: overall screen. After: per-pair screen. U = none, F = foil, S = braid.</span></p>
+  </header>
+
+  <section class="panel" aria-labelledby="h1">
+    <h2 id="h1"><span class="step">1</span>代碼解碼器 <span class="en">Code decoder</span></h2>
+    <div class="xs">
+      <div class="xs-fig"><div id="fig" style="width:100%"></div><div class="lg"><span><i class="foil"></i>鋁箔 Foil</span><span><i class="braid"></i>編織網 Braid</span><span><i class="drain"></i>地線 Drain</span></div></div>
+      <div>
+        <div class="code-big" id="code" aria-live="polite"></div>
+        <div class="grp-title" style="margin-top:12px">整體遮蔽 Overall（斜線前）</div>
+        <div class="seg" id="ov"><button data-v="U" aria-pressed="true">U 無</button><button data-v="F">F 鋁箔</button><button data-v="S">S 編織網</button><button data-v="SF">SF 編織網＋鋁箔</button></div>
+        <div class="grp-title">線對遮蔽 Pair（斜線後）</div>
+        <div class="seg" id="pr"><button data-v="U" aria-pressed="true">U 無</button><button data-v="F">F 每對鋁箔</button></div>
+        <div class="grp-title">或直接輸入代碼</div>
+        <div class="controls"><input type="text" class="code-in" id="inp" value="U/UTP" aria-label="輸入遮蔽代碼" spellcheck="false"><span class="badge" id="ok"></span></div>
+        <div class="infobox" id="desc" style="--c:var(--accent);min-height:0"></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="panel" aria-labelledby="h2">
+    <h2 id="h2"><span class="step">2</span>六種常見結構 <span class="en">Six common constructions</span></h2>
+    <div class="gal" id="gal"></div>
+    <div class="scroll-x" style="margin-top:14px"><table class="tbl">
+      <thead><tr><th>舊稱（市場俗名）</th><th>ISO/IEC 11801 代碼</th><th>說明</th></tr></thead>
+      <tbody>
+        <tr><td>UTP</td><td class="m">U/UTP</td><td>無遮蔽</td></tr>
+        <tr><td>FTP、ScTP</td><td class="m">F/UTP</td><td>俗稱「總隔」</td></tr>
+        <tr><td>STP</td><td class="m hl-y">不一定</td><td>各廠定義不一，採購請以 ISO 代碼確認</td></tr>
+        <tr><td>S-STP、PiMF</td><td class="m">S/FTP</td><td>整體編織網＋每對鋁箔</td></tr>
+      </tbody></table></div>
+  </section>
+
+  <section class="panel" aria-labelledby="h3">
+    <h2 id="h3"><span class="step">3</span>要不要用遮蔽線 <span class="en">Do I need shielded cable?</span></h2>
+    <div class="grid-2">
+      <div class="chk" id="q">
+        <label><input type="checkbox" value="2">附近有強電、馬達、變頻器、電焊等干擾源</label>
+        <label><input type="checkbox" value="2">銀行、產線機台、重要機房，斷線會出事</label>
+        <label><input type="checkbox" value="1">大量 PoE 線束綁在一起</label>
+        <label><input type="checkbox" value="1">10G 以上、大量線纜並排（外部串音 AXT）</label>
+        <label><input type="checkbox" value="-2">施工單位沒有遮蔽系統的端接與接地經驗</label>
+        <label><input type="checkbox" value="-1">預算吃緊，一般辦公或家用環境</label>
+      </div>
+      <div class="rec" id="ans" aria-live="polite"></div>
+    </div>
+    <div class="steps" style="margin-top:14px">
+      <div><h3>金屬遮蔽元件</h3><p>模組、配線架、接頭都要用遮蔽（金屬）版本，塑膠模組無法讓遮蔽層導通。</p></div>
+      <div><h3>配線架端接地</h3><p>遮蔽層透過金屬配線架連到機櫃接地排；沒接地等於沒有遮蔽。</p></div>
+      <div><h3>全程遮蔽連續</h3><p>從配線架、水平線、資訊插座到跳線，任何一段斷掉，效果都會打折。</p></div>
+    </div>
+  </section>
+
+  <footer>
+命名依 ISO/IEC 11801-1 附錄（XX/YTP）；遮蔽的端接與接地依 ANSI/TIA-568.2-D 與 TIA-607。原影片稱 S 為「鋁絲遮蔽」，正確為編織網（Braid，常見鍍錫銅），「SF/TP」應寫作 SF/UTP。
+  </footer>
+</div>
+<script src="assets/common.js"></script>
+<script>
+(function(){
+  const st = {ov:'U', pr:'U'};
+  const INFO = {
+    'U/UTP': ['完全無遮蔽', '家用、一般辦公；成本最低、最好施工。'],
+    'F/UTP': ['整體鋁箔＋地線，線對不遮蔽', '舊稱 FTP／ScTP，俗稱「總隔」；Cat 6A、Cat 8.1 常見。'],
+    'S/UTP': ['整體編織網，線對不遮蔽', '較少見。'],
+    'SF/UTP': ['整體編織網＋鋁箔，線對不遮蔽', '對外部干擾的防護佳，線較粗。'],
+    'U/FTP': ['整體不遮蔽，每對鋁箔', '俗稱「個隔」；線對間串音最低，Cat 6A 常見。'],
+    'F/FTP': ['整體鋁箔＋每對鋁箔', '雙層遮蔽，線徑較粗。'],
+    'S/FTP': ['整體編織網＋每對鋁箔', 'Cat 7／7A、Cat 8.2 的標準結構；舊稱 S-STP、PiMF。'],
+    'SF/FTP': ['整體編織網＋鋁箔＋每對鋁箔', '三重遮蔽，最粗最硬。'],
+  };
+  function render(){
+    const code = `${st.ov}/${st.pr}TP`;
+    $('code').innerHTML = `<span class="o">${st.ov}</span><span class="s">/</span><span class="p">${st.pr}</span><span class="s">TP</span>`;
+    $('fig').innerHTML = cableSVG({jacket:'#7e8a90', overall:st.ov, pair:st.pr, drain:st.ov === 'F', label:code});
+    const i = INFO[code];
+    $('desc').innerHTML = `<h3>${code}</h3><p><b>${i[0]}</b></p><p>${i[1]}</p>`;
+    $('inp').value = code; $('ok').textContent = ''; $('ok').className = 'badge';
+    setSeg('ov', st.ov); setSeg('pr', st.pr);
+    document.querySelectorAll('#gal button').forEach(b => b.setAttribute('aria-pressed', b.dataset.c === code));
+    abbrify(null, '#desc');
+  }
+  segGroup('ov', v => { st.ov = v; render(); });
+  segGroup('pr', v => { st.pr = v; render(); });
+  $('inp').addEventListener('input', e => {
+    const m = e.target.value.trim().toUpperCase().replace(/\s/g, '').match(/^(SF|U|F|S)\/(U|F)TP$/);
+    if (m){ st.ov = m[1]; st.pr = m[2]; const v = e.target.value; render(); $('inp').value = v; $('ok').textContent = '✓ 有效代碼'; $('ok').className = 'badge ok'; }
+    else { $('ok').textContent = '格式：XX/YTP，例如 S/FTP'; $('ok').className = 'badge warn'; }
+  });
+  const G = ['U/UTP', 'F/UTP', 'SF/UTP', 'U/FTP', 'F/FTP', 'S/FTP'];
+  $('gal').innerHTML = G.map(c => { const [o, p] = c.split('/'); return `<button type="button" data-c="${c}">${cableSVG({jacket:'#7e8a90', overall:o, pair:p[0], drain:o === 'F', label:c})}<b>${c}</b><small>${INFO[c][0]}</small></button>`; }).join('');
+  $('gal').addEventListener('click', e => { const b = e.target.closest('button'); if (!b) return; const [o, p] = b.dataset.c.split('/'); st.ov = o; st.pr = p[0]; render(); $('h1').scrollIntoView({behavior:'smooth'}); });
+  render();
+  function judge(){
+    let s = 0; $('q').querySelectorAll('input:checked').forEach(c => s += +c.value);
+    const n = $('q').querySelectorAll('input:checked').length;
+    let h;
+    if (!n) h = '<div class="rec-card"><h3>勾選左側符合的情況</h3><p>依干擾、重要性、施工能力與預算綜合判斷。</p></div>';
+    else if (s >= 2) h = '<div class="rec-card" style="--c:var(--ok)"><h3><span class="tag">建議</span>用遮蔽線</h3><ul><li>Cat 6A F/UTP 或 U/FTP 最常見</li><li>強干擾環境可考慮 S/FTP</li><li>務必做到下方三個條件，並在報價時說明費用差異</li></ul></div>';
+    else if (s === 1) h = '<div class="rec-card" style="--c:var(--accent)"><h3><span class="tag">可評估</span>兩者皆可</h3><ul><li>大量 PoE 或 10G 線束：Cat 6A U/UTP 也能應付，遮蔽版散熱與 AXT 表現更好</li><li>和業主說明利弊與預算後決定</li></ul></div>';
+    else h = '<div class="rec-card" style="--c:var(--muted)"><h3><span class="tag">建議</span>用 U/UTP</h3><ul><li>一般環境無遮蔽線就足夠</li><li>遮蔽線若沒接地或端接不良，效果可能比 UTP 還差</li></ul></div>';
+    $('ans').innerHTML = h; abbrify(null, '#ans');
+  }
+  $('q').addEventListener('change', judge); judge();
+  abbrify(null);
+})();
+</script>
+</body>
+</html>

@@ -1,0 +1,98 @@
+<!--#TITLE-->
+09 選型總表與辭典｜網路線材系列
+<!--#H1-->
+選型總表、辭典與勘誤
+<!--#H1_EN-->
+Reference · glossary · corrections
+<!--#CHIP-->
+A <span>→</span> Z
+<!--#LEDE-->
+<p class="lede">把銅纜、DAC、AOC、多模與單模光纖放在同一張表比較；後面是本系列所有縮寫的完整英文名稱、參考標準，以及原始簡報與影片內容的修正說明。
+  <span class="en">One table for every medium, plus the glossary, standards and corrections.</span></p>
+<!--#STYLE-->
+.flt{display:flex;flex-wrap:wrap;gap:8px;align-items:center;margin-bottom:10px}
+<!--#BODY-->
+  <section class="panel" aria-labelledby="h1">
+    <h2 id="h1"><span class="step">1</span>選型總表 <span class="en">Media comparison</span></h2>
+    <div class="flt"><span style="font-weight:700;color:var(--muted)">距離：</span><div class="seg" id="df"><button data-v="0" aria-pressed="true">全部</button><button data-v="5">≤ 5 m</button><button data-v="30">≤ 30 m</button><button data-v="100">≤ 100 m</button><button data-v="550">≤ 550 m</button><button data-v="10000">≤ 10 km</button></div></div>
+    <div class="scroll-x"><table class="tbl" id="mt">
+      <thead><tr><th>方案</th><th>速率</th><th>最遠距離</th><th>媒介／接頭</th><th>適合</th><th>頁面</th></tr></thead>
+      <tbody></tbody></table></div>
+    <p class="note-key" style="margin-top:6px">距離為 IEEE 802.3 規範值；DAC、AOC 長度為市售常見範圍。篩選會保留「最遠距離 ≥ 所選距離」的方案。</p>
+  </section>
+
+  <section class="panel" aria-labelledby="h2">
+    <h2 id="h2"><span class="step">2</span>縮寫辭典 <span class="en">Abbreviations</span></h2>
+    <div class="flt"><input type="text" class="code-in" id="q" placeholder="搜尋，例如 LSZH" style="width:220px" aria-label="搜尋縮寫"></div>
+    <div class="scroll-x" id="abbrTable" data-all="1"></div>
+  </section>
+
+  <section class="panel" aria-labelledby="h3">
+    <h2 id="h3"><span class="step">3</span>勘誤說明 <span class="en">Corrections to the source material</span></h2>
+    <div class="grid-2">
+      <div><div class="grp-title">網路線影片（弱電通 × 越祥光電）</div>
+        <div class="scroll-x"><table class="tbl" style="min-width:0">
+          <thead><tr><th>原說法</th><th>修正</th></tr></thead>
+          <tbody>
+            <tr><td>Cat 7 沒有國際標準</td><td>ISO/IEC 11801 有定義（Class F）；是美國 TIA 不承認，且標準接頭不是 RJ45</td></tr>
+            <tr><td>Cat 7 頻寬 1000 MHz</td><td>Cat 7 為 600 MHz；1000 MHz 是 Cat 7A</td></tr>
+            <tr><td>S 是「鋁絲遮蔽」</td><td>S 為編織網（Braid），常見鍍錫銅</td></tr>
+            <tr><td>「SF/TP」</td><td>應寫作 SF/UTP；鋁箔＋編織網且每對遮蔽為 S/FTP 或 SF/FTP</td></tr>
+            <tr><td>Cat 6 跑 10G 約二三十米</td><td>依 TIA TSB-155 約 37–55 m（視外部串音）</td></tr>
+            <tr><td>34 AWG 極細跳線</td><td>主流細跳線為 28 AWG，30／32 AWG 也有；34 AWG 少見</td></tr>
+          </tbody></table></div></div>
+      <div><div class="grp-title">《光纖模組完全指南》簡報</div>
+        <div class="scroll-x"><table class="tbl" style="min-width:0">
+          <thead><tr><th>原內容</th><th>修正／補充</th></tr></thead>
+          <tbody>
+            <tr><td>綠色拉環＝150 km</td><td>業界無此統一慣例；常見為 850 nm 黑／米、1310 nm 藍、1550 nm 黃或紅，以模組標籤為準</td></tr>
+            <tr><td>1G 長距可達 120–150 km</td><td>屬廠商延長型模組（如 ZX），非 IEEE 規範；IEEE 1000BASE-LX 為 5 km</td></tr>
+            <tr><td>多模 300 m（未分等級）</td><td>10GBASE-SR：OM3 300 m、OM4 400 m；OM1 僅 33 m</td></tr>
+            <tr><td>未提及</td><td>補上 OM／OS 等級、BiDi、DDM 判讀、接頭清潔、UPC／APC、損耗預算</td></tr>
+          </tbody></table></div></div>
+    </div>
+  </section>
+
+  <section class="panel" aria-labelledby="h4">
+    <h2 id="h4"><span class="step">4</span>參考標準 <span class="en">Standards</span></h2>
+    <ul style="font-size:14px;margin:0;padding-left:18px;columns:2 320px;column-gap:28px">
+      <li>ISO/IEC 11801-1：Generic cabling for customer premises（Class D～II、遮蔽命名、OM／OS）</li>
+      <li>ANSI/TIA-568.0-D：通用佈線（長度、施工）</li>
+      <li>ANSI/TIA-568.2-D：平衡雙絞線纜與元件</li>
+      <li>ANSI/TIA-568.3-D：光纖纜線與元件</li>
+      <li>TIA TSB-155（Cat 6 跑 10G）、TSB-184-A（PoE 線束）</li>
+      <li>TIA-598-D：光纖色碼；TIA-607：接地</li>
+      <li>IEEE 802.3：ab、an、bz、bq（BASE-T）；Clause 38、52 等（光纖 PHY）</li>
+      <li>IEC 61300-3-35：光纖端面檢查</li>
+      <li>NFPA 70（NEC）Article 800；EU CPR (EU) No 305/2011、EN 50575</li>
+      <li>SFF-8472（DDM）、SFP／SFP+ MSA</li>
+    </ul>
+    <p class="note-key" style="margin-top:10px">素材：弱電通 × 越祥光電〈網路線規格與網路線種類樣板大公開〉（YouTube）、部門簡報《網路線規格全解析》《光纖模組完全指南》《Ethernet 從 1G 到 800G》。</p>
+  </section>
+<!--#FOOTER-->
+本頁數值皆來自上列標準的公開摘要與廠商常見規格；採購與驗收請以標準原文、設備與模組規格書為準。
+<!--#SCRIPT-->
+(function(){
+  const T = [
+    ['Cat 6 U/UTP', '1G–5G（10G ≤ 55 m）', 100, '100 m', '銅／RJ45', '辦公區水平佈線', 'cat-grades.html'],
+    ['Cat 6A', '10G', 100, '100 m', '銅／RJ45', '10G、AP、重要場域', 'cat-grades.html'],
+    ['Cat 8', '25G／40G', 30, '30 m', '銅／RJ45（8.1）', '機房內短距（少用）', 'cat-grades.html'],
+    ['DAC 直連銅纜', '10G–100G+', 5, '被動多為 1–5 m', '銅（twinax）／模組一體', '同機櫃', 'transceivers.html'],
+    ['AOC 主動光纜', '10G–100G+', 100, '常見 1–100 m', '多模光纖／模組一體', '相鄰機櫃', 'transceivers.html'],
+    ['1000BASE-SX', '1G', 550, '550 m（OM2+）', '多模／LC', '建物內 1G', 'fiber-basics.html'],
+    ['10GBASE-SR', '10G', 400, 'OM3 300 m、OM4 400 m', '多模／LC', '建物內、機房', 'fiber-basics.html'],
+    ['25GBASE-SR', '25G', 100, 'OM4 100 m', '多模／LC', '伺服器接入', 'fiber-basics.html'],
+    ['40G／100GBASE-SR4', '40G／100G', 150, '40G OM4 150 m、100G OM4 100 m', '多模／MPO', '機房骨幹', 'connectors.html'],
+    ['1000BASE-LX', '1G', 5000, '5 km', '單模／LC', '跨棟、園區', 'transceivers.html'],
+    ['10G／25G LR、40G／100G LR4', '10G–100G', 10000, '10 km', '單模／LC', '跨棟、園區骨幹', 'transceivers.html'],
+    ['10GBASE-ER', '10G', 40000, '40 km', '單模／LC', '遠距', 'transceivers.html'],
+  ];
+  function tbl(min){
+    $('mt').querySelector('tbody').innerHTML = T.filter(r => r[2] >= min).map(r => `<tr><td><b>${r[0]}</b></td><td>${r[1]}</td><td class="m">${r[3]}</td><td>${r[4]}</td><td>${r[5]}</td><td><a href="${r[6]}">看說明</a></td></tr>`).join('');
+    abbrify(null, '#mt');
+  }
+  segGroup('df', v => tbl(+v)); tbl(0);
+  abbrify($('abbrTable'));
+  $('q').addEventListener('input', e => { const q = e.target.value.trim().toLowerCase();
+    $('abbrTable').querySelectorAll('tbody tr').forEach(tr => { tr.hidden = q && !tr.textContent.toLowerCase().includes(q); }); });
+})();

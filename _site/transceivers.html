@@ -1,0 +1,185 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>07 光模組｜網路線材系列</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@600;700;800&family=Noto+Sans+TC:wght@400;500;700;900&family=JetBrains+Mono:wght@400;600&display=swap">
+<link rel="stylesheet" href="assets/series.css">
+<style>
+.mods{display:grid;grid-template-columns:repeat(auto-fit,minmax(120px,1fr));gap:8px}
+.mods button{display:flex;flex-direction:column;gap:2px;align-items:flex-start;text-align:left;padding:8px 10px}
+.mods button b{font-family:var(--display);font-size:17px;letter-spacing:.03em}
+.mods button small{color:var(--muted);font-weight:500}
+.mods button[aria-pressed="true"]{border-color:var(--accent);box-shadow:0 0 0 3px color-mix(in srgb,var(--accent) 25%,transparent)}
+.bail{display:inline-block;width:42px;height:14px;border-radius:7px;vertical-align:-2px;border:1px solid var(--line)}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <nav class="series" aria-label="系列 Series"><span class="lab">系列 Series</span><a href="./"><b>HOME</b>選型首頁</a><a href="copper-basics.html"><b>01 BASICS</b>構造與雙絞</a><a href="cat-grades.html"><b>02 CATEGORY</b>Cat 等級</a><a href="shielding.html"><b>03 SHIELDING</b>遮蔽代碼</a><a href="awg-jacket.html"><b>04 AWG · JACKET</b>線徑外被線序</a><a href="install-test.html"><b>05 INSTALL</b>佈線與驗收</a><a href="fiber-basics.html"><b>06 FIBER</b>光纖基礎</a><span class="cur" aria-current="page"><b>07 MODULE</b>光模組</span><a href="connectors.html"><b>08 CONNECTOR</b>接頭與維護</a><a href="reference.html"><b>09 APPENDIX</b>選型總表與辭典</a><a href="https://poe-pd-series.vercel.app/" target="_blank" rel="noopener"><b>↗ PoE PD</b>受電端系列</a></nav>
+  <header>
+    <div>
+      <div class="eyebrow">Network Cabling Series · 07</div>
+      <h1>光模組：SFP、SFP+ 與 DDM<small>Transceivers · Base-T / SR / LR · BiDi · DDM</small></h1>
+    </div>
+    <div class="chip-dc">1G <span>→</span> 10G</div>
+    <p class="lede">SFP 和 SFP+ 外型完全相同，差在速率：SFP 是 1G，SFP+ 是 10G。插上不同模組，同一個埠就能接網路線、多模或單模光纖。這頁整理怎麼選模組、BiDi 是什麼，以及怎麼從 DDM 讀值判斷光路好壞。
+  <span class="en">Same cage, different engines. Pick the module, then read its DDM values to judge the link.</span></p>
+  </header>
+
+  <section class="panel" aria-labelledby="h1">
+    <h2 id="h1"><span class="step">1</span>SFP 與 SFP+ <span class="en">Same size, different speed</span></h2>
+    <div class="scroll-x"><table class="tbl">
+      <thead><tr><th></th><th>SFP</th><th>SFP+</th></tr></thead>
+      <tbody>
+        <tr><td><b>速率</b></td><td>最高 1 Gbps（也有 100M）</td><td>10 Gbps</td></tr>
+        <tr><td><b>外型與接頭</b></td><td colspan="2">相同籠座（MSA 規範），光模組多為 LC 雙芯；電口模組為 RJ45</td></tr>
+        <tr><td><b>相容性</b></td><td>SFP 埠不能用 SFP+ 模組</td><td>多數 SFP+ 埠可插 1G SFP 模組（依交換器支援）</td></tr>
+        <tr><td><b>典型用途</b></td><td>接入層、邊緣連線</td><td>骨幹、伺服器、交換器上行</td></tr>
+      </tbody></table></div>
+    <div class="errata" style="margin-top:12px;border-color:var(--accent);background:color-mix(in srgb,var(--accent) 6%,transparent)"><b style="color:var(--accent)">兩端要成對</b>：同一條光纖兩端的模組類型、速率、波長都要相同（SR 對 SR、LR 對 LR）。1G 的 SX 和 10G 的 SR 雖然都是 850 nm 多模，彼此不能互通。</div>
+  </section>
+
+  <section class="panel" aria-labelledby="h2">
+    <h2 id="h2"><span class="step">2</span>選一個模組看規格 <span class="en">Pick a module</span></h2>
+    <div class="mods" id="mods"></div>
+    <div class="grid-2" style="margin-top:12px">
+      <table class="spec" id="mspec"></table>
+      <div class="infobox" id="mnote" style="--c:var(--accent)"></div>
+    </div>
+  </section>
+
+  <section class="panel" aria-labelledby="h3">
+    <h2 id="h3"><span class="step">3</span>BiDi：一芯雙向 <span class="en">Bidirectional over one fiber</span></h2>
+    <div class="scroll-x"><svg id="bidi" viewBox="0 0 760 150" role="img" aria-label="BiDi 模組示意"></svg></div>
+    <ul style="font-size:14px;margin:8px 0 0;padding-left:18px">
+      <li>一般光模組用兩芯（一收一發）；BiDi 用<b>兩個不同波長</b>在同一芯光纖上同時收發，光纖芯數不夠時很好用。</li>
+      <li>必須<b>成對使用</b>：一端發 1270 nm／收 1330 nm，另一端發 1330／收 1270（常標 U／D 或 A／B）。兩端裝一樣的會不通。</li>
+      <li>接頭多為 LC 單芯；上圖以 10G BiDi 常見的 1270／1330 nm 為例，1G BiDi 常用 1310／1550 nm。</li>
+    </ul>
+  </section>
+
+  <section class="panel" aria-labelledby="h4">
+    <h2 id="h4"><span class="step">4</span>DDM 光功率判讀器 <span class="en">Reading DDM / DOM values</span></h2>
+    <p style="font-size:14px;margin:0 0 10px">DDM（也叫 DOM）讓交換器讀出模組的溫度、電壓、雷射偏壓電流、<b>發射光功率 Tx</b> 與<b>接收光功率 Rx</b>。輸入你從交換器看到的數值：</p>
+    <div class="controls"><div class="seg" id="dm"><button data-v="0" aria-pressed="true">1000BASE-SX</button><button data-v="1">1000BASE-LX</button><button data-v="2">10GBASE-SR</button><button data-v="3">10GBASE-LR</button></div></div>
+    <div class="grid-2">
+      <div><div class="params" id="dprm"></div>
+        <div style="margin-top:10px"><svg style="width:100%;height:auto;display:block" id="dbar" viewBox="0 0 520 90" role="img" aria-label="接收光功率範圍"></svg></div></div>
+      <div><div class="badges" id="dbad"></div><div class="formulas" id="dres"></div></div>
+    </div>
+    <p class="note-key" style="margin-top:8px">門檻採 IEEE 802.3 規範的平均光功率（Tx 最小／最大、Rx 靈敏度與過載）。模組內建的 DDM 告警與警告門檻依廠商規格書而定，以該值為準。餘裕建議保留 3 dB 以上。</p>
+  </section>
+
+  <section class="panel" aria-labelledby="h5">
+    <h2 id="h5"><span class="step">5</span>拉環顏色與採購 <span class="en">Bail colours &amp; buying</span></h2>
+    <div class="grid-2">
+      <div>
+        <table class="spec"><tbody>
+          <tr><th>850 nm（多模）</th><td><span class="bail" style="background:#222"></span> 黑色或米色</td></tr>
+          <tr><th>1310 nm（單模）</th><td><span class="bail" style="background:#2d6bd8"></span> 藍色</td></tr>
+          <tr><th>1550 nm（單模）</th><td><span class="bail" style="background:#f2c230"></span> 黃色或紅色（依廠牌）</td></tr>
+          <tr><th>CWDM／DWDM</th><td>依波長各有顏色</td></tr>
+        </tbody></table>
+        <div class="errata" style="margin-top:10px"><b class="t">修正</b>：原《光纖模組完全指南》寫「綠色拉環＝150 km 超長距」，業界沒有這個統一慣例。拉環顏色只是常見做法，各廠牌不一定一致，<b>以模組標籤為準</b>。</div>
+      </div>
+      <ul style="font-size:14px;margin:0;padding-left:18px">
+        <li><b>原廠鎖碼</b>：部分交換器會檢查模組 EEPROM 的廠商資訊，第三方模組可能被拒絕或跳警告；採購前確認相容清單，或買「指定品牌相容碼」的模組。</li>
+        <li><b>10GBASE-T 電口模組</b>：耗電與發熱比光模組高，多數只能跑 30 m（Cat 6A）；同機櫃短距可改用 DAC。</li>
+        <li><b>DAC／AOC</b>：模組和線一體，免清潔接頭，適合機櫃內與相鄰機櫃；25G 以上延伸可參考《Ethernet 1G→800G》簡報。</li>
+        <li>光模組多為 <b>Class 1 雷射</b>，仍<b>不要直視</b>模組或光纖端面。</li>
+      </ul>
+    </div>
+  </section>
+
+  <footer>
+依據 IEEE 802.3 Clause 38（1000BASE-SX／LX）、Clause 52（10GBASE-SR／LR／ER）、SFF-8472（DDM）與 SFP／SFP+ MSA。拉環顏色為業界常見慣例，非標準規定。
+  </footer>
+</div>
+<script src="assets/common.js"></script>
+<script>
+(function(){
+  const M = [
+    ['1000BASE-T', 'SFP 電口', {媒介:'Cat 5e 以上網路線，RJ45', 距離:'100 m', 波長:'—', 接頭:'RJ45'}, '拿來接既有網路線；耗電比光模組高一些。', null],
+    ['1000BASE-SX', 'SFP 多模', {媒介:'多模光纖 OM2–OM4', 距離:'550 m（OM1 275 m）', 波長:'850 nm（VCSEL）', 接頭:'LC 雙芯'}, '建物內短距最便宜的光纖方案。', '#222'],
+    ['1000BASE-LX', 'SFP 單模', {媒介:'單模光纖 OS2', 距離:'5 km（市售多標 10 km）', 波長:'1310 nm', 接頭:'LC 雙芯'}, '跨棟、園區連線。', '#2d6bd8'],
+    ['10GBASE-T', 'SFP+ 電口', {媒介:'Cat 6A 網路線，RJ45', 距離:'多數 30 m（新款可到 80 m）', 波長:'—', 接頭:'RJ45'}, '耗電約 2–3 W、發熱大，可能影響相鄰埠；交換器常限制可插的數量。', null],
+    ['10GBASE-SR', 'SFP+ 多模', {媒介:'多模光纖 OM3／OM4', 距離:'300 m／400 m', 波長:'850 nm（VCSEL）', 接頭:'LC 雙芯'}, '機房與建物內 10G 最常見。', '#222'],
+    ['10GBASE-LR', 'SFP+ 單模', {媒介:'單模光纖 OS2', 距離:'10 km', 波長:'1310 nm（DFB）', 接頭:'LC 雙芯'}, '跨棟、園區骨幹最常見。', '#2d6bd8'],
+    ['10GBASE-ER', 'SFP+ 單模', {媒介:'單模光纖 OS2', 距離:'40 km', 波長:'1550 nm', 接頭:'LC 雙芯'}, '短距使用時接收端可能過載，需加光衰減器。', '#f2c230'],
+    ['10G BiDi', 'SFP+ 單芯雙向', {媒介:'單模光纖 OS2（1 芯）', 距離:'常見 10–20 km', 波長:'1270／1330 nm 成對', 接頭:'LC 單芯'}, '必須 U／D 成對使用。', null],
+  ];
+  $('mods').innerHTML = M.map((m, i) => `<button type="button" data-i="${i}"><b>${m[0]}</b><small>${m[1]}</small></button>`).join('');
+  function pick(i){
+    const m = M[i];
+    $('mods').querySelectorAll('button').forEach((b, k) => b.setAttribute('aria-pressed', k === i));
+    $('mspec').innerHTML = '<tbody>' + Object.entries(m[2]).map(([k, v]) => `<tr><th>${k}</th><td>${v}</td></tr>`).join('') +
+      `<tr><th>拉環顏色（慣例）</th><td>${m[4] ? `<span class="bail" style="background:${m[4]}"></span>` : '—'}</td></tr></tbody>`;
+    $('mnote').innerHTML = `<h3>${m[0]}</h3><p>${m[3]}</p>`;
+    abbrify(null, '#mspec, #mnote');
+  }
+  $('mods').addEventListener('click', e => { const b = e.target.closest('button'); if (b) pick(+b.dataset.i); });
+  pick(4);
+  // BiDi figure
+  const s = $('bidi');
+  const mod = (x, t, tx, rx) => { svgEl('rect', {x, y:35, width:150, height:80, rx:8, fill:'var(--paper-2)', stroke:'var(--wire)', 'stroke-width':1.6}, s);
+    svgEl('text', {x:x + 75, y:62, 'text-anchor':'middle', class:'lbl'}, s, t);
+    svgEl('text', {x:x + 75, y:84, 'text-anchor':'middle', class:'read'}, s, 'Tx ' + tx + ' nm');
+    svgEl('text', {x:x + 75, y:102, 'text-anchor':'middle', class:'read'}, s, 'Rx ' + rx + ' nm'); };
+  mod(20, '模組 A（U）', 1270, 1330); mod(590, '模組 B（D）', 1330, 1270);
+  svgEl('line', {x1:170, x2:590, y1:75, y2:75, stroke:'#f2c230', 'stroke-width':10, 'stroke-linecap':'round'}, s);
+  svgEl('text', {x:380, y:22, 'text-anchor':'middle', class:'lbl-sm'}, s, '單芯單模光纖');
+  [[200, 560, 62, '#2d6bd8', '1270 nm →'], [560, 200, 92, '#c43d22', '← 1330 nm']].forEach(([a, b, y, c, t]) => {
+    svgEl('line', {x1:a, x2:b, y1:y, y2:y, stroke:c, 'stroke-width':2.5}, s);
+    svgEl('polygon', {points:a < b ? `${b},${y} ${b - 10},${y - 5} ${b - 10},${y + 5}` : `${b},${y} ${b + 10},${y - 5} ${b + 10},${y + 5}`, fill:c}, s);
+    svgEl('text', {x:380, y:y + (y < 75 ? -6 : 16), 'text-anchor':'middle', class:'read', fill:c}, s, t);
+  });
+  // DDM
+  const D = [
+    {n:'1000BASE-SX', tx:[-9.5, null], rx:[-17, 0], def:[-6, -8]},
+    {n:'1000BASE-LX', tx:[-11, -3], rx:[-19, -3], def:[-6, -12]},
+    {n:'10GBASE-SR', tx:[-7.3, -1], rx:[-9.9, -1], def:[-2.5, -4]},
+    {n:'10GBASE-LR', tx:[-8.2, 0.5], rx:[-14.4, 0.5], def:[-2, -7]},
+  ];
+  let di = 0; const P = {tx:D[0].def[0], rx:D[0].def[1]};
+  const defs = [{k:'tx', zh:'發射光功率 Tx', en:'dBm'}, {k:'rx', zh:'接收光功率 Rx（對端模組）', en:'dBm'}];
+  defs.forEach(d => { const w = document.createElement('div'); w.className = 'param';
+    w.innerHTML = `<div class="top"><label for="d_${d.k}">${d.zh}<span class="en">${d.en}</span></label><output id="do_${d.k}"></output></div><input type="range" id="d_${d.k}" min="-25" max="3" step="0.1">`;
+    $('dprm').appendChild(w); $('d_' + d.k).addEventListener('input', e => { P[d.k] = +e.target.value; ddm(); }); });
+  segGroup('dm', v => { di = +v; P.tx = D[di].def[0]; P.rx = D[di].def[1]; ddm(); });
+  function ddm(){
+    const d = D[di];
+    defs.forEach(x => { $('d_' + x.k).value = P[x.k]; $('do_' + x.k).textContent = P[x.k].toFixed(1) + ' dBm'; });
+    const loss = P.tx - P.rx, margin = P.rx - d.rx[0];
+    const bad = [];
+    if (P.tx < d.tx[0]) bad.push(['warn', 'Tx 低於規範：模組老化或故障']);
+    if (d.tx[1] != null && P.tx > d.tx[1]) bad.push(['warn', 'Tx 高於規範']);
+    if (P.rx < d.rx[0]) bad.push(['warn', 'Rx 低於靈敏度：光太弱，鏈路會斷或誤碼']);
+    else if (margin < 3) bad.push(['warn', '餘裕不足 3 dB：先清潔接頭']);
+    if (P.rx > d.rx[1]) bad.push(['warn', 'Rx 過載：光太強，加光衰減器']);
+    if (!bad.length) bad.push(['ok', '光功率正常']);
+    $('dbad').innerHTML = bad.map(b => `<span class="badge ${b[0]}">${b[1]}</span>`).join('');
+    $('dres').innerHTML = [
+      ['鏈路損耗（Tx − Rx，假設兩端模組相近）', loss.toFixed(1) + ' dB', `${P.tx.toFixed(1)} − (${P.rx.toFixed(1)})`],
+      ['接收餘裕（Rx − 靈敏度）', margin.toFixed(1) + ' dB', `${P.rx.toFixed(1)} − (${d.rx[0]})`],
+      ['規範 Tx 範圍', d.tx[0] + (d.tx[1] != null ? ' ～ ' + d.tx[1] : ' 以上') + ' dBm', ''],
+      ['規範 Rx 範圍', d.rx[0] + ' ～ ' + d.rx[1] + ' dBm', ''],
+    ].map(r => `<div class="f-row"><span class="name">${r[0]}</span><span class="eq">${r[2]}</span><span class="res">${r[1]}</span></div>`).join('');
+    const s = $('dbar'); s.innerHTML = ''; const X = v => 20 + (v + 25) / 28 * 480;
+    svgEl('rect', {x:X(-25), y:30, width:X(3) - X(-25), height:22, fill:'var(--paper-2)', stroke:'var(--line)'}, s);
+    svgEl('rect', {x:X(d.rx[0]), y:30, width:X(d.rx[1]) - X(d.rx[0]), height:22, fill:'color-mix(in srgb,var(--ok) 35%,transparent)'}, s);
+    svgEl('rect', {x:X(d.rx[0]), y:30, width:Math.min(X(d.rx[0] + 3), X(d.rx[1])) - X(d.rx[0]), height:22, fill:'color-mix(in srgb,#e3a400 45%,transparent)'}, s);
+    [-25, -20, -15, -10, -5, 0].forEach(v => svgEl('text', {x:X(v), y:72, 'text-anchor':'middle', class:'tick'}, s, v));
+    svgEl('text', {x:X(d.rx[0]), y:22, 'text-anchor':'middle', class:'tick'}, s, '靈敏度 ' + d.rx[0]);
+    svgEl('line', {x1:X(P.rx), x2:X(P.rx), y1:24, y2:58, stroke:'var(--ink)', 'stroke-width':3}, s);
+    svgEl('text', {x:X(P.rx), y:86, 'text-anchor':'middle', class:'read'}, s, 'Rx ' + P.rx.toFixed(1));
+  }
+  ddm();
+  abbrify(null);
+})();
+</script>
+</body>
+</html>

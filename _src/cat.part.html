@@ -1,0 +1,117 @@
+<!--#TITLE-->
+02 Cat 等級｜網路線材系列
+<!--#H1-->
+Cat 等級：頻寬、速率、距離
+<!--#H1_EN-->
+Category 5e · 6 · 6A · 7 · 8
+<!--#CHIP-->
+100 <span>→</span> 2000 MHz
+<!--#LEDE-->
+<p class="lede">Cat 是 Category（類別）的縮寫，代表線材與元件的等級。常用的是 Cat 6 與 Cat 6A；Cat 7 雖然有 ISO 標準，但 TIA 不承認、接頭也不是 RJ45，實務不規劃；Cat 8 能跑 25G／40G，但通道只有 30 m。
+  <span class="en">Category = cable/component grade. Cat 6 and 6A are the workhorses; Cat 7 is ISO-only; Cat 8 runs 25/40G but only 30 m.</span></p>
+<!--#STYLE-->
+<!--#BODY-->
+  <section class="panel" aria-labelledby="h1">
+    <h2 id="h1"><span class="step">1</span>五種等級切換 <span class="en">Pick a category</span></h2>
+    <div class="controls"><div class="seg" id="cat"><button data-v="5e" aria-pressed="true">Cat 5e</button><button data-v="6">Cat 6</button><button data-v="6A">Cat 6A</button><button data-v="7">Cat 7／7A</button><button data-v="8">Cat 8</button></div></div>
+    <div class="xs">
+      <div class="xs-fig"><div id="fig" style="width:100%"></div><div class="lg" id="lg"><span><i class="foil"></i>鋁箔 Foil</span><span><i class="braid"></i>編織網 Braid</span><span><i class="drain"></i>地線 Drain</span></div></div>
+      <div>
+        <table class="spec" id="spec"></table>
+        <div class="grid-2" style="margin-top:12px;gap:12px">
+          <div class="infobox" style="--c:var(--ok);min-height:0"><h3><span class="tag">適用場景</span></h3><ul id="use"></ul></div>
+          <div class="infobox" style="--c:var(--on);min-height:0"><h3><span class="tag">注意</span></h3><ul id="note"></ul></div>
+        </div>
+      </div>
+    </div>
+    <p class="note-key" style="margin-top:8px">剖面為典型結構示意；遮蔽層依 ISO/IEC 11801 代碼繪製，外被顏色沒有標準規定。</p>
+  </section>
+
+  <section class="panel" aria-labelledby="h2">
+    <h2 id="h2"><span class="step">2</span>等級總覽 <span class="en">Overview</span></h2>
+    <div class="scroll-x"><table class="tbl">
+      <thead><tr><th>等級</th><th>ISO/IEC 等級</th><th>頻寬</th><th>代表應用（IEEE 802.3）</th><th>最長通道</th><th>標準狀態</th></tr></thead>
+      <tbody>
+        <tr><td><b>Cat 5e</b></td><td>Class D</td><td class="m">100 MHz</td><td>1000BASE-T、2.5GBASE-T</td><td class="m">100 m</td><td>TIA ✓ ISO ✓</td></tr>
+        <tr><td><b>Cat 6</b></td><td>Class E</td><td class="m">250 MHz</td><td>1000BASE-T、5GBASE-T（10G ≤ 55 m）</td><td class="m">100 m</td><td>TIA ✓ ISO ✓</td></tr>
+        <tr><td><b>Cat 6A</b></td><td>Class EA</td><td class="m">500 MHz</td><td>10GBASE-T</td><td class="m">100 m</td><td>TIA ✓ ISO ✓</td></tr>
+        <tr><td><b>Cat 7／7A</b></td><td>Class F／FA</td><td class="m">600／1000 MHz</td><td>10GBASE-T</td><td class="m">100 m</td><td class="hl-y">僅 ISO；TIA 不承認</td></tr>
+        <tr><td><b>Cat 8</b></td><td>Class I／II</td><td class="m">2000 MHz</td><td>25GBASE-T、40GBASE-T</td><td class="m hl-y">30 m</td><td>TIA ✓ ISO ✓</td></tr>
+      </tbody></table></div>
+    <div class="phases" style="margin-top:12px">
+      <div class="phase" style="--c:var(--p1)"><h3>Category 與 Class</h3><p>Category 指線材與元件的等級；ISO 的 Class 指整條通道（Channel）的等級。</p></div>
+      <div class="phase" style="--c:var(--p2)"><h3>頻寬 ≠ 速率</h3><p>MHz 是線材測試頻寬的上限；能跑多快由 PHY 的編碼技術決定（10GBASE-T 用 PAM-16）。</p></div>
+      <div class="phase" style="--c:var(--p3)"><h3>整條鏈路看最低等級</h3><p>Cat 6A 線配 Cat 6 模組，整條鏈路只能算 Cat 6。線材、模組、跳線要同等級。</p></div>
+    </div>
+  </section>
+
+  <section class="panel" aria-labelledby="h3">
+    <h2 id="h3"><span class="step">3</span>要跑多快、用哪一級線 <span class="en">Speed × category</span></h2>
+    <div class="controls"><span class="lab" style="font-weight:700;color:var(--muted)">只看：</span><div class="seg" id="sp"><button data-v="all" aria-pressed="true">全部</button><button data-v="1">1G</button><button data-v="2.5">2.5G</button><button data-v="5">5G</button><button data-v="10">10G</button><button data-v="25">25／40G</button></div></div>
+    <div class="scroll-x"><table class="mtx" id="mtx">
+      <thead><tr><th>速率</th><th>IEEE 規格</th><th>Cat 5e</th><th>Cat 6</th><th>Cat 6A</th><th>Cat 8</th></tr></thead>
+      <tbody>
+        <tr data-s="1"><td class="l">1 G</td><td>1000BASE-T（802.3ab）</td><td class="ok">100 m</td><td class="ok">100 m</td><td class="ok">100 m</td><td class="mid">30 m*</td></tr>
+        <tr data-s="2.5"><td class="l">2.5 G</td><td>2.5GBASE-T（802.3bz）</td><td class="ok">100 m</td><td class="ok">100 m</td><td class="ok">100 m</td><td class="mid">30 m*</td></tr>
+        <tr data-s="5"><td class="l">5 G</td><td>5GBASE-T（802.3bz）</td><td class="mid">視環境</td><td class="ok">100 m</td><td class="ok">100 m</td><td class="mid">30 m*</td></tr>
+        <tr data-s="10"><td class="l">10 G</td><td>10GBASE-T（802.3an）</td><td class="no">✕</td><td class="mid">≤ 55 m</td><td class="ok">100 m</td><td class="mid">30 m*</td></tr>
+        <tr data-s="25"><td class="l">25／40 G</td><td>25G／40GBASE-T（802.3bq）</td><td class="no">✕</td><td class="no">✕</td><td class="no">✕</td><td class="mid">30 m</td></tr>
+      </tbody></table></div>
+    <p class="note-key" style="margin-top:8px">* Cat 8 通道規範只定義到 30 m。5GBASE-T 以 Cat 6 為設計目標，Cat 5e 能否跑 5G 要看安裝環境。Cat 6 跑 10GBASE-T 的距離依 TIA TSB-155（約 37–55 m，視外部串音）。</p>
+  </section>
+
+  <section class="panel" aria-labelledby="h4">
+    <h2 id="h4">原影片說法的修正 <span class="en">Corrections</span></h2>
+    <div class="errata">
+      <p style="margin:0 0 6px"><b class="t">Cat 7 不是「沒有國際標準」</b>：ISO/IEC 11801 有定義 Cat 7（Class F，600 MHz）與 Cat 7A（Class FA，1000 MHz），是<b>美國 TIA 不承認</b>。影片說 Cat 7 頻寬 1000 MHz，那是 Cat 7A。</p>
+      <p style="margin:0"><b class="t">Cat 6 跑 10G 不只 20～30 m</b>：依 TIA TSB-155 約可到 37–55 m，但要保證 100 m 仍需 Cat 6A。</p>
+    </div>
+  </section>
+
+  <section class="panel" aria-labelledby="hq">
+    <h2 id="hq">小測驗 <span class="en">Quick check</span></h2>
+    <div class="quiz" id="quiz"></div>
+  </section>
+<!--#FOOTER-->
+依據 ISO/IEC 11801-1、ANSI/TIA-568.2-D、TIA TSB-155、IEEE 802.3ab／an／bz／bq。
+<!--#SCRIPT-->
+(function(){
+  const D = {
+    '5e': {figs:[[{jacket:'#8e9aa0', rip:true}, 'U/UTP']],
+      spec:[['ISO/IEC 等級','Class D'],['頻寬','100 MHz'],['代表速率','1000BASE-T；2.5GBASE-T（802.3bz）'],['最長通道','100 m（永久鏈路 90 m）'],['常見結構','U/UTP，通常沒有十字骨架']],
+      use:['家用、小型辦公室','既有建築沿用、預算有限'], note:['新佈線案建議至少用 Cat 6','避開 CCA 銅包鋁的低價線']},
+    '6': {figs:[[{jacket:'#3f79b5', spline:true, rip:true}, 'U/UTP＋十字骨架']],
+      spec:[['ISO/IEC 等級','Class E'],['頻寬','250 MHz'],['代表速率','1000BASE-T；5GBASE-T（802.3bz）'],['10G 能力','<span class="hl-y">10GBASE-T 約 37–55 m（TIA TSB-155）</span>'],['常見結構','U/UTP（常見十字骨架）；也有 F/UTP']],
+      use:['企業辦公區水平佈線、一般機房','家用 1G～5G、Wi-Fi AP 上行'], note:['10G 要跑滿 100 m 請改用 Cat 6A','十字骨架並非標準強制，依廠牌設計']},
+    '6A': {figs:[[{jacket:'#4e9a6a', pair:'F'}, 'U/FTP 每對鋁箔'], [{jacket:'#4e9a6a', overall:'F', drain:true}, 'F/UTP 總鋁箔＋地線']],
+      spec:[['ISO/IEC 等級','Class EA'],['頻寬','500 MHz'],['代表速率','10GBASE-T，100 m'],['最長通道','100 m（永久鏈路 90 m）'],['常見結構','U/UTP、F/UTP、U/FTP、S/FTP 皆有']],
+      use:['銀行、高科技廠房、資料機房','Wi-Fi 6／7 AP、大量 PoE 線束'], note:['遮蔽版要搭配金屬遮蔽模組並接地','線徑較粗，管路與線架容量要先算','500 MHz 時外部串音（AXT）變重要，常用遮蔽版']},
+    '7': {figs:[[{jacket:'#c9803a', overall:'S', pair:'F'}, 'S/FTP']],
+      spec:[['ISO/IEC 等級','Class F（Cat 7）／Class FA（Cat 7A）'],['頻寬','600 MHz／1000 MHz'],['代表速率','10GBASE-T（與 Cat 6A 相同）'],['TIA','<span class="hl-y">不承認 Cat 7</span>'],['標準接頭','GG45、TERA 等，不是 RJ45']],
+      use:['實務很少規劃：速率沒有比 Cat 6A 高','歐洲部分機房曾採用'], note:['市售「Cat 7 線＋RJ45 頭」整條通道最多算 Cat 6A','建議：10G 用 Cat 6A，更高速改用光纖']},
+    '8': {figs:[[{jacket:'#7466a8', overall:'F', drain:true}, 'Cat 8.1 F/UTP（RJ45）'], [{jacket:'#7466a8', overall:'S', pair:'F'}, 'Cat 8.2 S/FTP（非 RJ45）']],
+      spec:[['ISO/IEC 等級','Class I（8.1）／Class II（8.2）'],['頻寬','2000 MHz'],['代表速率','25GBASE-T、40GBASE-T（802.3bq）'],['最長通道','<span class="hl-y">30 m（永久鏈路 24 m＋跳線 6 m）</span>'],['接頭','8.1：RJ45；8.2：TERA、GG45 等']],
+      use:['機房內 Switch ↔ Server 短距','同機櫃或相鄰機櫃'], note:['25G／40G 實務多用 DAC、AOC 或光纖','TIA 的 Category 8 ≈ ISO Cat 8.1；8.1 也有 U/FTP 結構']},
+  };
+  function show(k){
+    const x = D[k];
+    $('fig').innerHTML = x.figs.length === 1 ? cableSVG(Object.assign({label:x.figs[0][1]}, x.figs[0][0])) + `<p style="text-align:center;margin:4px 0 0;font-weight:700">${x.figs[0][1]}</p>`
+      : '<div class="xs-pair">' + x.figs.map(f => `<figure>${cableSVG(Object.assign({label:f[1]}, f[0]))}<figcaption>${f[1]}</figcaption></figure>`).join('') + '</div>';
+    $('lg').hidden = !x.figs.some(f => f[0].overall || f[0].pair);
+    $('spec').innerHTML = '<tbody>' + x.spec.map(r => `<tr><th>${r[0]}</th><td>${r[1]}</td></tr>`).join('') + '</tbody>';
+    $('use').innerHTML = x.use.map(u => `<li>${u}</li>`).join('');
+    $('note').innerHTML = x.note.map(u => `<li>${u}</li>`).join('');
+    abbrify(null, '#spec, #use, #note');
+  }
+  segGroup('cat', show); show('5e');
+  segGroup('sp', v => document.querySelectorAll('#mtx tbody tr').forEach(tr => {
+    tr.classList.toggle('dim', v !== 'all' && tr.dataset.s !== v);
+    tr.classList.toggle('on', v !== 'all' && tr.dataset.s === v);
+  }));
+  quiz($('quiz'), [
+    {q:'要讓 10GBASE-T 跑滿 100 m，至少要用？', opts:['Cat 5e', 'Cat 6', 'Cat 6A', 'Cat 8'], a:2, why:'Cat 6 只保證約 37–55 m；Cat 8 通道只有 30 m。'},
+    {q:'Cat 7 為什麼實務上不規劃？', opts:['沒有任何標準', 'TIA 不承認、標準接頭不是 RJ45，速率與 6A 相同', '太便宜'], a:1, why:'ISO 有 Class F 標準，但 TIA 不承認，而且 10G 用 Cat 6A 就夠。'},
+    {q:'Cat 8 的通道最長多少？', opts:['100 m', '55 m', '30 m'], a:2, why:'永久鏈路 24 m＋跳線共 30 m，適合機房內短距。'},
+  ]);
+  abbrify(null);
+})();

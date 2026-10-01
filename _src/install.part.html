@@ -1,0 +1,119 @@
+<!--#TITLE-->
+05 佈線與驗收｜網路線材系列
+<!--#H1-->
+佈線距離、施工與驗收
+<!--#H1_EN-->
+Permanent link · channel · certification
+<!--#CHIP-->
+90 <span>+</span> 10 m
+<!--#LEDE-->
+<p class="lede">「通了」不等於「合格」。這頁先釐清永久鏈路與通道的距離上限，再整理施工要點、認證測試的參數，以及網路不穩時的排查方向。
+  <span class="en">A link that passes traffic is not a link that passes certification.</span></p>
+<!--#STYLE-->
+<!--#BODY-->
+  <section class="panel" aria-labelledby="h1">
+    <h2 id="h1"><span class="step">1</span>鏈路長度檢查器 <span class="en">Link length checker</span></h2>
+    <div class="controls"><div class="seg" id="cls"><button data-v="d" aria-pressed="true">Cat 5e／6／6A</button><button data-v="8">Cat 8</button></div></div>
+    <div class="scroll-x"><svg id="lk" viewBox="0 0 760 190" role="img" aria-label="鏈路模型"></svg></div>
+    <div class="grid-2" style="margin-top:8px">
+      <div class="params" id="prm"></div>
+      <div><div class="badges" id="badges"></div><div class="formulas" id="chk"></div></div>
+    </div>
+    <p class="note-key" style="margin-top:8px">永久鏈路＝配線架到資訊插座這段固定不動的水平線。通道＝加上兩端跳線的整條。28 AWG 細跳線依 TIA-568.2-D 需折減通道長度，本檢查器未計入。</p>
+  </section>
+
+  <section class="panel" aria-labelledby="h2">
+    <h2 id="h2"><span class="step">2</span>施工檢查清單 <span class="en">Installation checklist</span></h2>
+    <div class="grid-2">
+      <div class="chk" id="ck">
+        <label><input type="checkbox">遠離強電與干擾源<small>電源線、馬達、影印機；強弱電分開走線架或保持間距</small></label>
+        <label><input type="checkbox">端接退絞 ≤ 13 mm（0.5 吋）<small>退太開，近端串音會變差</small></label>
+        <label><input type="checkbox">彎曲半徑 ≥ 4 倍線徑（UTP，安裝時）<small>不可折死、壓扁</small></label>
+        <label><input type="checkbox">拉線張力 ≤ 110 N（約 25 lbf）<small>過度拉扯會改變絞距</small></label>
+        <label><input type="checkbox">束線帶不要勒緊，改用魔鬼氈<small>擠壓會改變線對幾何，影響回波損耗</small></label>
+        <label><input type="checkbox">戶外與地下管路用戶外線，接頭防水</label>
+        <label><input type="checkbox">遮蔽系統全程用金屬元件並接地</label>
+        <label><input type="checkbox">標籤與米數紀錄，交付測試報告</label>
+      </div>
+      <div><div class="bigres"><div style="--c:var(--ok)"><span>完成項目</span><b id="ckN">0 / 8</b></div></div>
+        <div class="infobox" style="--c:var(--on);min-height:0"><h3>案例：影印機</h3><p>同業分享：某案場網路時好時壞，最後發現線經過影印機後方，影印機啟動時的瞬間電流造成干擾。重新佈線、避開影印機後就穩定了。</p></div></div>
+    </div>
+  </section>
+
+  <section class="panel" aria-labelledby="h3">
+    <h2 id="h3"><span class="step">3</span>認證測試看什麼 <span class="en">Certification parameters</span></h2>
+    <p style="font-size:14px;margin:0 0 10px">簡易測線器只能測通斷與線序；認證測試儀（例如 Fluke DSX 系列）會依 TIA／ISO 等級逐項量測，每條鏈路判定 PASS／FAIL 並出報告。</p>
+    <div class="scroll-x"><table class="tbl">
+      <thead><tr><th>參數</th><th>白話意思</th><th>FAIL 常見原因</th></tr></thead>
+      <tbody>
+        <tr><td><b>Wire Map 線序</b></td><td>8 芯是否各自接對、有無斷路短路、跨對</td><td>打錯線、A／B 混用、線對拆散（Split pair）</td></tr>
+        <tr><td><b>Length 長度</b></td><td>永久鏈路 ≤ 90 m、通道 ≤ 100 m</td><td>實際路徑比預估長、盤線過多</td></tr>
+        <tr><td><b>IL 插入損耗</b></td><td>訊號走完整條線衰減多少</td><td>太長、線材等級不足、CCA 線、高溫</td></tr>
+        <tr><td><b>NEXT／PSNEXT</b></td><td>近端串音：同一端線對之間互相干擾</td><td>退絞太長、模組等級不符、端接手法不良</td></tr>
+        <tr><td><b>ACR-F</b></td><td>遠端串音相對於訊號的比值</td><td>線材品質、線束擠壓</td></tr>
+        <tr><td><b>RL 回波損耗</b></td><td>阻抗不連續造成的反射</td><td>彎折、壓扁、束線帶勒太緊、接頭與線不匹配</td></tr>
+        <tr><td><b>Delay／Skew</b></td><td>傳播延遲 ≤ 555 ns，各對延遲差 ≤ 50 ns（通道）</td><td>線材品質、混用不同線材</td></tr>
+        <tr><td><b>DC 迴路電阻</b></td><td>通道 ≤ 25 Ω，影響 PoE 壓降</td><td>CCA 線、端接接觸不良、線太細</td></tr>
+      </tbody></table></div>
+  </section>
+
+  <section class="panel" aria-labelledby="h4">
+    <h2 id="h4"><span class="step">4</span>網路不穩排查 <span class="en">Troubleshooting</span></h2>
+    <div class="controls"><div class="seg" id="sym"><button data-v="0" aria-pressed="true">速度掉到 100M</button><button data-v="1">時好時壞</button><button data-v="2">PoE 設備重開</button><button data-v="3">完全不通</button></div></div>
+    <div class="infobox" id="symInfo" style="--c:var(--on)"></div>
+  </section>
+<!--#FOOTER-->
+長度與施工限值依 ANSI/TIA-568.0-D／568.2-D（退絞 13 mm、彎曲半徑 4 倍外徑、拉力 110 N、通道延遲 555 ns、延遲差 50 ns、DC 迴路電阻 25 Ω）。案例取自弱電通 × 越祥光電影片。
+<!--#SCRIPT-->
+(function(){
+  const P = {h:80, a:3, b:5}, LIM = {d:{pl:90, ch:100, cord:10, name:'Class D–EA'}, 8:{pl:24, ch:30, cord:6, name:'Cat 8'}};
+  let cls = 'd';
+  const sync = sliders([
+    {k:'h', zh:'水平線（永久鏈路）', en:'horizontal', min:1, max:110, step:1, fmt:v => v + ' m'},
+    {k:'a', zh:'機房端跳線', en:'patch cord', min:0, max:10, step:0.5, fmt:v => v + ' m'},
+    {k:'b', zh:'工作區跳線', en:'work-area cord', min:0, max:10, step:0.5, fmt:v => v + ' m'},
+  ], P, $('prm'), draw);
+  function sliders(defs, P, box, onChange){
+    defs.forEach(d => {
+      const w = document.createElement('div'); w.className = 'param';
+      w.innerHTML = `<div class="top"><label for="p_${d.k}">${d.zh}<span class="en">${d.en}</span></label><output id="o_${d.k}"></output></div><input type="range" id="p_${d.k}" min="${d.min}" max="${d.max}" step="${d.step}">`;
+      box.appendChild(w);
+      $('p_' + d.k).addEventListener('input', e => { P[d.k] = +e.target.value; s(); onChange(); });
+    });
+    function s(){ defs.forEach(d => { $('p_' + d.k).value = P[d.k]; $('o_' + d.k).textContent = d.fmt(P[d.k]); }); }
+    s(); return s;
+  }
+  segGroup('cls', v => { cls = v; if (v === '8'){ P.h = 20; P.a = 2; P.b = 2; } else { P.h = 80; P.a = 3; P.b = 5; } sync(); draw(); });
+  function draw(){
+    const L = LIM[cls], ch = P.h + P.a + P.b, cord = P.a + P.b;
+    const s = $('lk'); s.innerHTML = '';
+    const BX = [70, 250, 510, 690], NM = ['交換器', '配線架', '資訊插座', '電腦'];
+    const segs = [[0, P.a, cord > L.cord], [1, P.h, P.h > L.pl], [2, P.b, cord > L.cord]];
+    segs.forEach(([i, len, bad]) => {
+      const main = i === 1;
+      svgEl('line', {x1:BX[i] + 50, x2:BX[i + 1] - 50, y1:50, y2:50, stroke:bad ? 'var(--warn)' : main ? 'var(--accent)' : 'var(--muted)', 'stroke-width':main ? 6 : 4, 'stroke-dasharray':main ? '' : '8 5'}, s);
+      svgEl('text', {x:(BX[i] + BX[i + 1]) / 2, y:38, 'text-anchor':'middle', class:'read', fill:bad ? 'var(--warn)' : 'var(--ink)'}, s, (main ? '水平線 ' : '跳線 ') + f1(len) + ' m');
+    });
+    BX.forEach((x, i) => { svgEl('rect', {x:x - 50, y:30, width:100, height:40, rx:8, fill:'var(--paper-2)', stroke:'var(--accent)', 'stroke-width':1.6}, s); svgEl('text', {x, y:55, 'text-anchor':'middle', class:'lbl'}, s, NM[i]); });
+    const brk = (a, b, y, col, t) => { [a, b].forEach(x => svgEl('line', {x1:x, x2:x, y1:y - 7, y2:y + 7, stroke:col, 'stroke-width':1.5}, s)); svgEl('line', {x1:a, x2:b, y1:y, y2:y, stroke:col, 'stroke-width':1.5}, s); svgEl('text', {x:(a + b) / 2, y:y + 20, 'text-anchor':'middle', class:'read', fill:col}, s, t); };
+    brk(250, 510, 100, P.h > L.pl ? 'var(--warn)' : 'var(--ok)', `永久鏈路 ${f1(P.h)} m（上限 ${L.pl} m）`);
+    brk(20, 740, 145, ch > L.ch ? 'var(--warn)' : 'var(--ok)', `通道 ${f1(ch)} m（上限 ${L.ch} m）`);
+    const rows = [
+      ['永久鏈路 Permanent link', P.h, L.pl], ['跳線合計 Cords', cord, L.cord], ['通道 Channel', ch, L.ch],
+    ];
+    $('chk').innerHTML = rows.map(r => `<div class="f-row"><span class="name">${r[0]}</span><span class="eq">上限 <b>${r[2]} m</b></span><span class="res" style="color:${r[1] > r[2] ? 'var(--warn)' : 'var(--ok)'}">${f1(r[1])} m</span></div>`).join('');
+    const bad = rows.filter(r => r[1] > r[2]);
+    $('badges').innerHTML = bad.length ? bad.map(r => `<span class="badge warn">${r[0].split(' ')[0]}超過上限</span>`).join('') : `<span class="badge ok">${L.name} 長度符合規範</span>`;
+  }
+  draw();
+  $('ck').addEventListener('change', () => { $('ckN').textContent = $('ck').querySelectorAll('input:checked').length + ' / 8'; });
+  const SYM = [
+    ['速度掉到 100M', ['1000BASE-T 以上要四對全通；有一對斷或接觸不良，設備會自動降速到 100M（只用兩對）', '檢查兩端 RJ45 與模組是否有芯線沒壓到', '用測線器看 Wire Map，或在交換器查該埠協商速率']],
+    ['時好時壞', ['靠近強電、馬達、影印機等干擾源（見上方案例）', '退絞太長、接頭壓接不良，晃動時接觸不穩', '線材被壓扁、彎折或進水；用認證測試儀測 NEXT、RL']],
+    ['PoE 設備重開', ['CCA 線或線太細，迴路電阻大，壓降讓設備欠壓', '線太長或接觸不良；大量線束溫升使電阻增加', '交換器 PoE 總預算不足（見 PoE PD 系列 05 頁）']],
+    ['完全不通', ['線序錯、斷線、短路：先用測線器看 Wire Map', '檢查交換器埠是否關閉或 VLAN 設定', '換一條已知正常的跳線，區分是跳線還是永久鏈路']],
+  ];
+  function sym(i){ const s = SYM[i]; $('symInfo').innerHTML = `<h3>${s[0]}：先查這些</h3><ul>${s[1].map(x => `<li>${x}</li>`).join('')}</ul>`; abbrify(null, '#symInfo'); }
+  segGroup('sym', v => sym(+v)); sym(0);
+  abbrify(null);
+})();
