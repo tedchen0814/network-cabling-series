@@ -52,6 +52,9 @@ def main():
     (SITE / "assets").mkdir(parents=True, exist_ok=True)
     (SITE / "assets" / "series.css").write_text(reset + css, encoding="utf-8")
     (SITE / "assets" / "common.js").write_text((SRC / "common.js").read_text(encoding="utf-8-sig"), encoding="utf-8")
+    (SITE / "assets" / "img").mkdir(exist_ok=True)
+    for img in (SRC / "img").glob("*.jpg"):  # real photos (Wikimedia Commons, credited on each page)
+        (SITE / "assets" / "img" / img.name).write_bytes(img.read_bytes())
     pages = [(k, no, f) for k, no, _, _, f in SERIES] + [("home", "", "index.html")]
     for key, no, site_file in pages:
         part = SRC / ("index.part.html" if key == "home" else f"{key}.part.html")

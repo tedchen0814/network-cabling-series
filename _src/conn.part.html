@@ -14,9 +14,9 @@ Connectors · UPC / APC · cleaning · loss budget
 .cg .phase svg{width:100%;height:90px;display:block;margin:4px 0 6px}
 <!--#BODY-->
   <section class="panel" aria-labelledby="h1">
-    <h2 id="h1"><span class="step">1</span>常見接頭 <span class="en">Connector types (front view, schematic)</span></h2>
+    <h2 id="h1"><span class="step">1</span>常見接頭 <span class="en">Connector types · photo + front-view schematic</span></h2>
     <div class="cg" id="cg"></div>
-    <p class="note-key" style="margin-top:8px">正面示意圖，非實際比例的外殼造型；插芯直徑為標準值。</p>
+    <p class="note-key" style="margin-top:8px">上方為實物照片（取自 Wikimedia Commons，依原授權標示作者，本站僅縮圖），下方為正面示意圖（非實際比例，插芯直徑為標準值）。</p>
   </section>
 
   <section class="panel" aria-labelledby="h2">
@@ -71,7 +71,16 @@ Connectors · UPC / APC · cleaning · loss budget
     ['FC', '2.5 mm 插芯，螺牙鎖固、抗震動。量測儀器與工業設備。', s => {
       svgEl('circle', {cx:90, cy:45, r:36, fill:'var(--paper-2)', stroke:'var(--wire)', 'stroke-width':1.5, 'stroke-dasharray':'4 3'}, s); svgEl('circle', {cx:90, cy:45, r:12, fill:'#e8e2d4', stroke:'var(--wire)'}, s); }],
   ];
-  $('cg').innerHTML = C.map((c, i) => `<div class="phase" style="--c:var(--p${i + 1})"><h3>${c[0]}</h3><svg id="cg${i}" viewBox="0 0 180 90" role="img" aria-label="${c[0]} 正面示意"></svg><p>${c[1]}</p></div>`).join('');
+  // real photos: [file, alt, author, Commons page, licence, licence URL]
+  const SA3 = ['CC BY-SA 3.0', 'https://creativecommons.org/licenses/by-sa/3.0/'];
+  const PH = [
+    ['conn-lc.jpg', 'LC 雙芯跳線接頭實物（多模橘色線）', 'Adamantios', 'LC-optical-fiber-connector-hdr-0a.jpg', ...SA3],
+    ['conn-sc.jpg', 'SC 雙芯跳線接頭實物（多模橘色線）', 'Adamantios', 'SC-optical-fiber-connector-hdr-0a.jpg', ...SA3],
+    ['conn-mpo.jpg', 'MPO 接頭正面實物，一排纖芯與兩側導針孔', 'Reichle &amp; De-Massari', 'MPO_Stecker_HR_crop.jpg', 'CC BY-SA 3.0 DE', 'https://creativecommons.org/licenses/by-sa/3.0/de/'],
+    ['conn-fc.jpg', 'FC/PC 螺牙式接頭實物（單模黃色線）', 'Srleffler', 'FCPC_001.jpg', 'Public domain', ''],
+  ];
+  const credit = p => `<span class="credit">Photo: <a href="https://commons.wikimedia.org/wiki/File:${p[3]}" target="_blank" rel="noopener">${p[2]}</a> · ${p[5] ? `<a href="${p[5]}" target="_blank" rel="noopener">${p[4]}</a>` : p[4]}</span>`;
+  $('cg').innerHTML = C.map((c, i) => `<div class="phase" style="--c:var(--p${i + 1})"><h3>${c[0]}</h3><img class="ph" src="assets/img/${PH[i][0]}" alt="${PH[i][1]}" loading="lazy"><svg id="cg${i}" viewBox="0 0 180 90" role="img" aria-label="${c[0]} 正面示意"></svg><p>${c[1]}</p>${credit(PH[i])}</div>`).join('');
   C.forEach((c, i) => c[2]($('cg' + i)));
   // polish
   function pol(v){

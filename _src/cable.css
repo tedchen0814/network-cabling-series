@@ -68,3 +68,12 @@ input[type=text].code-in{font:600 16px var(--mono);padding:5px 10px;border:1.5px
 p.note-key{display:block}
 .badge:empty{display:none}
 .noise-wrap svg{width:100%;height:auto;display:block;min-width:480px}
+/* real photos */
+.photos{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:12px;margin-top:14px}
+.photo{margin:0;text-align:left;font-weight:400;border:1.5px solid var(--line);border-radius:12px;overflow:hidden;background:var(--paper-2)}
+.photo img{display:block;width:100%;height:auto;aspect-ratio:4/3;object-fit:cover;background:#fff}
+.photo figcaption{padding:8px 10px 10px;font-size:13px;line-height:1.5}
+.photo figcaption b{display:block;font-size:14px}
+.credit{display:block;margin-top:4px;font-size:11.5px;color:var(--muted);line-height:1.5}
+.credit a{color:inherit}
+.phase .ph{display:block;width:100%;height:auto;aspect-ratio:4/3;object-fit:cover;border-radius:8px;margin:2px 0 4px;background:#fff}
