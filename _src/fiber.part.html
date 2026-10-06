@@ -20,6 +20,14 @@ Multimode vs single-mode · OM1–OM5 · OS2
 .core-cmp button.off{opacity:.35}
 .core-cmp button.on{border-color:var(--accent)}
 .core-note{grid-column:1/-1;font-size:12.5px;color:var(--muted)}
+.code-legend{margin:0 0 14px;border:1.5px dashed var(--line);border-radius:12px;padding:8px 14px;background:var(--paper-2)}
+.code-legend summary{cursor:pointer;font-weight:800;font-size:14px}
+.code-legend summary .en{display:inline;margin-left:6px}
+.cl-ex{font-size:15px;margin:10px 0}
+.cl-ex b{font-family:var(--mono)}
+.c1{color:var(--on)} .c2{color:var(--accent)} .c3{color:var(--ok)}
+.code-legend .tbl{min-width:560px}
+.code-legend th,.code-legend td[rowspan]{white-space:nowrap}
 .sw{display:inline-block;width:14px;height:14px;border-radius:3px;vertical-align:-2px;margin-right:6px;border:1px solid var(--line)}
 <!--#BODY-->
   <section class="panel" aria-labelledby="h1">
@@ -50,6 +58,22 @@ Multimode vs single-mode · OM1–OM5 · OS2
   <section class="panel" aria-labelledby="h3">
     <h2 id="h3"><span class="step">3</span>這個速率能跑多遠 <span class="en">Reach by speed</span></h2>
     <div class="controls"><div class="seg" id="spd" style="flex-wrap:wrap"><button data-v="0" aria-pressed="true">1G SX／LX</button><button data-v="1">10G SR／LR</button><button data-v="2">25G SR／LR</button><button data-v="3">40G SR4／LR4</button><button data-v="4">100G SR4／LR4</button></div></div>
+    <details class="code-legend" open>
+      <summary>這些英文代號是什麼意思？ <span class="en">How to read 10GBASE-SR</span></summary>
+      <p class="cl-ex"><b>10G</b>BASE-<b class="c1">S</b><b class="c2">R</b><b class="c3">4</b>　＝　<b>速率</b> ＋ BASE（基頻傳輸）＋ <b class="c1">光的波長／距離</b> ＋ <b class="c2">編碼方式</b> ＋ <b class="c3">通道數</b></p>
+      <div class="scroll-x"><table class="tbl">
+        <thead><tr><th>位置</th><th>代號</th><th>意思</th><th>實際上代表</th></tr></thead>
+        <tbody>
+          <tr><td rowspan="3"><b class="c1">第 1 個字母</b><br>波長／距離</td><td class="m">S</td><td>Short wavelength（短波長）</td><td>850 nm，配<b>多模</b>光纖，短距（數十～數百公尺）</td></tr>
+          <tr><td class="m">L</td><td>Long wavelength（長波長）</td><td>1310 nm，配<b>單模</b>光纖，約 5～10 km</td></tr>
+          <tr><td class="m">E</td><td>Extended（延伸）</td><td>1550 nm，單模，約 40 km（如 10GBASE-ER）</td></tr>
+          <tr><td rowspan="2"><b class="c2">第 2 個字母</b><br>編碼方式</td><td class="m">X</td><td>8B/10B 編碼家族</td><td>1G 世代（1000BASE-X）：SX、LX</td></tr>
+          <tr><td class="m">R</td><td>64B/66B 編碼家族</td><td>10G 以後（BASE-R）：SR、LR、ER</td></tr>
+          <tr><td rowspan="2"><b class="c3">結尾數字</b><br>通道數</td><td class="m">SR4</td><td>4 條平行光纖通道</td><td>多模 4 收 4 發共 8 芯，用 <b>MPO</b> 接頭</td></tr>
+          <tr><td class="m">LR4</td><td>4 個波長</td><td>單模用分波多工（WDM）把 4 個波長塞進一對光纖，仍是 <b>LC 雙芯</b></td></tr>
+        </tbody></table></div>
+      <p class="note-key" style="margin-top:6px">口訣：<b>S 是多模短距、L 是單模長距</b>；看到結尾有 4，就是 4 個通道。代號依 IEEE 802.3 命名，市面上常把 SR 讀成 Short Reach、LR 讀成 Long Reach，意思相同。</p>
+    </details>
     <div class="grid-2">
       <div><div class="grp-title" id="mmT"></div><div class="rbars" id="bars"></div></div>
       <div class="infobox" id="smInfo" style="--c:#c9a400;min-height:0"></div>
