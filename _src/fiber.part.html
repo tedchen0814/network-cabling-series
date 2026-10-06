@@ -28,6 +28,10 @@ Multimode vs single-mode · OM1–OM5 · OS2
 .c1{color:var(--on)} .c2{color:var(--accent)} .c3{color:var(--ok)}
 .code-legend .tbl{min-width:560px}
 .code-legend th,.code-legend td[rowspan]{white-space:nowrap}
+.reach-col{border:1.5px solid var(--c);border-radius:12px;padding:12px 14px;background:var(--paper-2);min-width:0}
+.reach-col h3{margin:0 0 10px;font-size:16px}
+.reach-col h3 small{display:block;font-size:12.5px;color:var(--muted);font-weight:600;margin-top:2px}
+.reach-col .rbar{grid-template-columns:92px minmax(0,1fr) 64px}
 .sw{display:inline-block;width:14px;height:14px;border-radius:3px;vertical-align:-2px;margin-right:6px;border:1px solid var(--line)}
 <!--#BODY-->
   <section class="panel" aria-labelledby="h1">
@@ -74,11 +78,12 @@ Multimode vs single-mode · OM1–OM5 · OS2
         </tbody></table></div>
       <p class="note-key" style="margin-top:6px">口訣：<b>S 是多模短距、L 是單模長距</b>；看到結尾有 4，就是 4 個通道。代號依 IEEE 802.3 命名，市面上常把 SR 讀成 Short Reach、LR 讀成 Long Reach，意思相同。</p>
     </details>
+    <p style="font-size:14px;margin:0 0 12px">同一個速率有兩條路可選。<b>多模</b>便宜但只能短距，距離看你用哪一級<b>光纖</b>（OM1～OM5）；<b>單模</b>光纖只有 OS2 一種，距離改看你插哪一種<b>模組</b>（LR、ER）。注意兩邊單位不同：左邊是公尺，右邊是公里。</p>
     <div class="grid-2">
-      <div><div class="grp-title" id="mmT"></div><div class="rbars" id="bars"></div></div>
-      <div class="infobox" id="smInfo" style="--c:#c9a400;min-height:0"></div>
+      <div class="reach-col" style="--c:#36c3cf"><h3>多模 MMF ＋ <span id="mmMod"></span><small>距離由「光纖等級」決定（850 nm）</small></h3><div class="rbars" id="bars"></div></div>
+      <div class="reach-col" style="--c:#c9a400"><h3>單模 SMF（OS2）＋ <span id="smMod"></span><small>距離由「模組種類」決定（1310／1550 nm）</small></h3><div class="rbars" id="smBars"></div><p id="smNote" class="note-key" style="margin-top:8px"></p></div>
     </div>
-    <p class="note-key" style="margin-top:8px">依 IEEE 802.3 規範距離；廠商「延長型」模組可能更遠。—＝規範未支援。40G／100G SR4 使用 MPO 接頭（4 收 4 發，8 芯）。</p>
+    <p class="note-key" style="margin-top:8px">依 IEEE 802.3 規範距離；—＝該光纖等級不支援。左右長條各自用不同比例尺（左 550 m、右 40 km 為滿格）。單模實際能跑多遠還要看損耗預算，見 08 頁計算器。</p>
   </section>
 
   <section class="panel" aria-labelledby="h4">
@@ -89,7 +94,7 @@ Multimode vs single-mode · OM1–OM5 · OS2
     </div>
   </section>
 <!--#FOOTER-->
-依據 ISO/IEC 11801-1、ANSI/TIA-568.3-D、TIA-598-D（色碼）與 IEEE 802.3（1000BASE-SX／LX、10GBASE-SR／LR、25GBASE-SR／LR、40GBASE-SR4／LR4、100GBASE-SR4／LR4）。
+依據 ISO/IEC 11801-1、ANSI/TIA-568.3-D、TIA-598-D（色碼）與 IEEE 802.3（1000BASE-SX／LX、10GBASE-SR／LR／ER、25GBASE-SR／LR、40GBASE-SR4／LR4／ER4、100GBASE-SR4／LR4／ER4）。
 <!--#SCRIPT-->
 (function(){
   let mode = 'mm', playing = true, t0 = performance.now();
@@ -137,21 +142,23 @@ Multimode vs single-mode · OM1–OM5 · OS2
   }
   $('cores').addEventListener('click', e => { const b = e.target.closest('button[data-m]'); if (b) $('mode').querySelector(`button[data-v="${b.dataset.m}"]`).click(); });
   cores();
-  // reach data (m): [OM1, OM2, OM3, OM4, OM5]
+  // reach data. Multimode (m): [OM1..OM5]. Single-mode modules on OS2: [name, wavelength, km]
   const R = [
-    {mm:'1000BASE-SX（850 nm）', r:[275, 550, 550, 550, 550], sm:'1000BASE-LX：單模 5 km（市售多標 10 km）'},
-    {mm:'10GBASE-SR（850 nm）', r:[33, 82, 300, 400, 400], sm:'10GBASE-LR：單模 10 km；10GBASE-ER：40 km'},
-    {mm:'25GBASE-SR（850 nm）', r:[0, 0, 70, 100, 100], sm:'25GBASE-LR：單模 10 km'},
-    {mm:'40GBASE-SR4（MPO，8 芯）', r:[0, 0, 100, 150, 150], sm:'40GBASE-LR4：單模 10 km，LC 雙芯（4 波長 WDM）'},
-    {mm:'100GBASE-SR4（MPO，8 芯）', r:[0, 0, 70, 100, 100], sm:'100GBASE-LR4：單模 10 km，LC 雙芯（4 波長 WDM）'},
+    {mm:'1000BASE-SX', r:[275, 550, 550, 550, 550], smMod:'LX', sm:[['1000BASE-LX', '1310 nm', 5]], note:'IEEE 規範 5 km，市售 LX 模組多標 10 km；更遠的 ZX（約 70–80 km）為廠商規格，非 IEEE。'},
+    {mm:'10GBASE-SR', r:[33, 82, 300, 400, 400], smMod:'LR／ER', sm:[['10GBASE-LR', '1310 nm', 10], ['10GBASE-ER', '1550 nm', 40]], note:''},
+    {mm:'25GBASE-SR', r:[0, 0, 70, 100, 100], smMod:'LR', sm:[['25GBASE-LR', '1310 nm', 10]], note:''},
+    {mm:'40GBASE-SR4', r:[0, 0, 100, 150, 150], smMod:'LR4／ER4', sm:[['40GBASE-LR4', '1310 nm 帶×4', 10], ['40GBASE-ER4', '1310 nm 帶×4', 40]], note:'SR4 用 MPO（8 芯平行）；LR4／ER4 用 4 個波長分波多工，仍是 LC 雙芯。'},
+    {mm:'100GBASE-SR4', r:[0, 0, 70, 100, 100], smMod:'LR4／ER4', sm:[['100GBASE-LR4', '1310 nm 帶×4', 10], ['100GBASE-ER4', '1310 nm 帶×4', 40]], note:'SR4 用 MPO（8 芯平行）；LR4／ER4 用 4 個波長分波多工，仍是 LC 雙芯。'},
   ];
   const CL = ['#f08a24', '#f08a24', '#36c3cf', '#36c3cf', '#9ccc3a'];
   function reach(i){
     const x = R[i];
-    $('mmT').textContent = '多模：' + x.mm;
+    $('mmMod').textContent = x.mm.replace(/^\d+G?BASE-/, '').replace(/^(\d+)BASE-/, '') + ' 模組';
     $('bars').innerHTML = x.r.map((v, k) => `<div class="rbar"><span>OM${k + 1}</span><div class="t"><div class="f" style="width:${v / 550 * 100}%;background:${CL[k]}"></div></div><b>${v ? v + ' m' : '—'}</b></div>`).join('');
-    $('smInfo').innerHTML = `<h3><span class="tag">單模 OS2</span></h3><p>${x.sm}</p><p style="color:var(--muted);font-size:13px">單模距離由光功率預算決定，見 08 頁損耗預算計算器。</p>`;
-    abbrify(null, '#smInfo, #mmT');
+    $('smMod').textContent = x.smMod + ' 模組';
+    $('smBars').innerHTML = x.sm.map(m => `<div class="rbar"><span>${m[0].replace(/^\d+G?BASE-|^\d+BASE-/, '')}<small style="display:block;color:var(--muted);font-size:11px">${m[1]}</small></span><div class="t"><div class="f" style="width:${m[2] / 40 * 100}%;background:#f2c230"></div></div><b>${m[2]} km</b></div>`).join('');
+    $('smNote').textContent = x.note;
+    abbrify(null, '#smNote');
   }
   segGroup('spd', v => reach(+v)); reach(0);
   abbrify(null);
