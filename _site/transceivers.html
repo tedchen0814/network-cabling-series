@@ -14,6 +14,9 @@
 .mods button b{font-family:var(--display);font-size:17px;letter-spacing:.03em}
 .mods button small{color:var(--muted);font-weight:500}
 .mods button[aria-pressed="true"]{border-color:var(--accent);box-shadow:0 0 0 3px color-mix(in srgb,var(--accent) 25%,transparent)}
+#mnote .mph{display:block;width:100%;max-width:380px;height:auto;aspect-ratio:16/9;object-fit:cover;object-position:50% 30%;border-radius:8px;margin:10px 0 6px;background:#fff}
+#mnote .mcap{font-size:13px;margin:0}
+#mnote .nophoto{margin-top:10px;padding:10px 12px;border:1.5px dashed var(--line);border-radius:8px;color:var(--muted)}
 .bail{display:inline-block;width:42px;height:14px;border-radius:7px;vertical-align:-2px;border:1px solid var(--line)}
 </style>
 </head>
@@ -55,7 +58,7 @@
         <figcaption><b>正面：LC 雙芯插孔</b>一孔發射（TX）、一孔接收（RX），沒插跳線時要蓋防塵蓋（後方黑色）。圖為 100BASE-FX SFP。
           <span class="credit">Photo: <a href="https://commons.wikimedia.org/wiki/File:100BASE-FX_Multimode_LC_SFP_Transceiver_IMGP7815_wp.jpg" target="_blank" rel="noopener">Smial</a> · <a href="https://artlibre.org/licence/lal/en/" target="_blank" rel="noopener">FAL</a></span></figcaption></figure>
     </div>
-    <p class="note-key" style="margin-top:8px">實物照片取自 Wikimedia Commons，依原授權條款標示作者；本站僅縮圖，未修改內容。</p>
+    <p class="note-key" style="margin-top:8px">實物照片取自 Wikimedia Commons，依原授權條款標示作者；本站縮圖，部分照片經裁切（已註明）。</p>
   </section>
 
   <section class="panel" aria-labelledby="h2">
@@ -127,13 +130,26 @@
     ['10GBASE-ER', 'SFP+ 單模', {媒介:'單模光纖 OS2', 距離:'40 km', 波長:'1550 nm', 接頭:'LC 雙芯'}, '短距使用時接收端可能過載，需加光衰減器。', '#f2c230'],
     ['10G BiDi', 'SFP+ 單芯雙向', {媒介:'單模光纖 OS2（1 芯）', 距離:'常見 10–20 km', 波長:'1270／1330 nm 成對', 接頭:'LC 單芯'}, '必須 U／D 成對使用。', null],
   ];
+  // real photos (Wikimedia Commons, CC BY-SA 4.0): [file, caption, author, Commons file, cropped]
+  const PHOTO = {
+    '1000BASE-T': ['mod-1000base-t.jpg', 'GLC-T-C 1000BASE-T SFP：前端直接是 RJ45 母座，插網路線即可。', 'Aurélien Rinaldi', 'Modules_SFP.jpg', 1],
+    '1000BASE-SX': ['sfp-1g.jpg', 'LevelOne SFP-3001：GbE SX、850 nm、多模 550 m，黑色拉環。', 'Smial', 'Multi_mode_sfp_transceiver_IMGP7820_wp.jpg', 0, 'FAL'],
+    '1000BASE-LX': ['mod-1000base-lx.jpg', 'Cisco GLC-LH-SMD（1000BASE-LX/LH）：1310 nm 單模，藍色拉環。', 'Aurélien Rinaldi', 'Module_SFP_Module_Fibre_GLC-LH-SMD_CISCO.jpg', 0],
+    '10GBASE-SR': ['sfpplus-10g.jpg', 'LR-Link 10GBASE-SR：10G／850 nm／多模 300 m，黑色拉環。', 'Dmitry Nosachev', 'LR-Link_10GBASE-SR_SFP%2B_transceiver.jpg', 0],
+    '10GBASE-LR': ['mod-10gbase-lr.jpg', '中間 SFP-10G-LR-C：10G／1310 nm／10 km，藍色拉環；左下為黑色拉環的 SR 對照。', 'Aurélien Rinaldi', 'Modules_SFP_officiels_et_compatibles.jpg', 1],
+    '10G BiDi': ['mod-bidi.jpg', 'BiDi 成對範例（圖為 100M BiDi）：一支 TX 1490／RX 1550，另一支反過來，拉環顏色不同方便分辨。10G BiDi 外型相同。', 'OUSENT', 'Ousent_Optical_Transceiver_BIDI_SFP_01.jpg', 0],
+  };
+  Object.values(PHOTO).forEach(ph => { new Image().src = 'assets/img/' + ph[0]; }); // preload so switching is instant
   $('mods').innerHTML = M.map((m, i) => `<button type="button" data-i="${i}"><b>${m[0]}</b><small>${m[1]}</small></button>`).join('');
   function pick(i){
     const m = M[i];
     $('mods').querySelectorAll('button').forEach((b, k) => b.setAttribute('aria-pressed', k === i));
     $('mspec').innerHTML = '<tbody>' + Object.entries(m[2]).map(([k, v]) => `<tr><th>${k}</th><td>${v}</td></tr>`).join('') +
       `<tr><th>拉環顏色（慣例）</th><td>${m[4] ? `<span class="bail" style="background:${m[4]}"></span>` : '—'}</td></tr></tbody>`;
-    $('mnote').innerHTML = `<h3>${m[0]}</h3><p>${m[3]}</p>`;
+    const ph = PHOTO[m[0]];
+    $('mnote').innerHTML = `<h3>${m[0]}</h3><p>${m[3]}</p>` + (ph
+      ? `<img class="mph" src="assets/img/${ph[0]}" alt="${m[0]} 模組實物照片"><p class="mcap">${ph[1]}<span class="credit">Photo: <a href="https://commons.wikimedia.org/wiki/File:${ph[3]}" target="_blank" rel="noopener">${ph[2]}</a> · ${ph[5] ? `<a href="https://artlibre.org/licence/lal/en/" target="_blank" rel="noopener">FAL</a>` : `<a href="https://creativecommons.org/licenses/by-sa/4.0/" target="_blank" rel="noopener">CC BY-SA 4.0</a>`}${ph[4] ? '（本站裁切）' : ''}</span></p>`
+      : `<p class="mcap nophoto">目前找不到可公開授權的實拍照。外型與其他 SFP+ 相同，差在${m[0] === '10GBASE-T' ? '前端是 RJ45 母座（樣子類似 1000BASE-T 那張）' : '標籤上的波長（1550 nm）與距離（40 km）'}。</p>`);
     abbrify(null, '#mspec, #mnote');
   }
   $('mods').addEventListener('click', e => { const b = e.target.closest('button'); if (b) pick(+b.dataset.i); });
