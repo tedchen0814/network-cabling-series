@@ -10,6 +10,8 @@ Transceivers · Base-T / SR / LR · BiDi · DDM
 <p class="lede">SFP 和 SFP+ 外型完全相同，差在速率：SFP 是 1G，SFP+ 是 10G。插上不同模組，同一個埠就能接網路線、多模或單模光纖。這頁整理怎麼選模組、BiDi 是什麼，以及怎麼從 DDM 讀值判斷光路好壞。
   <span class="en">Same cage, different engines. Pick the module, then read its DDM values to judge the link.</span></p>
 <!--#STYLE-->
+#dprm .param label{white-space:nowrap}
+#dprm .param label .en{display:inline;margin-left:4px}
 .mods{display:grid;grid-template-columns:repeat(auto-fit,minmax(120px,1fr));gap:8px}
 .mods button{display:flex;flex-direction:column;gap:2px;align-items:flex-start;text-align:left;padding:8px 10px}
 .mods button b{font-family:var(--display);font-size:17px;letter-spacing:.03em}
@@ -73,6 +75,7 @@ Transceivers · Base-T / SR / LR · BiDi · DDM
     <div class="controls"><div class="seg" id="dm"><button data-v="0" aria-pressed="true">1000BASE-SX</button><button data-v="1">1000BASE-LX</button><button data-v="2">10GBASE-SR</button><button data-v="3">10GBASE-LR</button></div></div>
     <div class="grid-2">
       <div><div class="params" id="dprm"></div>
+        <p class="note-key" style="margin:6px 0 0">Tx＝本端模組送出去的光；Rx＝本端收到的光（由對端模組送來）。兩個值都在交換器的同一個埠上讀得到。</p>
         <div style="margin-top:10px"><svg style="width:100%;height:auto;display:block" id="dbar" viewBox="0 0 520 90" role="img" aria-label="接收光功率範圍"></svg></div></div>
       <div><div class="badges" id="dbad"></div><div class="formulas" id="dres"></div></div>
     </div>
@@ -159,7 +162,7 @@ Transceivers · Base-T / SR / LR · BiDi · DDM
     {n:'10GBASE-LR', tx:[-8.2, 0.5], rx:[-14.4, 0.5], def:[-2, -7]},
   ];
   let di = 0; const P = {tx:D[0].def[0], rx:D[0].def[1]};
-  const defs = [{k:'tx', zh:'發射光功率 Tx', en:'dBm'}, {k:'rx', zh:'接收光功率 Rx（對端模組）', en:'dBm'}];
+  const defs = [{k:'tx', zh:'Tx 發射光功率', en:'dBm'}, {k:'rx', zh:'Rx 接收光功率', en:'dBm'}];
   defs.forEach(d => { const w = document.createElement('div'); w.className = 'param';
     w.innerHTML = `<div class="top"><label for="d_${d.k}">${d.zh}<span class="en">${d.en}</span></label><output id="do_${d.k}"></output></div><input type="range" id="d_${d.k}" min="-25" max="3" step="0.1">`;
     $('dprm').appendChild(w); $('d_' + d.k).addEventListener('input', e => { P[d.k] = +e.target.value; ddm(); }); });
