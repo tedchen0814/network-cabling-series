@@ -341,3 +341,23 @@ p.note-key{display:block}
 .credit{display:block;margin-top:4px;font-size:11.5px;color:var(--muted);line-height:1.5}
 .credit a{color:inherit}
 .phase .ph{display:block;width:100%;height:auto;aspect-ratio:4/3;object-fit:cover;border-radius:8px;margin:2px 0 4px;background:#fff}
+
+/* ---- 2026-10 改版：銅纜篇／光纖篇分區主題 ---- */
+body.sec-copper{--accent:#b5652b}
+body.sec-fiber{--accent:#0e7f9a}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]) body.sec-copper{--accent:#e39a5f}
+  :root:not([data-theme="light"]) body.sec-fiber{--accent:#4cc6e0}
+}
+:root[data-theme="dark"] body.sec-copper{--accent:#e39a5f}
+:root[data-theme="dark"] body.sec-fiber{--accent:#4cc6e0}
+.series a[data-sec="copper"] b{color:#c46f2f}
+.series a[data-sec="fiber"] b{color:#118aa6}
+@media (prefers-color-scheme: dark){ :root:not([data-theme="light"]) .series a[data-sec="copper"] b{color:#e39a5f} :root:not([data-theme="light"]) .series a[data-sec="fiber"] b{color:#4cc6e0} }
+.series a.sec-on{border-color:var(--accent);box-shadow:inset 0 0 0 1.5px var(--accent)}
+.series.sub{margin-top:-10px;padding:8px 10px;border-radius:12px;background:color-mix(in srgb,var(--accent) 9%,transparent);border:1px dashed color-mix(in srgb,var(--accent) 45%,transparent)}
+.series.sub .lab{color:var(--accent)}
+.series.sub span.cur{background:var(--accent);border-color:var(--accent)}
+.sec-head{display:flex;flex-wrap:wrap;align-items:baseline;gap:6px 14px;margin:6px 0 -6px}
+.sec-head h2{margin:0;font-family:var(--display);font-size:30px;letter-spacing:.04em;color:var(--c)}
+.sec-head p{margin:0;color:var(--muted);font-size:14px}

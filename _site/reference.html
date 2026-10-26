@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<title>09 選型總表與辭典｜網路線材系列</title>
+<title>附錄 選型總表與辭典｜網路線材系列</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@600;700;800&family=Noto+Sans+TC:wght@400;500;700;900&family=JetBrains+Mono:wght@400;600&display=swap">
@@ -12,12 +12,12 @@
 .flt{display:flex;flex-wrap:wrap;gap:8px;align-items:center;margin-bottom:10px}
 </style>
 </head>
-<body>
+<body class="sec-home">
 <div class="wrap">
-  <nav class="series" aria-label="系列 Series"><span class="lab">系列 Series</span><a href="./"><b>HOME</b>選型首頁</a><a href="copper-basics.html"><b>01 BASICS</b>構造與雙絞</a><a href="cat-grades.html"><b>02 CATEGORY</b>Cat 等級</a><a href="shielding.html"><b>03 SHIELDING</b>遮蔽代碼</a><a href="awg-jacket.html"><b>04 AWG · JACKET</b>線徑外被線序</a><a href="install-test.html"><b>05 INSTALL</b>佈線與驗收</a><a href="fiber-basics.html"><b>06 FIBER</b>光纖基礎</a><a href="transceivers.html"><b>07 MODULE</b>光模組</a><a href="connectors.html"><b>08 CONNECTOR</b>接頭與維護</a><span class="cur" aria-current="page"><b>09 APPENDIX</b>選型總表與辭典</span><a href="https://poe-pd-series.vercel.app/" target="_blank" rel="noopener"><b>↗ PoE PD</b>受電端系列</a></nav>
+  <nav class="series" aria-label="網站分區 Sections"><span class="lab">網路線材 Series</span><a href="index.html"><b>HOME</b>選型首頁</a><a data-sec="copper" href="copper/basics.html"><b>COPPER</b>銅纜篇</a><a data-sec="fiber" href="fiber/basics.html"><b>FIBER</b>光纖篇</a><span class="cur" aria-current="page"><b>APPENDIX</b>附錄</span><a href="https://poe-pd-series.vercel.app/" target="_blank" rel="noopener"><b>↗ PoE PD</b>受電端系列</a></nav>
   <header>
     <div>
-      <div class="eyebrow">Network Cabling Series · 09</div>
+      <div class="eyebrow">Network Cabling Series · 附錄</div>
       <h1>選型總表、辭典與勘誤<small>Reference · glossary · corrections</small></h1>
     </div>
     <div class="chip-dc">A <span>→</span> Z</div>
@@ -91,18 +91,18 @@
 <script>
 (function(){
   const T = [
-    ['Cat 6 U/UTP', '1G–5G（10G ≤ 55 m）', 100, '100 m', '銅／RJ45', '辦公區水平佈線', 'cat-grades.html'],
-    ['Cat 6A', '10G', 100, '100 m', '銅／RJ45', '10G、AP、重要場域', 'cat-grades.html'],
-    ['Cat 8', '25G／40G', 30, '30 m', '銅／RJ45（8.1）', '機房內短距（少用）', 'cat-grades.html'],
-    ['DAC 直連銅纜', '10G–100G+', 5, '被動多為 1–5 m', '銅（twinax）／模組一體', '同機櫃', 'transceivers.html'],
-    ['AOC 主動光纜', '10G–100G+', 100, '常見 1–100 m', '多模光纖／模組一體', '相鄰機櫃', 'transceivers.html'],
-    ['1000BASE-SX', '1G', 550, '550 m（OM2+）', '多模／LC', '建物內 1G', 'fiber-basics.html'],
-    ['10GBASE-SR', '10G', 400, 'OM3 300 m、OM4 400 m', '多模／LC', '建物內、機房', 'fiber-basics.html'],
-    ['25GBASE-SR', '25G', 100, 'OM4 100 m', '多模／LC', '伺服器接入', 'fiber-basics.html'],
-    ['40G／100GBASE-SR4', '40G／100G', 150, '40G OM4 150 m、100G OM4 100 m', '多模／MPO', '機房骨幹', 'connectors.html'],
-    ['1000BASE-LX', '1G', 5000, '5 km', '單模／LC', '跨棟、園區', 'transceivers.html'],
-    ['10G／25G LR、40G／100G LR4', '10G–100G', 10000, '10 km', '單模／LC', '跨棟、園區骨幹', 'transceivers.html'],
-    ['10GBASE-ER', '10G', 40000, '40 km', '單模／LC', '遠距', 'transceivers.html'],
+    ['Cat 6 U/UTP', '1G–5G（10G ≤ 55 m）', 100, '100 m', '銅／RJ45', '辦公區水平佈線', 'copper/category.html'],
+    ['Cat 6A', '10G', 100, '100 m', '銅／RJ45', '10G、AP、重要場域', 'copper/category.html'],
+    ['Cat 8', '25G／40G', 30, '30 m', '銅／RJ45（8.1）', '機房內短距（少用）', 'copper/category.html'],
+    ['DAC 直連銅纜', '10G–100G+', 5, '被動多為 1–5 m', '銅（twinax）／模組一體', '同機櫃', 'fiber/transceivers.html'],
+    ['AOC 主動光纜', '10G–100G+', 100, '常見 1–100 m', '多模光纖／模組一體', '相鄰機櫃', 'fiber/transceivers.html'],
+    ['1000BASE-SX', '1G', 550, '550 m（OM2+）', '多模／LC', '建物內 1G', 'fiber/basics.html'],
+    ['10GBASE-SR', '10G', 400, 'OM3 300 m、OM4 400 m', '多模／LC', '建物內、機房', 'fiber/basics.html'],
+    ['25GBASE-SR', '25G', 100, 'OM4 100 m', '多模／LC', '伺服器接入', 'fiber/basics.html'],
+    ['40G／100GBASE-SR4', '40G／100G', 150, '40G OM4 150 m、100G OM4 100 m', '多模／MPO', '機房骨幹', 'fiber/connectors.html'],
+    ['1000BASE-LX', '1G', 5000, '5 km', '單模／LC', '跨棟、園區', 'fiber/transceivers.html'],
+    ['10G／25G LR、40G／100G LR4', '10G–100G', 10000, '10 km', '單模／LC', '跨棟、園區骨幹', 'fiber/transceivers.html'],
+    ['10GBASE-ER', '10G', 40000, '40 km', '單模／LC', '遠距', 'fiber/transceivers.html'],
   ];
   function tbl(min){
     $('mt').querySelector('tbody').innerHTML = T.filter(r => r[2] >= min).map(r => `<tr><td><b>${r[0]}</b></td><td>${r[1]}</td><td class="m">${r[3]}</td><td>${r[4]}</td><td>${r[5]}</td><td><a href="${r[6]}">看說明</a></td></tr>`).join('');

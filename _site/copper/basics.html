@@ -3,21 +3,22 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<title>01 構造與雙絞｜網路線材系列</title>
+<title>C1 構造與雙絞｜網路線材系列</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@600;700;800&family=Noto+Sans+TC:wght@400;500;700;900&family=JetBrains+Mono:wght@400;600&display=swap">
-<link rel="stylesheet" href="assets/series.css">
+<link rel="stylesheet" href="../assets/series.css">
 <style>
 
 </style>
 </head>
-<body>
+<body class="sec-copper">
 <div class="wrap">
-  <nav class="series" aria-label="系列 Series"><span class="lab">系列 Series</span><a href="./"><b>HOME</b>選型首頁</a><span class="cur" aria-current="page"><b>01 BASICS</b>構造與雙絞</span><a href="cat-grades.html"><b>02 CATEGORY</b>Cat 等級</a><a href="shielding.html"><b>03 SHIELDING</b>遮蔽代碼</a><a href="awg-jacket.html"><b>04 AWG · JACKET</b>線徑外被線序</a><a href="install-test.html"><b>05 INSTALL</b>佈線與驗收</a><a href="fiber-basics.html"><b>06 FIBER</b>光纖基礎</a><a href="transceivers.html"><b>07 MODULE</b>光模組</a><a href="connectors.html"><b>08 CONNECTOR</b>接頭與維護</a><a href="reference.html"><b>09 APPENDIX</b>選型總表與辭典</a><a href="https://poe-pd-series.vercel.app/" target="_blank" rel="noopener"><b>↗ PoE PD</b>受電端系列</a></nav>
+  <nav class="series" aria-label="網站分區 Sections"><span class="lab">網路線材 Series</span><a href="../index.html"><b>HOME</b>選型首頁</a><a class="sec-on" data-sec="copper" href="../copper/basics.html"><b>COPPER</b>銅纜篇</a><a data-sec="fiber" href="../fiber/basics.html"><b>FIBER</b>光纖篇</a><a href="../reference.html"><b>APPENDIX</b>附錄</a><a href="https://poe-pd-series.vercel.app/" target="_blank" rel="noopener"><b>↗ PoE PD</b>受電端系列</a></nav>
+  <nav class="series sub" aria-label="銅纜篇"><span class="lab">銅纜篇</span><span class="cur" aria-current="page"><b>C1 BASICS</b>構造與雙絞</span><a href="../copper/category.html"><b>C2 CATEGORY</b>Cat 等級</a><a href="../copper/shielding.html"><b>C3 SHIELDING</b>遮蔽代碼</a><a href="../copper/awg-jacket.html"><b>C4 AWG · JACKET</b>線徑外被線序</a><a href="../copper/install-test.html"><b>C5 INSTALL</b>佈線與驗收</a></nav>
   <header>
     <div>
-      <div class="eyebrow">Network Cabling Series · 01</div>
+      <div class="eyebrow">Network Cabling Series · 銅纜篇 C1</div>
       <h1>網路線的構造與雙絞<small>Construction &amp; twisted pairs</small></h1>
     </div>
     <div class="chip-dc">8 芯 <span>·</span> 4 對</div>
@@ -87,7 +88,7 @@
 依據 ANSI/TIA-568.2-D 與 ISO/IEC 11801-1；構造說明參考弱電通 × 越祥光電影片。剖面圖依標準色碼與典型結構繪製。
   </footer>
 </div>
-<script src="assets/common.js"></script>
+<script src="../assets/common.js"></script>
 <script>
 (function(){
   $('fig').innerHTML = cableSVG({jacket:'#3f79b5', spline:true, rip:true, label:'Cat 6 U/UTP 剖面'});

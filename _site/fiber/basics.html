@@ -3,11 +3,11 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<title>06 光纖基礎｜網路線材系列</title>
+<title>F1 光纖基礎｜網路線材系列</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@600;700;800&family=Noto+Sans+TC:wght@400;500;700;900&family=JetBrains+Mono:wght@400;600&display=swap">
-<link rel="stylesheet" href="assets/series.css">
+<link rel="stylesheet" href="../assets/series.css">
 <style>
 .core-cmp{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px;text-align:center}
 .core-cmp svg{width:100%;max-width:150px;height:auto}
@@ -34,12 +34,13 @@
 .sw{display:inline-block;width:14px;height:14px;border-radius:3px;vertical-align:-2px;margin-right:6px;border:1px solid var(--line)}
 </style>
 </head>
-<body>
+<body class="sec-fiber">
 <div class="wrap">
-  <nav class="series" aria-label="系列 Series"><span class="lab">系列 Series</span><a href="./"><b>HOME</b>選型首頁</a><a href="copper-basics.html"><b>01 BASICS</b>構造與雙絞</a><a href="cat-grades.html"><b>02 CATEGORY</b>Cat 等級</a><a href="shielding.html"><b>03 SHIELDING</b>遮蔽代碼</a><a href="awg-jacket.html"><b>04 AWG · JACKET</b>線徑外被線序</a><a href="install-test.html"><b>05 INSTALL</b>佈線與驗收</a><span class="cur" aria-current="page"><b>06 FIBER</b>光纖基礎</span><a href="transceivers.html"><b>07 MODULE</b>光模組</a><a href="connectors.html"><b>08 CONNECTOR</b>接頭與維護</a><a href="reference.html"><b>09 APPENDIX</b>選型總表與辭典</a><a href="https://poe-pd-series.vercel.app/" target="_blank" rel="noopener"><b>↗ PoE PD</b>受電端系列</a></nav>
+  <nav class="series" aria-label="網站分區 Sections"><span class="lab">網路線材 Series</span><a href="../index.html"><b>HOME</b>選型首頁</a><a data-sec="copper" href="../copper/basics.html"><b>COPPER</b>銅纜篇</a><a class="sec-on" data-sec="fiber" href="../fiber/basics.html"><b>FIBER</b>光纖篇</a><a href="../reference.html"><b>APPENDIX</b>附錄</a><a href="https://poe-pd-series.vercel.app/" target="_blank" rel="noopener"><b>↗ PoE PD</b>受電端系列</a></nav>
+  <nav class="series sub" aria-label="光纖篇"><span class="lab">光纖篇</span><span class="cur" aria-current="page"><b>F1 FIBER</b>光纖基礎</span><a href="../fiber/connectors.html"><b>F2 CONNECTOR</b>接頭與維護</a><a href="../fiber/transceivers.html"><b>F3 MODULE</b>光模組入門</a></nav>
   <header>
     <div>
-      <div class="eyebrow">Network Cabling Series · 06</div>
+      <div class="eyebrow">Network Cabling Series · 光纖篇 F1</div>
       <h1>光纖基礎：多模與單模<small>Multimode vs single-mode · OM1–OM5 · OS2</small></h1>
     </div>
     <div class="chip-dc">50 <span>vs</span> 9 µm</div>
@@ -96,14 +97,14 @@
       <div class="reach-col" style="--c:#36c3cf"><h3>多模 MMF ＋ <span id="mmMod"></span><small>距離由「光纖等級」決定（850 nm）</small></h3><div class="rbars" id="bars"></div></div>
       <div class="reach-col" style="--c:#c9a400"><h3>單模 SMF（OS2）＋ <span id="smMod"></span><small>距離由「模組種類」決定（1310／1550 nm）</small></h3><div class="rbars" id="smBars"></div><p id="smNote" class="note-key" style="margin-top:8px"></p></div>
     </div>
-    <p class="note-key" style="margin-top:8px">依 IEEE 802.3 規範距離；—＝該光纖等級不支援。左右長條各自用不同比例尺（左 550 m、右 40 km 為滿格）。單模實際能跑多遠還要看損耗預算，見 08 頁計算器。</p>
+    <p class="note-key" style="margin-top:8px">依 IEEE 802.3 規範距離；—＝該光纖等級不支援。左右長條各自用不同比例尺（左 550 m、右 40 km 為滿格）。單模實際能跑多遠還要看損耗預算，見 F2 損耗預算計算器。</p>
   </section>
 
   <section class="panel" aria-labelledby="h4">
     <h2 id="h4"><span class="step">4</span>銅纜還是光纖 <span class="en">Copper or fiber</span></h2>
     <div class="grid-2">
       <div class="infobox" style="--c:var(--on)"><h3><span class="tag">銅纜</span>RJ45／DAC</h3><ul><li>≤ 100 m（10G 以下），可沿用既有網路線，設備便宜</li><li>可以 PoE 供電</li><li>受電磁干擾影響；跨建物有地電位差風險</li></ul></div>
-      <div class="infobox" style="--c:var(--accent)"><h3><span class="tag">光纖</span>MMF／SMF</h3><ul><li>300 m～數十 km，頻寬升級空間大</li><li>完全不受電磁干擾、沒有接地問題</li><li>需光模組；接頭怕髒、光纖怕折（見 08 頁）</li></ul></div>
+      <div class="infobox" style="--c:var(--accent)"><h3><span class="tag">光纖</span>MMF／SMF</h3><ul><li>300 m～數十 km，頻寬升級空間大</li><li>完全不受電磁干擾、沒有接地問題</li><li>需光模組；接頭怕髒、光纖怕折（見 F2 接頭與維護）</li></ul></div>
     </div>
   </section>
 
@@ -111,7 +112,7 @@
 依據 ISO/IEC 11801-1、ANSI/TIA-568.3-D、TIA-598-D（色碼）與 IEEE 802.3（1000BASE-SX／LX、10GBASE-SR／LR／ER、25GBASE-SR／LR、40GBASE-SR4／LR4／ER4、100GBASE-SR4／LR4／ER4）。
   </footer>
 </div>
-<script src="assets/common.js"></script>
+<script src="../assets/common.js"></script>
 <script>
 (function(){
   let mode = 'mm', playing = true, t0 = performance.now();

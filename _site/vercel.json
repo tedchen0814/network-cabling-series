@@ -1,0 +1,44 @@
+{
+  "redirects": [
+    {
+      "source": "/copper-basics.html",
+      "destination": "/copper/basics.html",
+      "permanent": true
+    },
+    {
+      "source": "/cat-grades.html",
+      "destination": "/copper/category.html",
+      "permanent": true
+    },
+    {
+      "source": "/shielding.html",
+      "destination": "/copper/shielding.html",
+      "permanent": true
+    },
+    {
+      "source": "/awg-jacket.html",
+      "destination": "/copper/awg-jacket.html",
+      "permanent": true
+    },
+    {
+      "source": "/install-test.html",
+      "destination": "/copper/install-test.html",
+      "permanent": true
+    },
+    {
+      "source": "/fiber-basics.html",
+      "destination": "/fiber/basics.html",
+      "permanent": true
+    },
+    {
+      "source": "/connectors.html",
+      "destination": "/fiber/connectors.html",
+      "permanent": true
+    },
+    {
+      "source": "/transceivers.html",
+      "destination": "/fiber/transceivers.html",
+      "permanent": true
+    }
+  ]
+}

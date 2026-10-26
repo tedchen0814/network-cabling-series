@@ -3,22 +3,23 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<title>08 接頭與維護｜網路線材系列</title>
+<title>F2 接頭與維護｜網路線材系列</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@600;700;800&family=Noto+Sans+TC:wght@400;500;700;900&family=JetBrains+Mono:wght@400;600&display=swap">
-<link rel="stylesheet" href="assets/series.css">
+<link rel="stylesheet" href="../assets/series.css">
 <style>
 .cg{display:grid;grid-template-columns:repeat(auto-fit,minmax(170px,1fr));gap:12px}
 .cg .phase svg{width:100%;height:90px;display:block;margin:4px 0 6px}
 </style>
 </head>
-<body>
+<body class="sec-fiber">
 <div class="wrap">
-  <nav class="series" aria-label="系列 Series"><span class="lab">系列 Series</span><a href="./"><b>HOME</b>選型首頁</a><a href="copper-basics.html"><b>01 BASICS</b>構造與雙絞</a><a href="cat-grades.html"><b>02 CATEGORY</b>Cat 等級</a><a href="shielding.html"><b>03 SHIELDING</b>遮蔽代碼</a><a href="awg-jacket.html"><b>04 AWG · JACKET</b>線徑外被線序</a><a href="install-test.html"><b>05 INSTALL</b>佈線與驗收</a><a href="fiber-basics.html"><b>06 FIBER</b>光纖基礎</a><a href="transceivers.html"><b>07 MODULE</b>光模組</a><span class="cur" aria-current="page"><b>08 CONNECTOR</b>接頭與維護</span><a href="reference.html"><b>09 APPENDIX</b>選型總表與辭典</a><a href="https://poe-pd-series.vercel.app/" target="_blank" rel="noopener"><b>↗ PoE PD</b>受電端系列</a></nav>
+  <nav class="series" aria-label="網站分區 Sections"><span class="lab">網路線材 Series</span><a href="../index.html"><b>HOME</b>選型首頁</a><a data-sec="copper" href="../copper/basics.html"><b>COPPER</b>銅纜篇</a><a class="sec-on" data-sec="fiber" href="../fiber/basics.html"><b>FIBER</b>光纖篇</a><a href="../reference.html"><b>APPENDIX</b>附錄</a><a href="https://poe-pd-series.vercel.app/" target="_blank" rel="noopener"><b>↗ PoE PD</b>受電端系列</a></nav>
+  <nav class="series sub" aria-label="光纖篇"><span class="lab">光纖篇</span><a href="../fiber/basics.html"><b>F1 FIBER</b>光纖基礎</a><span class="cur" aria-current="page"><b>F2 CONNECTOR</b>接頭與維護</span><a href="../fiber/transceivers.html"><b>F3 MODULE</b>光模組入門</a></nav>
   <header>
     <div>
-      <div class="eyebrow">Network Cabling Series · 08</div>
+      <div class="eyebrow">Network Cabling Series · 光纖篇 F2</div>
       <h1>光纖接頭、清潔與損耗預算<small>Connectors · UPC / APC · cleaning · loss budget</small></h1>
     </div>
     <div class="chip-dc">0.75 <span>dB</span></div>
@@ -72,7 +73,7 @@
 依據 ANSI/TIA-568.3-D（接頭 0.75 dB、熔接 0.3 dB）、IEC 61300-3-35（端面檢查）、IEEE 802.3 各規格通道插入損耗。UPC／APC 回波損耗為常見產品規格。
   </footer>
 </div>
-<script src="assets/common.js"></script>
+<script src="../assets/common.js"></script>
 <script>
 (function(){
   // connector gallery (front view schematics)
@@ -97,7 +98,7 @@
     ['conn-fc.jpg', 'FC/PC 螺牙式接頭實物（單模黃色線）', 'Srleffler', 'FCPC_001.jpg', 'Public domain', ''],
   ];
   const credit = p => `<span class="credit">Photo: <a href="https://commons.wikimedia.org/wiki/File:${p[3]}" target="_blank" rel="noopener">${p[2]}</a> · ${p[5] ? `<a href="${p[5]}" target="_blank" rel="noopener">${p[4]}</a>` : p[4]}</span>`;
-  $('cg').innerHTML = C.map((c, i) => `<div class="phase" style="--c:var(--p${i + 1})"><h3>${c[0]}</h3><img class="ph" src="assets/img/${PH[i][0]}" alt="${PH[i][1]}" loading="lazy"><svg id="cg${i}" viewBox="0 0 180 90" role="img" aria-label="${c[0]} 正面示意"></svg><p>${c[1]}</p>${credit(PH[i])}</div>`).join('');
+  $('cg').innerHTML = C.map((c, i) => `<div class="phase" style="--c:var(--p${i + 1})"><h3>${c[0]}</h3><img class="ph" src="../assets/img/${PH[i][0]}" alt="${PH[i][1]}" loading="lazy"><svg id="cg${i}" viewBox="0 0 180 90" role="img" aria-label="${c[0]} 正面示意"></svg><p>${c[1]}</p>${credit(PH[i])}</div>`).join('');
   C.forEach((c, i) => c[2]($('cg' + i)));
   // polish
   function pol(v){

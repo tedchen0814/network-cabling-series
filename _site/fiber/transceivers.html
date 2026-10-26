@@ -3,11 +3,11 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<title>07 光模組｜網路線材系列</title>
+<title>F3 光模組｜網路線材系列</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@600;700;800&family=Noto+Sans+TC:wght@400;500;700;900&family=JetBrains+Mono:wght@400;600&display=swap">
-<link rel="stylesheet" href="assets/series.css">
+<link rel="stylesheet" href="../assets/series.css">
 <style>
 #dprm .param label{white-space:nowrap}
 #dprm .param label .en{display:inline;margin-left:4px}
@@ -22,12 +22,13 @@
 .bail{display:inline-block;width:42px;height:14px;border-radius:7px;vertical-align:-2px;border:1px solid var(--line)}
 </style>
 </head>
-<body>
+<body class="sec-fiber">
 <div class="wrap">
-  <nav class="series" aria-label="系列 Series"><span class="lab">系列 Series</span><a href="./"><b>HOME</b>選型首頁</a><a href="copper-basics.html"><b>01 BASICS</b>構造與雙絞</a><a href="cat-grades.html"><b>02 CATEGORY</b>Cat 等級</a><a href="shielding.html"><b>03 SHIELDING</b>遮蔽代碼</a><a href="awg-jacket.html"><b>04 AWG · JACKET</b>線徑外被線序</a><a href="install-test.html"><b>05 INSTALL</b>佈線與驗收</a><a href="fiber-basics.html"><b>06 FIBER</b>光纖基礎</a><span class="cur" aria-current="page"><b>07 MODULE</b>光模組</span><a href="connectors.html"><b>08 CONNECTOR</b>接頭與維護</a><a href="reference.html"><b>09 APPENDIX</b>選型總表與辭典</a><a href="https://poe-pd-series.vercel.app/" target="_blank" rel="noopener"><b>↗ PoE PD</b>受電端系列</a></nav>
+  <nav class="series" aria-label="網站分區 Sections"><span class="lab">網路線材 Series</span><a href="../index.html"><b>HOME</b>選型首頁</a><a data-sec="copper" href="../copper/basics.html"><b>COPPER</b>銅纜篇</a><a class="sec-on" data-sec="fiber" href="../fiber/basics.html"><b>FIBER</b>光纖篇</a><a href="../reference.html"><b>APPENDIX</b>附錄</a><a href="https://poe-pd-series.vercel.app/" target="_blank" rel="noopener"><b>↗ PoE PD</b>受電端系列</a></nav>
+  <nav class="series sub" aria-label="光纖篇"><span class="lab">光纖篇</span><a href="../fiber/basics.html"><b>F1 FIBER</b>光纖基礎</a><a href="../fiber/connectors.html"><b>F2 CONNECTOR</b>接頭與維護</a><span class="cur" aria-current="page"><b>F3 MODULE</b>光模組入門</span></nav>
   <header>
     <div>
-      <div class="eyebrow">Network Cabling Series · 07</div>
+      <div class="eyebrow">Network Cabling Series · 光纖篇 F3</div>
       <h1>光模組：SFP、SFP+ 與 DDM<small>Transceivers · Base-T / SR / LR · BiDi · DDM</small></h1>
     </div>
     <div class="chip-dc">1G <span>→</span> 10G</div>
@@ -47,16 +48,16 @@
       </tbody></table></div>
     <div class="errata" style="margin-top:12px;border-color:var(--accent);background:color-mix(in srgb,var(--accent) 6%,transparent)"><b style="color:var(--accent)">兩端要成對</b>：同一條光纖兩端的模組類型、速率、波長都要相同（SR 對 SR、LR 對 LR）。1G 的 SX 和 10G 的 SR 雖然都是 850 nm 多模，彼此不能互通。</div>
     <div class="photos">
-      <figure class="photo"><img src="assets/img/sfp-1g.jpg" alt="1G SFP 多模光模組（1000BASE-SX，850 nm，LC 雙芯），黑色拉環" loading="lazy" width="960" height="729">
+      <figure class="photo"><img src="../assets/img/sfp-1g.jpg" alt="1G SFP 多模光模組（1000BASE-SX，850 nm，LC 雙芯），黑色拉環" loading="lazy" width="960" height="729">
         <figcaption><b>SFP · 1G（1000BASE-SX）</b>850 nm 多模、LC 雙芯，標籤寫明 GbE SX 550 m。
           <span class="credit">Photo: <a href="https://commons.wikimedia.org/wiki/File:Multi_mode_sfp_transceiver_IMGP7820_wp.jpg" target="_blank" rel="noopener">Smial</a> · <a href="https://artlibre.org/licence/lal/en/" target="_blank" rel="noopener">FAL</a></span></figcaption></figure>
-      <figure class="photo"><img src="assets/img/sfpplus-10g.jpg" alt="10G SFP+ 多模光模組（10GBASE-SR，850 nm，300 m）" loading="lazy" width="960" height="613">
+      <figure class="photo"><img src="../assets/img/sfpplus-10g.jpg" alt="10G SFP+ 多模光模組（10GBASE-SR，850 nm，300 m）" loading="lazy" width="960" height="613">
         <figcaption><b>SFP+ · 10G（10GBASE-SR）</b>外型與 SFP 相同，標籤 10G／850nm／MM／300M。
           <span class="credit">Photo: <a href="https://commons.wikimedia.org/wiki/File:LR-Link_10GBASE-SR_SFP%2B_transceiver.jpg" target="_blank" rel="noopener">Dmitry Nosachev</a> · <a href="https://creativecommons.org/licenses/by-sa/4.0/" target="_blank" rel="noopener">CC BY-SA 4.0</a></span></figcaption></figure>
-      <figure class="photo"><img src="assets/img/sfp-vs-sfpplus.jpg" alt="Cisco GLC-LH-SMD（1G SFP）與 SFP-10G-SR（10G SFP+）並排，可見尾端金手指" loading="lazy" width="960" height="540">
+      <figure class="photo"><img src="../assets/img/sfp-vs-sfpplus.jpg" alt="Cisco GLC-LH-SMD（1G SFP）與 SFP-10G-SR（10G SFP+）並排，可見尾端金手指" loading="lazy" width="960" height="540">
         <figcaption><b>並排比較</b>Cisco GLC-LH-SMD（1G SFP，單模）與 SFP-10G-SR（10G SFP+）：尺寸相同，右後方可見插入籠座的金手指。
           <span class="credit">Photo: <a href="https://commons.wikimedia.org/wiki/File:Module_SFP_Module_Fibre_GLC-LH-SMD_et_SFP-10G-SR_CISCO.jpg" target="_blank" rel="noopener">Aurélien Rinaldi</a> · <a href="https://creativecommons.org/licenses/by-sa/4.0/" target="_blank" rel="noopener">CC BY-SA 4.0</a></span></figcaption></figure>
-      <figure class="photo"><img src="assets/img/sfp-lc-port.jpg" alt="SFP 光模組正面的 LC 雙芯插孔，後方為取下的防塵蓋" loading="lazy" width="960" height="1103">
+      <figure class="photo"><img src="../assets/img/sfp-lc-port.jpg" alt="SFP 光模組正面的 LC 雙芯插孔，後方為取下的防塵蓋" loading="lazy" width="960" height="1103">
         <figcaption><b>正面：LC 雙芯插孔</b>一孔發射（TX）、一孔接收（RX），沒插跳線時要蓋防塵蓋（後方黑色）。圖為 100BASE-FX SFP。
           <span class="credit">Photo: <a href="https://commons.wikimedia.org/wiki/File:100BASE-FX_Multimode_LC_SFP_Transceiver_IMGP7815_wp.jpg" target="_blank" rel="noopener">Smial</a> · <a href="https://artlibre.org/licence/lal/en/" target="_blank" rel="noopener">FAL</a></span></figcaption></figure>
     </div>
@@ -120,7 +121,7 @@
 依據 IEEE 802.3 Clause 38（1000BASE-SX／LX）、Clause 52（10GBASE-SR／LR／ER）、SFF-8472（DDM）與 SFP／SFP+ MSA。拉環顏色為業界常見慣例，非標準規定。
   </footer>
 </div>
-<script src="assets/common.js"></script>
+<script src="../assets/common.js"></script>
 <script>
 (function(){
   const M = [
@@ -142,7 +143,7 @@
     '10GBASE-LR': ['mod-10gbase-lr.jpg', '中間 SFP-10G-LR-C：10G／1310 nm／10 km，藍色拉環；左下為黑色拉環的 SR 對照。', 'Aurélien Rinaldi', 'Modules_SFP_officiels_et_compatibles.jpg', 1],
     '10G BiDi': ['mod-bidi.jpg', 'BiDi 成對範例（圖為 100M BiDi）：一支 TX 1490／RX 1550，另一支反過來，拉環顏色不同方便分辨。10G BiDi 外型相同。', 'OUSENT', 'Ousent_Optical_Transceiver_BIDI_SFP_01.jpg', 0],
   };
-  Object.values(PHOTO).forEach(ph => { new Image().src = 'assets/img/' + ph[0]; }); // preload so switching is instant
+  Object.values(PHOTO).forEach(ph => { new Image().src = '../assets/img/' + ph[0]; }); // preload so switching is instant
   $('mods').innerHTML = M.map((m, i) => `<button type="button" data-i="${i}"><b>${m[0]}</b><small>${m[1]}</small></button>`).join('');
   function pick(i){
     const m = M[i];
@@ -151,7 +152,7 @@
       `<tr><th>拉環顏色（慣例）</th><td>${m[4] ? `<span class="bail" style="background:${m[4]}"></span>` : '—'}</td></tr></tbody>`;
     const ph = PHOTO[m[0]];
     $('mnote').innerHTML = `<h3>${m[0]}</h3><p>${m[3]}</p>` + (ph
-      ? `<img class="mph" src="assets/img/${ph[0]}" alt="${m[0]} 模組實物照片"><p class="mcap">${ph[1]}<span class="credit">Photo: <a href="https://commons.wikimedia.org/wiki/File:${ph[3]}" target="_blank" rel="noopener">${ph[2]}</a> · ${ph[5] ? `<a href="https://artlibre.org/licence/lal/en/" target="_blank" rel="noopener">FAL</a>` : `<a href="https://creativecommons.org/licenses/by-sa/4.0/" target="_blank" rel="noopener">CC BY-SA 4.0</a>`}${ph[4] ? '（本站裁切）' : ''}</span></p>`
+      ? `<img class="mph" src="../assets/img/${ph[0]}" alt="${m[0]} 模組實物照片"><p class="mcap">${ph[1]}<span class="credit">Photo: <a href="https://commons.wikimedia.org/wiki/File:${ph[3]}" target="_blank" rel="noopener">${ph[2]}</a> · ${ph[5] ? `<a href="https://artlibre.org/licence/lal/en/" target="_blank" rel="noopener">FAL</a>` : `<a href="https://creativecommons.org/licenses/by-sa/4.0/" target="_blank" rel="noopener">CC BY-SA 4.0</a>`}${ph[4] ? '（本站裁切）' : ''}</span></p>`
       : `<p class="mcap nophoto">目前找不到可公開授權的實拍照。外型與其他 SFP+ 相同，差在${m[0] === '10GBASE-T' ? '前端是 RJ45 母座（樣子類似 1000BASE-T 那張）' : '標籤上的波長（1550 nm）與距離（40 km）'}。</p>`);
     abbrify(null, '#mspec, #mnote');
   }

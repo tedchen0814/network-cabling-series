@@ -7,8 +7,8 @@ Network Cabling Series · copper &amp; fiber
 <!--#CHIP-->
 Cat <span>↔</span> Fiber
 <!--#LEDE-->
-<p class="lede">從 Cat 5e 到 Cat 8 的網路線，到多模、單模光纖與 SFP 光模組，整理成 9 頁可以互動操作的參考資料。先用下面的決策器輸入距離、速率與環境，看建議用哪一種線材；想知道為什麼，再點進各頁。
-  <span class="en">Pick distance, speed and environment to get a cabling recommendation, then dive into the nine reference pages for the why.</span></p>
+<p class="lede">從 Cat 5e 到 Cat 8 的網路線，到多模、單模光纖與 SFP 光模組，分成<b>銅纜篇</b>與<b>光纖篇</b>兩區，每頁都可以互動操作。先用下面的決策器輸入距離、速率與環境，看建議用哪一種線材；想知道為什麼，再點進各頁。
+  <span class="en">Pick distance, speed and environment to get a cabling recommendation, then then dive into the copper or fiber section for the why.</span></p>
 <!--#STYLE-->
 .path{display:flex;flex-wrap:wrap;gap:8px 10px;align-items:center;font-size:14px}
 .path b{font-family:var(--display);font-size:17px;letter-spacing:.05em}
@@ -41,17 +41,12 @@ Cat <span>↔</span> Fiber
     <p class="note-key" style="margin-top:12px">建議依 IEEE 802.3 各規格的標準距離與 TIA／ISO 佈線規範整理，屬一般原則；實際案場請再依設備規格書、預算與業主需求確認。</p>
   </section>
 
-  <section class="panel" aria-labelledby="h-path">
-    <h2 id="h-path"><span class="step">2</span>閱讀路徑 <span class="en">Reading path</span></h2>
-    <div class="path">
-      <span><b>01–02</b> 網路線怎麼做、等級怎麼分</span><span class="arr">→</span>
-      <span><b>03–04</b> 遮蔽、線徑、外被、線序</span><span class="arr">→</span>
-      <span><b>05</b> 佈線與驗收</span><span class="arr">→</span>
-      <span><b>06–08</b> 光纖、光模組、接頭</span><span class="arr">→</span>
-      <span><b>09</b> 總表與辭典</span>
-    </div>
-  </section>
-  <div class="cards" id="cards"></div>
+  <div class="sec-head" style="--c:#c46f2f"><h2>銅纜篇 COPPER</h2><p>網路線（RJ45）：構造、Cat 等級、遮蔽、線徑外被、佈線驗收</p></div>
+  <div class="cards" id="cardsC"></div>
+  <div class="sec-head" style="--c:#118aa6"><h2>光纖篇 FIBER</h2><p>光纖、接頭與光模組；400G～1.6T 高速模組陸續加入</p></div>
+  <div class="cards" id="cardsF"></div>
+  <div class="sec-head" style="--c:var(--muted)"><h2>附錄 APPENDIX</h2><p>兩篇共用的總表、辭典與勘誤</p></div>
+  <div class="cards" id="cardsA"></div>
 
   <section class="panel" aria-labelledby="h-rel">
     <h2 id="h-rel">相關系列 <span class="en">Related series</span></h2>
@@ -64,21 +59,27 @@ Cat <span>↔</span> Fiber
 <br>Compiled from public standards summaries; verify against the standards and datasheets.
 <!--#SCRIPT-->
 (function(){
-  const S = [
-    ['01', '構造與雙絞', 'Construction & twisting', 'copper-basics.html', '一條網路線由哪些部分組成，為什麼要雙絞、絞距為什麼都不一樣。', ['可點選的剖面圖', '雙絞抵消雜訊模擬']],
-    ['02', 'Cat 等級', 'Category 5e – 8', 'cat-grades.html', 'Cat 5e、6、6A、7、8 的頻寬、速率與距離，Cat 7 為什麼不規劃。', ['五種等級剖面切換', '速率 × 等級對照表']],
-    ['03', '遮蔽代碼', 'Shielding codes', 'shielding.html', '看懂 U/UTP、F/UTP、S/FTP，什麼時候需要遮蔽線。', ['代碼解碼器', '要不要用遮蔽線']],
-    ['04', '線徑、外被與線序', 'AWG · jacket · pinout', 'awg-jacket.html', 'AWG 與電阻、PVC／LSZH／PE、防火等級、T568A／B。', ['AWG 滑桿', '外被印字解讀', '線序切換']],
-    ['05', '佈線與驗收', 'Installation & testing', 'install-test.html', '永久鏈路與通道長度、施工要點、認證測試看什麼。', ['鏈路長度檢查器', '故障對照表']],
-    ['06', '光纖基礎', 'Fiber basics', 'fiber-basics.html', '多模與單模、OM1～OM5 與 OS2，各速率能跑多遠。', ['光路動畫', '距離查詢器']],
-    ['07', '光模組', 'Transceivers', 'transceivers.html', 'SFP 與 SFP+、Base-T／SR／LR、BiDi，DDM 光功率怎麼判讀。', ['模組選擇', 'DDM 判讀器']],
-    ['08', '接頭與維護', 'Connectors & care', 'connectors.html', 'LC、SC、MPO、FC，UPC 與 APC，光纖清潔與損耗預算。', ['損耗預算計算器', '清潔流程']],
-    ['09', '選型總表與辭典', 'Reference', 'reference.html', '銅纜／DAC／AOC／光纖總表、名詞辭典、參考標準與勘誤說明。', ['縮寫全名對照', '原簡報勘誤']],
+  const C = [
+    ['C1', '構造與雙絞', 'Construction & twisting', 'copper-basics.html', '一條網路線由哪些部分組成，為什麼要雙絞、絞距為什麼都不一樣。', ['可點選的剖面圖', '雙絞抵消雜訊模擬']],
+    ['C2', 'Cat 等級', 'Category 5e – 8', 'cat-grades.html', 'Cat 5e、6、6A、7、8 的頻寬、速率與距離，Cat 7 為什麼不規劃。', ['五種等級剖面切換', '速率 × 等級對照表']],
+    ['C3', '遮蔽代碼', 'Shielding codes', 'shielding.html', '看懂 U/UTP、F/UTP、S/FTP，什麼時候需要遮蔽線。', ['代碼解碼器', '要不要用遮蔽線']],
+    ['C4', '線徑、外被與線序', 'AWG · jacket · pinout', 'awg-jacket.html', 'AWG 與電阻、PVC／LSZH／PE、防火等級、T568A／B。', ['AWG 滑桿', '外被印字解讀', '線序切換']],
+    ['C5', '佈線與驗收', 'Installation & testing', 'install-test.html', '永久鏈路與通道長度、施工要點、認證測試看什麼。', ['鏈路長度檢查器', '故障對照表']],
   ];
-  const cols = ['var(--p1)', 'var(--p2)', 'var(--p3)', 'var(--p4)', 'var(--p5)', 'var(--p6)', 'var(--p7)', 'var(--p8)', 'var(--accent)'];
-  $('cards').innerHTML = S.map((s, i) => `<a class="card" style="--c:${cols[i]}" href="${s[3]}">
-      <span class="no">PAGE ${s[0]}</span><h2>${s[1]}<small>${s[2]}</small></h2><p>${s[4]}</p>
-      <ul>${s[5].map(x => `<li>${x}</li>`).join('')}</ul><span class="go">進入 →</span></a>`).join('');
+  const F = [
+    ['F1', '光纖基礎', 'Fiber basics', 'fiber-basics.html', '多模與單模、OM1～OM5 與 OS2，各速率能跑多遠。', ['光路動畫', '距離查詢器']],
+    ['F2', '接頭與維護', 'Connectors & care', 'connectors.html', 'LC、SC、MPO、FC，UPC 與 APC，光纖清潔與損耗預算。', ['損耗預算計算器', '清潔流程']],
+    ['F3', '光模組入門', 'Transceivers 1G–100G', 'transceivers.html', 'SFP 與 SFP+、Base-T／SR／LR、BiDi，DDM 光功率怎麼判讀。', ['模組選擇', 'DDM 判讀器']],
+  ];
+  const A = [
+    ['附錄', '選型總表與辭典', 'Reference', 'reference.html', '銅纜／DAC／AOC／光纖總表、名詞辭典、參考標準與勘誤說明。', ['縮寫全名對照', '原簡報勘誤']],
+  ];
+  const mkCard = (s, c) => `<a class="card" style="--c:${c}" href="${s[3]}">
+      <span class="no">${s[0]}</span><h2>${s[1]}<small>${s[2]}</small></h2><p>${s[4]}</p>
+      <ul>${s[5].map(x => `<li>${x}</li>`).join('')}</ul><span class="go">進入 →</span></a>`;
+  $('cardsC').innerHTML = C.map(s => mkCard(s, '#c46f2f')).join('');
+  $('cardsF').innerHTML = F.map(s => mkCard(s, '#118aa6')).join('');
+  $('cardsA').innerHTML = A.map(s => mkCard(s, 'var(--muted)')).join('');
 
   // distance slider: 0..100 mapped log-ish 1 m .. 40 km
   const toM = v => Math.round(Math.pow(10, v / 100 * Math.log10(40000)));
