@@ -41,9 +41,9 @@ Cat <span>↔</span> Fiber
     <p class="note-key" style="margin-top:12px">建議依 IEEE 802.3 各規格的標準距離與 TIA／ISO 佈線規範整理，屬一般原則；實際案場請再依設備規格書、預算與業主需求確認。</p>
   </section>
 
-  <div class="sec-head" style="--c:#c46f2f"><h2>銅纜篇 COPPER</h2><p>網路線（RJ45）：構造、Cat 等級、遮蔽、線徑外被、佈線驗收</p></div>
+  <div class="sec-head" style="--c:#c46f2f"><h2>銅纜篇 COPPER</h2><p>網路線（RJ45）與機櫃內的高速銅纜（DAC／AEC）</p></div>
   <div class="cards" id="cardsC"></div>
-  <div class="sec-head" style="--c:#118aa6"><h2>光纖篇 FIBER</h2><p>光纖、接頭與光模組；400G～1.6T 高速模組陸續加入</p></div>
+  <div class="sec-head" style="--c:#118aa6"><h2>光纖篇 FIBER</h2><p>光纖、接頭、光模組，一路到 400G～1.6T</p></div>
   <div class="cards" id="cardsF"></div>
   <div class="sec-head" style="--c:var(--muted)"><h2>附錄 APPENDIX</h2><p>兩篇共用的總表、辭典與勘誤</p></div>
   <div class="cards" id="cardsA"></div>
@@ -65,11 +65,15 @@ Cat <span>↔</span> Fiber
     ['C3', '遮蔽代碼', 'Shielding codes', 'shielding.html', '看懂 U/UTP、F/UTP、S/FTP，什麼時候需要遮蔽線。', ['代碼解碼器', '要不要用遮蔽線']],
     ['C4', '線徑、外被與線序', 'AWG · jacket · pinout', 'awg-jacket.html', 'AWG 與電阻、PVC／LSZH／PE、防火等級、T568A／B。', ['AWG 滑桿', '外被印字解讀', '線序切換']],
     ['C5', '佈線與驗收', 'Installation & testing', 'install-test.html', '永久鏈路與通道長度、施工要點、認證測試看什麼。', ['鏈路長度檢查器', '故障對照表']],
+    ['C6', '高速銅纜', 'DAC · ACC · AEC', 'dac-aec.html', '機櫃內 25G～1.6T 的直連銅纜：速率越高能跑越短，什麼時候該換 AEC 或 AOC。', ['長度 × 速率選擇器', 'CR 命名對照']],
   ];
   const F = [
     ['F1', '光纖基礎', 'Fiber basics', 'fiber-basics.html', '多模與單模、OM1～OM5 與 OS2，各速率能跑多遠。', ['光路動畫', '距離查詢器']],
     ['F2', '接頭與維護', 'Connectors & care', 'connectors.html', 'LC、SC、MPO、FC，UPC 與 APC，光纖清潔與損耗預算。', ['損耗預算計算器', '清潔流程']],
     ['F3', '光模組入門', 'Transceivers 1G–100G', 'transceivers.html', 'SFP 與 SFP+、Base-T／SR／LR、BiDi，DDM 光功率怎麼判讀。', ['模組選擇', 'DDM 判讀器']],
+    ['F4', '模組代號解碼', 'SR · DR · FR · LR · ZR', 'module-codes.html', '看懂 400GBASE-DR4-2 這種名字；「4」是 4 條光纖還是 4 個波長。', ['命名拆解', '10G～1.6T 規格解碼器']],
+    ['F5', '400G～1.6T 高速模組', 'Form factor · lanes · breakout', '400g-1.6t.html', 'QSFP-DD 與 OSFP、通道 × SerDes 世代、拆分與 MPO-16、標準時間軸。', ['通道計算器', '拆分示意']],
+    ['F6', '光源與架構', 'VCSEL · EML · SiPh · LPO · CPO', 'light-source.html', '四種光源、DSP／LPO／LRO／CPO、PAM4 與相干光的差別。', ['光源原理圖', '架構切換圖']],
   ];
   const A = [
     ['附錄', '選型總表與辭典', 'Reference', 'reference.html', '銅纜／DAC／AOC／光纖總表、名詞辭典、參考標準與勘誤說明。', ['縮寫全名對照', '原簡報勘誤']],
@@ -124,13 +128,13 @@ Cat <span>↔</span> Fiber
       lines.push(shield ? '有干擾或屬重要場域：用遮蔽線 F/UTP 或 U/FTP，搭配金屬模組並接地' : '一般環境用 U/UTP 即可');
       lines.push(jacket);
       out.push(card('var(--ok)', '建議', `${grade} 網路線（RJ45）`, lines, ['cat-grades.html', '看 Cat 等級']));
-      if (s >= 10 && d <= 5) out.push(card('var(--accent)', '可選', '同機櫃：SFP+ DAC 直連銅纜', ['10G Base-T 電口模組耗電、發熱較高；交換器與伺服器都有 SFP+ 埠時，DAC 更省電、延遲更低'], ['transceivers.html', '看光模組']));
+      if (s >= 10 && d <= 5) out.push(card('var(--accent)', '可選', '同機櫃：SFP+ DAC 直連銅纜', ['10G Base-T 電口模組耗電、發熱較高；交換器與伺服器都有 SFP+ 埠時，DAC 更省電、延遲更低'], ['dac-aec.html', '看 C6 高速銅纜']));
     }
     if (copperOK && s > 10){
       out.push(card('var(--accent)', '可行但少用', 'Cat 8（' + (s === 25 ? '25GBASE-T' : '40GBASE-T') + '），通道 ≤ 30 m', ['設備端支援 25G／40GBASE-T 的很少', '實務多改用下方的 DAC、AOC 或光纖'], ['cat-grades.html', '看 Cat 8']));
     }
-    if (!bld && s > 10 && d <= 5) out.unshift(card('var(--ok)', '建議', '同機櫃：DAC 直連銅纜', ['被動 DAC 不耗電、成本最低，適合同機櫃短距（約 3 m 內最常見）', `${s}G 選對應的 ${s === 25 ? 'SFP28' : s === 40 ? 'QSFP+' : 'QSFP28'} DAC`], ['transceivers.html', '看光模組']));
-    else if (!bld && s > 10 && d <= 30) out.push(card('var(--accent)', '可選', '相鄰機櫃：AOC 主動光纜', ['兩端模組與光纖一體，免清潔接頭、抗干擾', '長度固定，日後改長度要整條換'], null));
+    if (!bld && s > 10 && d <= 5) out.unshift(card('var(--ok)', '建議', '同機櫃：DAC 直連銅纜', ['被動 DAC 不耗電、成本最低，適合同機櫃短距（約 3 m 內最常見）', `${s}G 選對應的 ${s === 25 ? 'SFP28' : s === 40 ? 'QSFP+' : 'QSFP28'} DAC`], ['dac-aec.html', '看 C6 高速銅纜']));
+    else if (!bld && s > 10 && d <= 30) out.push(card('var(--accent)', '可選', '相鄰機櫃：AOC 主動光纜', ['兩端模組與光纖一體，免清潔接頭、抗干擾', '長度固定，日後改長度要整條換'], ['dac-aec.html', '看 DAC／AEC／AOC 比較']));
     // fiber
     const F = FIB[s];
     const needFiber = !copperOK || bld || s === 100 || (s > 10 && d > 5);

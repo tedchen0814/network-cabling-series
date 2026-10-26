@@ -1,0 +1,264 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>F4 模組代號解碼｜網路線材系列</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@600;700;800&family=Noto+Sans+TC:wght@400;500;700;900&family=JetBrains+Mono:wght@400;600&display=swap">
+<link rel="stylesheet" href="../assets/series.css">
+<style>
+.reach-tbl td:first-child{font:800 18px var(--mono);color:var(--accent);text-align:center;width:56px}
+.four{display:grid;grid-template-columns:1fr;gap:14px}
+@media (min-width:900px){.four{grid-template-columns:1fr 1fr}}
+.four .infobox{min-height:0}
+</style>
+</head>
+<body class="sec-fiber">
+<div class="wrap">
+  <nav class="series" aria-label="網站分區 Sections"><span class="lab">網路線材 Series</span><a href="../index.html"><b>HOME</b>選型首頁</a><a data-sec="copper" href="../copper/basics.html"><b>COPPER</b>銅纜篇</a><a class="sec-on" data-sec="fiber" href="../fiber/basics.html"><b>FIBER</b>光纖篇</a><a href="../reference.html"><b>APPENDIX</b>附錄</a><a href="https://poe-pd-series.vercel.app/" target="_blank" rel="noopener"><b>↗ PoE PD</b>受電端系列</a></nav>
+  <nav class="series sub" aria-label="光纖篇"><span class="lab">光纖篇</span><a href="../fiber/basics.html"><b>F1 FIBER</b>光纖基礎</a><a href="../fiber/connectors.html"><b>F2 CONNECTOR</b>接頭與維護</a><a href="../fiber/transceivers.html"><b>F3 MODULE</b>光模組入門</a><span class="cur" aria-current="page"><b>F4 CODES</b>模組代號解碼</span><a href="../fiber/400g-1.6t.html"><b>F5 400G–1.6T</b>高速光模組</a><a href="../fiber/light-source.html"><b>F6 OPTICS</b>光源與架構</a></nav>
+  <header>
+    <div>
+      <div class="eyebrow">Network Cabling Series · 光纖篇 F4</div>
+      <h1>模組代號解碼<small>Reading 400GBASE-DR4-2 · SR / DR / FR / LR / ER / ZR</small></h1>
+    </div>
+    <div class="chip-dc">DR4 <span>≠</span> FR4</div>
+    <p class="lede">光模組的名字其實是一串規格：速率、距離等級、通道數、加長版本。看懂規則後，「400GBASE-DR4-2」不用查表就知道是 400G、單模、4 條平行光纖、可跑 2 km。這頁先教拆法，再用解碼器把 10G～1.6T 的常見規格一個一個拆開。
+  <span class="en">Every transceiver name is a spec sheet in disguise. Learn the grammar, then decode any PHY from 10G to 1.6T.</span></p>
+  </header>
+
+  <section class="panel" aria-labelledby="h1">
+    <h2 id="h1"><span class="step">1</span>命名規則 <span class="en">Naming grammar</span></h2>
+    <div class="controls"><span style="font-weight:700;color:var(--muted)">範例：</span><div class="seg" id="ex" style="flex-wrap:wrap">
+      <button data-v="0" aria-pressed="true">10GBASE-SR</button><button data-v="1">100GBASE-LR4</button><button data-v="2">400GBASE-SR4.2</button><button data-v="3">400GBASE-DR4-2</button><button data-v="4">800GBASE-FR4-500</button></div></div>
+    <div class="namebar" id="nb"></div>
+    <div class="infobox" id="nbInfo" style="--c:var(--accent);min-height:0"></div>
+  </section>
+
+  <section class="panel" aria-labelledby="h2">
+    <h2 id="h2"><span class="step">2</span>距離字母 <span class="en">Reach letters</span></h2>
+    <div class="scroll-x"><table class="tbl reach-tbl">
+      <thead><tr><th>字母</th><th>常見讀法</th><th>光纖</th><th>典型距離</th><th>例子</th></tr></thead>
+      <tbody>
+        <tr><td>V</td><td>Very short（極短）</td><td>多模</td><td>約 30–50 m</td><td>400GBASE-VR4、800GBASE-VR8</td></tr>
+        <tr><td>S</td><td>Short（短）</td><td>多模，850 nm</td><td>約 60–400 m（依速率與 OM 等級）</td><td>10GBASE-SR、400GBASE-SR8</td></tr>
+        <tr><td>D</td><td>DR，500 m 級</td><td>單模，1310 nm，多為平行光纖</td><td>500 m（加 -2 為 2 km）</td><td>100GBASE-DR、400GBASE-DR4</td></tr>
+        <tr><td>F</td><td>FR，2 km 級</td><td>單模，1310 nm 附近</td><td>2 km</td><td>100GBASE-FR1、400GBASE-FR4</td></tr>
+        <tr><td>L</td><td>Long（長）</td><td>單模，1310 nm 附近</td><td>10 km（少數 6 km）</td><td>10GBASE-LR、400GBASE-LR4-6</td></tr>
+        <tr><td>E</td><td>Extended（延伸）</td><td>單模，1550 nm 或 WDM</td><td>30–40 km</td><td>10GBASE-ER、400GBASE-ER8</td></tr>
+        <tr><td>Z</td><td>ZR（相干光）</td><td>單模，可調 DWDM 波長</td><td>80 km 以上</td><td>OIF 400ZR、800ZR</td></tr>
+      </tbody></table></div>
+    <p class="note-key" style="margin-top:8px">DR、FR 在 IEEE 標準裡沒有官方英文全名，業界習慣讀成 DR＝500 m、FR＝2 km。電口另有 C（CR，直連銅纜，見 C6）、K（KR，背板）、T（BASE-T，網路線）。1G 的 SX／LX 與 10G 的 SR／LR 第二個字母是編碼（X＝8B/10B、R＝64B/66B），見 F1。</p>
+  </section>
+
+  <section class="panel" aria-labelledby="h3">
+    <h2 id="h3"><span class="step">3</span>最常讀錯的「4」 <span class="en">Parallel fibers vs wavelengths</span></h2>
+    <div class="controls"><div class="seg" id="fourSel"><button data-v="dr" aria-pressed="true">DR4：4 條平行光纖</button><button data-v="fr">FR4：4 個波長</button></div></div>
+    <div class="svgbox scroll-x"><svg id="fourSvg" viewBox="0 0 760 230" role="img" aria-label="DR4 與 FR4 光路差異"></svg></div>
+    <div class="four" style="margin-top:10px">
+      <div class="infobox" style="--c:var(--accent)"><h3>平行光纖（SR4、DR4、DR8、PSM4）</h3><ul><li>每個通道各用一芯發、一芯收，<b>波長都一樣</b></li><li>需要 <b>MPO</b> 多芯接頭（MPO-12 用 8 芯、MPO-16 用 16 芯）</li><li>好處：可以<b>拆分（breakout）</b>成 4×100G 接到 4 台設備</li></ul></div>
+      <div class="infobox" style="--c:var(--on)"><h3>分波多工（FR4、LR4、CWDM4、FR8）</h3><ul><li>4 個<b>不同波長</b>在模組內合成一道光，只用<b>一對光纖</b></li><li>接頭是一般 <b>LC 雙芯</b>，可沿用既有雙芯光纖</li><li>代價：模組內要有合波／分波器，不能直接拆給 4 台設備</li></ul></div>
+    </div>
+    <p class="note-key" style="margin-top:8px">另外兩種寫法：SR4.2 的「.2」＝每芯 2 個波長（4 對光纖 × 2 波長）；「2×FR4」是一顆 800G 模組裡放兩組獨立的 400G-FR4，兩個 LC 雙芯接頭（MSA 名稱）。</p>
+  </section>
+
+  <section class="panel" aria-labelledby="h4">
+    <h2 id="h4"><span class="step">4</span>規格解碼器 <span class="en">PHY decoder · 10G → 1.6T</span></h2>
+    <div class="controls"><span style="font-weight:700;color:var(--muted)">速率：</span><div class="seg" id="spd" style="flex-wrap:wrap"></div></div>
+    <div class="phy-list" id="phys"></div>
+    <div class="grid-2">
+      <div class="dec-card" id="dec"></div>
+      <div>
+        <div class="grp-title">標準狀態怎麼看</div>
+        <ul style="font-size:13.5px;margin:0;padding-left:0;list-style:none;display:flex;flex-direction:column;gap:6px">
+          <li><span class="std ieee">IEEE</span> 已發布的 IEEE 802.3 標準</li>
+          <li><span class="std dj">制定中</span> IEEE P802.3dj 草案（200G／通道、1.6T）；截至 2026-10 查到仍在投票階段，名稱與距離以最終版為準</li>
+          <li><span class="std msa">MSA</span> 廠商聯盟規格（PSM4、CWDM4、2×FR4…），市場常見但不是 IEEE</li>
+          <li><span class="std oif">OIF</span> 光互聯論壇規格（400ZR、800ZR 相干光）</li>
+          <li><span class="std ven">廠商</span> 個別廠商延伸型號（例如 10G ZR）</li>
+        </ul>
+        <p class="note-key" style="margin-top:10px">「常見封裝」「典型光源」為業界常見做法，依廠商與世代而異。主機電介面依模組設計而定，同一個光規格可能有不同的電介面版本。</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="panel" aria-labelledby="hq">
+    <h2 id="hq">小測驗 <span class="en">Quick check</span></h2>
+    <div class="quiz" id="quiz"></div>
+  </section>
+
+  <footer>
+依據 IEEE 802.3 各修正案（ae、ba、bm、by、cc、cd、bs、cm、cn、cu、db、df）與 IEEE P802.3dj 公開資料、100G Lambda MSA、CWDM4／PSM4 MSA、OIF 400ZR／800ZR。命名拆解方式參考 Simple Tech Trend「光模組規格查詢器」的整理思路，數值皆另行查證。
+  </footer>
+</div>
+<script src="../assets/common.js"></script>
+<script>
+(function(){
+  // ---------- 1. naming grammar ----------
+  const EX = [
+    [['10G', '速率', 'var(--ink)'], ['BASE', '基頻傳輸', 'var(--muted)'], ['-S', '短距（多模 850 nm）', 'var(--on)'], ['R', '編碼 64B/66B', 'var(--accent)']],
+    [['100G', '速率', 'var(--ink)'], ['BASE', '基頻傳輸', 'var(--muted)'], ['-L', '長距 10 km（單模）', 'var(--on)'], ['R', '編碼家族', 'var(--accent)'], ['4', '4 個波長（WDM）', 'var(--ok)']],
+    [['400G', '速率', 'var(--ink)'], ['BASE', '基頻傳輸', 'var(--muted)'], ['-S', '短距（多模）', 'var(--on)'], ['R', '編碼家族', 'var(--accent)'], ['4', '4 對光纖', 'var(--ok)'], ['.2', '每芯 2 個波長', 'var(--p5)']],
+    [['400G', '速率', 'var(--ink)'], ['BASE', '基頻傳輸', 'var(--muted)'], ['-D', '500 m 級（單模）', 'var(--on)'], ['R', '編碼家族', 'var(--accent)'], ['4', '4 條平行光纖', 'var(--ok)'], ['-2', '加長到 2 km', 'var(--p7)']],
+    [['800G', '速率', 'var(--ink)'], ['BASE', '基頻傳輸', 'var(--muted)'], ['-F', '2 km 級（單模）', 'var(--on)'], ['R', '編碼家族', 'var(--accent)'], ['4', '4 個波長（WDM）', 'var(--ok)'], ['-500', '縮短版，500 m', 'var(--p7)']],
+  ];
+  const EXN = [
+    '1 個通道、10G。多模 OM3 跑 300 m、OM4 跑 400 m，LC 雙芯。',
+    '4 個波長各 25G，在模組內合成一道光，所以只要一對單模光纖（LC 雙芯），可跑 10 km。',
+    '4 對多模光纖，每芯同時走 850 nm 和 910 nm 兩個波長（雙向），MPO-12 接頭；OM5 可到 150 m。',
+    '4 條平行單模光纖各 100G，MPO-12 接頭；標準版 DR4 是 500 m，「-2」表示加長到 2 km。',
+    '4 個波長各 200G；FR4 原本 2 km，「-500」是只跑 500 m 的低成本版本（IEEE P802.3dj 制定中）。',
+  ];
+  function ex(i){
+    $('nb').innerHTML = EX[i].map(p => `<span style="--c:${p[2]}"><b>${p[0]}</b><small>${p[1]}</small></span>`).join('');
+    $('nbInfo').innerHTML = `<p style="margin:0">${EXN[i]}</p>`;
+    abbrify(null, '#nbInfo');
+  }
+  segGroup('ex', v => ex(+v)); ex(0);
+
+  // ---------- 3. DR4 vs FR4 ----------
+  const WL = ['#5b7cfa', '#2fa155', '#e5a400', '#e5484d'];
+  function four(v){
+    const s = $('fourSvg'); s.innerHTML = '';
+    const box = (x, t, sub) => { svgEl('rect', {x, y:20, width:150, height:190, rx:10, fill:'var(--paper-2)', stroke:'var(--wire)', 'stroke-width':1.6}, s);
+      svgEl('text', {x:x + 75, y:44, 'text-anchor':'middle', class:'lbl'}, s, t); svgEl('text', {x:x + 75, y:62, 'text-anchor':'middle', class:'lbl-sm'}, s, sub); };
+    box(20, '模組 A', v === 'dr' ? '400GBASE-DR4' : '400GBASE-FR4'); box(590, '模組 B', v === 'dr' ? '400GBASE-DR4' : '400GBASE-FR4');
+    if (v === 'dr'){
+      for (let i = 0; i < 4; i++){
+        const y = 84 + i * 30;
+        svgEl('line', {x1:170, x2:590, y1:y, y2:y, stroke:'#e5484d', 'stroke-width':3}, s);
+        svgEl('line', {x1:170, x2:590, y1:y + 12, y2:y + 12, stroke:'var(--muted)', 'stroke-width':2, 'stroke-dasharray':'5 4'}, s);
+        svgEl('text', {x:120, y:y + 4, 'text-anchor':'end', class:'read'}, s, `通道 ${i + 1}`);
+      }
+      svgEl('text', {x:380, y:44, 'text-anchor':'middle', class:'lbl'}, s, '8 芯單模（4 發 4 收），全部 1310 nm');
+      svgEl('text', {x:380, y:62, 'text-anchor':'middle', class:'lbl-sm'}, s, '實線＝發、虛線＝收；接頭 MPO-12（中間 4 芯不用）');
+    } else {
+      for (let i = 0; i < 4; i++){
+        const y = 84 + i * 30;
+        svgEl('line', {x1:96, x2:170, y1:y, y2:y, stroke:WL[i], 'stroke-width':3}, s);
+        svgEl('line', {x1:170, x2:230, y1:y, y2:144, stroke:WL[i], 'stroke-width':3}, s);
+        svgEl('line', {x1:530, x2:590, y1:144, y2:y, stroke:WL[i], 'stroke-width':3}, s);
+        svgEl('text', {x:90, y:y + 4, 'text-anchor':'end', class:'read', fill:WL[i]}, s, [1271, 1291, 1311, 1331][i] + ' nm');
+      }
+      svgEl('rect', {x:222, y:126, width:24, height:36, rx:4, fill:'var(--accent)'}, s);
+      svgEl('rect', {x:514, y:126, width:24, height:36, rx:4, fill:'var(--accent)'}, s);
+      WL.forEach((c, i) => svgEl('line', {x1:246, x2:514, y1:136 + i * 5, y2:136 + i * 5, stroke:c, 'stroke-width':2}, s));
+      svgEl('line', {x1:246, x2:514, y1:178, y2:178, stroke:'var(--muted)', 'stroke-width':2, 'stroke-dasharray':'5 4'}, s);
+      svgEl('text', {x:380, y:44, 'text-anchor':'middle', class:'lbl'}, s, '只用 2 芯單模（1 發 1 收），LC 雙芯');
+      svgEl('text', {x:380, y:62, 'text-anchor':'middle', class:'lbl-sm'}, s, '4 個 CWDM 波長在合波器（藍方塊）合成一道光；收端再分開');
+      svgEl('text', {x:234, y:118, 'text-anchor':'middle', class:'tag-t'}, s, '合波');
+      svgEl('text', {x:526, y:118, 'text-anchor':'middle', class:'tag-t'}, s, '分波');
+    }
+  }
+  segGroup('fourSel', four); four('dr');
+
+  // ---------- 4. decoder ----------
+  // [name, status, std, media, wavelength, fibers & connector, lane structure, reach, form factor, host electrical, light source, breakout/note]
+  const P = {
+    '10G': [
+      ['10GBASE-SR', 'ieee', '802.3ae', '多模', '850 nm', '2 芯／LC', '1×10G NRZ', 'OM3 300 m、OM4 400 m', 'SFP+', 'SFI（1×10G）', 'VCSEL', ''],
+      ['10GBASE-LR', 'ieee', '802.3ae', '單模', '1310 nm', '2 芯／LC', '1×10G NRZ', '10 km', 'SFP+', 'SFI（1×10G）', 'DML（DFB）', ''],
+      ['10GBASE-ER', 'ieee', '802.3ae', '單模', '1550 nm', '2 芯／LC', '1×10G NRZ', '40 km', 'SFP+', 'SFI（1×10G）', 'EML', '短距使用可能過載，需加衰減器'],
+      ['10G ZR', 'ven', '廠商規格', '單模', '1550 nm', '2 芯／LC', '1×10G NRZ', '約 80 km', 'SFP+', 'SFI（1×10G）', 'EML', '非 IEEE，各廠規格不一'],
+    ],
+    '25G': [
+      ['25GBASE-SR', 'ieee', '802.3by', '多模', '850 nm', '2 芯／LC', '1×25G NRZ', 'OM3 70 m、OM4 100 m', 'SFP28', '25GAUI（1×25G）', 'VCSEL', ''],
+      ['25GBASE-LR', 'ieee', '802.3cc', '單模', '1310 nm', '2 芯／LC', '1×25G NRZ', '10 km', 'SFP28', '25GAUI（1×25G）', 'DML', ''],
+      ['25GBASE-ER', 'ieee', '802.3cc', '單模', '1310 nm', '2 芯／LC', '1×25G NRZ', '30–40 km（依鏈路損耗）', 'SFP28', '25GAUI（1×25G）', 'EML', ''],
+    ],
+    '40G': [
+      ['40GBASE-SR4', 'ieee', '802.3ba', '多模', '850 nm', '8 芯／MPO-12', '4×10G NRZ，平行', 'OM3 100 m、OM4 150 m', 'QSFP+', 'XLAUI（4×10G）', 'VCSEL', '可拆成 4×10G-SR'],
+      ['40GBASE-LR4', 'ieee', '802.3ba', '單模', 'CWDM 1271–1331 nm ×4', '2 芯／LC', '4×10G，4 波長', '10 km', 'QSFP+', 'XLAUI（4×10G）', 'DML', '不能拆分'],
+      ['40GBASE-ER4', 'ieee', '802.3bm', '單模', '1310 nm 帶 ×4', '2 芯／LC', '4×10G，4 波長', '40 km', 'QSFP+', 'XLAUI（4×10G）', 'EML', ''],
+    ],
+    '50G': [
+      ['50GBASE-SR', 'ieee', '802.3cd', '多模', '850 nm', '2 芯／LC', '1×50G PAM4', 'OM3 70 m、OM4 100 m', 'SFP56', '50GAUI-1', 'VCSEL', ''],
+      ['50GBASE-FR', 'ieee', '802.3cd', '單模', '1310 nm', '2 芯／LC', '1×50G PAM4', '2 km', 'SFP56', '50GAUI-1', 'DML／EML', ''],
+      ['50GBASE-LR', 'ieee', '802.3cd', '單模', '1310 nm', '2 芯／LC', '1×50G PAM4', '10 km', 'SFP56', '50GAUI-1', 'EML', ''],
+    ],
+    '100G': [
+      ['100GBASE-SR4', 'ieee', '802.3bm', '多模', '850 nm', '8 芯／MPO-12', '4×25G NRZ，平行', 'OM3 70 m、OM4 100 m', 'QSFP28', 'CAUI-4（4×25G）', 'VCSEL', '可拆成 4×25G-SR'],
+      ['100GBASE-LR4', 'ieee', '802.3ba', '單模', 'LWDM 1295–1310 nm ×4', '2 芯／LC', '4×25G，4 波長', '10 km', 'QSFP28', 'CAUI-4（4×25G）', 'DML／EML', ''],
+      ['100GBASE-ER4', 'ieee', '802.3ba', '單模', 'LWDM ×4', '2 芯／LC', '4×25G，4 波長', '40 km', 'QSFP28', 'CAUI-4（4×25G）', 'EML＋光放大', ''],
+      ['100G-PSM4', 'msa', 'PSM4 MSA', '單模', '1310 nm', '8 芯／MPO-12', '4×25G NRZ，平行', '500 m', 'QSFP28', 'CAUI-4（4×25G）', 'DML 或 CW＋矽光', '可拆成 4×25G'],
+      ['100G-CWDM4', 'msa', 'CWDM4 MSA', '單模', 'CWDM 1271–1331 nm ×4', '2 芯／LC', '4×25G，4 波長', '2 km', 'QSFP28', 'CAUI-4（4×25G）', 'DML', '資料中心 100G 主力'],
+      ['100GBASE-DR', 'ieee', '802.3cd', '單模', '1310 nm', '2 芯／LC', '1×100G PAM4', '500 m', 'QSFP28', 'CAUI-4（模組內 DSP 轉 1×100G）', 'EML 或 CW＋矽光', '常接 400G-DR4 拆分出來的一路'],
+      ['100GBASE-FR1', 'ieee', '802.3cu', '單模', '1310 nm', '2 芯／LC', '1×100G PAM4', '2 km', 'QSFP28', 'CAUI-4（模組內 DSP）', 'EML', ''],
+      ['100GBASE-LR1', 'ieee', '802.3cu', '單模', '1310 nm', '2 芯／LC', '1×100G PAM4', '10 km', 'QSFP28', 'CAUI-4（模組內 DSP）', 'EML', ''],
+      ['100GBASE-SR1', 'ieee', '802.3db', '多模', '850 nm', '2 芯／LC', '1×100G PAM4', 'OM3 60 m、OM4 100 m', 'SFP112／QSFP28', '100GAUI-1', 'VCSEL', ''],
+    ],
+    '200G': [
+      ['200GBASE-SR4', 'ieee', '802.3cd', '多模', '850 nm', '8 芯／MPO-12', '4×50G PAM4，平行', 'OM3 70 m、OM4 100 m', 'QSFP56', '200GAUI-4', 'VCSEL', ''],
+      ['200GBASE-DR4', 'ieee', '802.3bs', '單模', '1310 nm', '8 芯／MPO-12', '4×50G PAM4，平行', '500 m', 'QSFP56', '200GAUI-4', 'DML／EML', ''],
+      ['200GBASE-FR4', 'ieee', '802.3bs', '單模', 'CWDM ×4', '2 芯／LC', '4×50G，4 波長', '2 km', 'QSFP56', '200GAUI-4', 'DML／EML', ''],
+      ['200GBASE-LR4', 'ieee', '802.3bs', '單模', 'LWDM ×4', '2 芯／LC', '4×50G，4 波長', '10 km', 'QSFP56', '200GAUI-4', 'EML', ''],
+      ['200GBASE-DR1', 'dj', 'P802.3dj', '單模', '1310 nm', '2 芯／LC', '1×200G PAM4', '500 m（DR1-2：2 km）', '—', '200GAUI-1', 'EML 或 CW＋矽光', '常接 800G-DR4／1.6T-DR8 拆分出來的一路'],
+    ],
+    '400G': [
+      ['400GBASE-SR8', 'ieee', '802.3cm', '多模', '850 nm', '16 芯／MPO-16', '8×50G PAM4，平行', 'OM3 70 m、OM4／OM5 100 m', 'QSFP-DD／OSFP', '400GAUI-8（8×50G）', 'VCSEL', '可拆成 8×50G 或 2×200G-SR4'],
+      ['400GBASE-SR4.2', 'ieee', '802.3cm', '多模', '850＋910 nm 雙向', '8 芯／MPO-12', '4 對光纖 × 2 波長', 'OM3 70、OM4 100、OM5 150 m', 'QSFP-DD／OSFP', '400GAUI-8', 'VCSEL', ''],
+      ['400GBASE-VR4', 'ieee', '802.3db', '多模', '850 nm', '8 芯／MPO-12', '4×100G PAM4，平行', 'OM3 30 m、OM4 50 m', 'QSFP112／QSFP-DD', '400GAUI-4', 'VCSEL', 'AI 機櫃內短距'],
+      ['400GBASE-SR4', 'ieee', '802.3db', '多模', '850 nm', '8 芯／MPO-12', '4×100G PAM4，平行', 'OM3 60 m、OM4 100 m', 'QSFP112／QSFP-DD', '400GAUI-4', 'VCSEL', ''],
+      ['400GBASE-DR4', 'ieee', '802.3bs', '單模', '1310 nm', '8 芯／MPO-12（APC）', '4×100G PAM4，平行', '500 m', 'QSFP-DD／OSFP', '400GAUI-8 或 400GAUI-4', 'EML 或 CW＋矽光', '可拆成 4×100G-DR'],
+      ['400GBASE-DR4-2', 'ieee', '802.3df', '單模', '1310 nm', '8 芯／MPO-12（APC）', '4×100G PAM4，平行', '2 km', 'QSFP-DD／OSFP', '400GAUI-8 或 400GAUI-4', 'EML 或 CW＋矽光', '可拆成 4×100G-FR1'],
+      ['400GBASE-FR4', 'ieee', '802.3cu', '單模', 'CWDM 1271–1331 nm ×4', '2 芯／LC', '4×100G，4 波長', '2 km', 'QSFP-DD／OSFP', '400GAUI-8 或 400GAUI-4', 'EML', ''],
+      ['400GBASE-LR4-6', 'ieee', '802.3cu', '單模', 'CWDM ×4', '2 芯／LC', '4×100G，4 波長', '6 km', 'QSFP-DD／OSFP', '400GAUI-8 或 400GAUI-4', 'EML', '10 km 版為 MSA 的 400G-LR4-10'],
+      ['400GBASE-FR8', 'ieee', '802.3bs', '單模', 'LWDM ×8', '2 芯／LC', '8×50G，8 波長', '2 km', 'QSFP-DD／OSFP', '400GAUI-8', 'DML／EML', '早期版本，現多改用 FR4'],
+      ['400GBASE-LR8', 'ieee', '802.3bs', '單模', 'LWDM ×8', '2 芯／LC', '8×50G，8 波長', '10 km', 'QSFP-DD／OSFP', '400GAUI-8', 'EML', ''],
+      ['400GBASE-ER8', 'ieee', '802.3cn', '單模', 'LWDM ×8', '2 芯／LC', '8×50G，8 波長', '40 km', 'QSFP-DD／OSFP', '400GAUI-8', 'EML', ''],
+      ['400GBASE-DR2', 'dj', 'P802.3dj', '單模', '1310 nm', '4 芯／MPO', '2×200G PAM4，平行', '500 m（DR2-2：2 km）', '—', '400GAUI-2', 'EML 或 CW＋矽光', ''],
+      ['400ZR', 'oif', 'OIF 400ZR', '單模', '可調 DWDM（1550 nm 帶）', '2 芯／LC', '相干 DP-16QAM 單波長', '約 80–120 km', 'QSFP-DD／OSFP', '400GAUI-8', '可調雷射＋相干 DSP', 'IEEE 400GBASE-ZR 專案已取消，市場以 OIF 400ZR 為準'],
+    ],
+    '800G': [
+      ['800GBASE-VR8', 'ieee', '802.3df', '多模', '850 nm', '16 芯／MPO-16', '8×100G PAM4，平行', 'OM3 30 m、OM4 50 m', 'OSFP／QSFP-DD800', '800GAUI-8（8×100G）', 'VCSEL', ''],
+      ['800GBASE-SR8', 'ieee', '802.3df', '多模', '850 nm', '16 芯／MPO-16', '8×100G PAM4，平行', 'OM3 60 m、OM4 100 m', 'OSFP／QSFP-DD800', '800GAUI-8', 'VCSEL', '可拆成 8×100G-SR1 或 2×400G-SR4'],
+      ['800GBASE-DR8', 'ieee', '802.3df', '單模', '1310 nm', '16 芯／MPO-16（APC）', '8×100G PAM4，平行', '500 m', 'OSFP／QSFP-DD800', '800GAUI-8', 'EML 或 CW＋矽光', '可拆成 8×100G-DR 或 2×400G-DR4'],
+      ['800GBASE-DR8-2', 'ieee', '802.3df', '單模', '1310 nm', '16 芯／MPO-16（APC）', '8×100G PAM4，平行', '2 km', 'OSFP／QSFP-DD800', '800GAUI-8', 'EML 或 CW＋矽光', ''],
+      ['800G 2×FR4', 'msa', 'MSA（OSFP／QSFP-DD）', '單模', 'CWDM ×4，兩組', '2 個 LC 雙芯', '2 組 × 4×100G', '2 km', 'OSFP／QSFP-DD800', '800GAUI-8', 'EML', '等於兩顆 400G-FR4 裝在一起'],
+      ['800G 2×LR4', 'msa', 'MSA', '單模', 'CWDM ×4，兩組', '2 個 LC 雙芯', '2 組 × 4×100G', '10 km', 'OSFP／QSFP-DD800', '800GAUI-8', 'EML', ''],
+      ['800GBASE-DR4', 'dj', 'P802.3dj', '單模', '1310 nm', '8 芯／MPO-12（APC）', '4×200G PAM4，平行', '500 m（DR4-2：2 km）', 'OSFP／QSFP-DD800', '800GAUI-4 或 800GAUI-8', 'EML 或 CW＋矽光', '可拆成 4×200G-DR1'],
+      ['800GBASE-FR4', 'dj', 'P802.3dj', '單模', 'CWDM ×4', '2 芯／LC', '4×200G，4 波長', '2 km（FR4-500：500 m）', 'OSFP／QSFP-DD800', '800GAUI-4 或 800GAUI-8', 'EML', ''],
+      ['800GBASE-LR4', 'dj', 'P802.3dj', '單模', 'CWDM ×4', '2 芯／LC', '4×200G，4 波長', '10 km', 'OSFP／QSFP-DD800', '800GAUI-4 或 800GAUI-8', 'EML', ''],
+      ['800GBASE-LR1／ER1', 'dj', 'P802.3dj', '單模', '單一波長（相干）', '2 芯／LC', '相干 DP-16QAM', 'LR1 10 km、ER1-20 20 km、ER1 40 km', 'OSFP／QSFP-DD800', '800GAUI-8', '相干 DSP', '資料中心間短距相干'],
+      ['800ZR', 'oif', 'OIF 800ZR', '單模', '可調 DWDM', '2 芯／LC', '相干單波長', '約 80–120 km 等級', 'OSFP／QSFP-DD800', '800GAUI-8', '可調雷射＋相干 DSP', ''],
+    ],
+    '1.6T': [
+      ['1.6TBASE-DR8', 'dj', 'P802.3dj', '單模', '1310 nm', '16 芯／MPO-16（APC）', '8×200G PAM4，平行', '500 m', 'OSFP 1600／QSFP-DD1600', '1.6TAUI-8（8×200G）', 'EML 或 CW＋矽光', '可拆成 8×200G-DR1 或 2×800G-DR4'],
+      ['1.6TBASE-DR8-2', 'dj', 'P802.3dj', '單模', '1310 nm', '16 芯／MPO-16（APC）', '8×200G PAM4，平行', '2 km', 'OSFP 1600／QSFP-DD1600', '1.6TAUI-8', 'EML 或 CW＋矽光', ''],
+      ['1.6T 2×DR4', 'msa', 'MSA（OSFP 1600）', '單模', '1310 nm', '2 個 MPO-12', '2 組 × 4×200G', '500 m', 'OSFP 1600', '1.6TAUI-8', 'EML 或 CW＋矽光', '等於兩顆 800G-DR4'],
+      ['1.6T 2×FR4', 'msa', 'MSA（OSFP 1600）', '單模', 'CWDM ×4，兩組', '2 個 LC 雙芯', '2 組 × 4×200G', '2 km', 'OSFP 1600', '1.6TAUI-8', 'EML', '等於兩顆 800G-FR4'],
+    ],
+  };
+  const SL = {ieee:'IEEE', dj:'制定中', msa:'MSA', oif:'OIF', ven:'廠商'};
+  const SPD = Object.keys(P);
+  $('spd').innerHTML = SPD.map((k, i) => `<button data-v="${k}"${k === '400G' ? ' aria-pressed="true"' : ''}>${k}</button>`).join('');
+  let cur = '400G';
+  function list(k){
+    cur = k;
+    $('phys').innerHTML = P[k].map((r, i) => `<button type="button" data-i="${i}">${r[0]} <span class="std ${r[1]}">${SL[r[1]]}</span></button>`).join('');
+    pick(0);
+  }
+  function pick(i){
+    const r = P[cur][i];
+    $('phys').querySelectorAll('button').forEach((b, k) => b.setAttribute('aria-pressed', k === i));
+    const rows = [['標準', `${r[2]} <span class="std ${r[1]}">${SL[r[1]]}</span>`], ['光纖', r[3]], ['波長', r[4]], ['芯數／接頭', r[5]], ['通道結構', r[6]], ['距離', `<b>${r[7]}</b>`],
+      ['常見封裝', r[8]], ['主機電介面', r[9]], ['典型光源', r[10]]].concat(r[11] ? [['備註', r[11]]] : []);
+    $('dec').innerHTML = `<h3>${r[0]}</h3><table class="spec"><tbody>${rows.map(x => `<tr><th>${x[0]}</th><td>${x[1]}</td></tr>`).join('')}</tbody></table>`;
+    abbrify(null, '#dec');
+  }
+  segGroup('spd', list);
+  $('phys').addEventListener('click', e => { const b = e.target.closest('button[data-i]'); if (b) pick(+b.dataset.i); });
+  list('400G');
+
+  quiz($('quiz'), [
+    {q:'400GBASE-DR4 和 400GBASE-FR4，哪一個可以只用一對 LC 光纖？', opts:['DR4', 'FR4', '兩個都可以'], a:1, why:'FR4 用 4 個波長合成一道光，只要 LC 雙芯；DR4 是 4 條平行光纖，要 MPO-12。'},
+    {q:'800GBASE-DR8-2 的「-2」是什麼意思？', opts:['第二版', '距離加長到 2 km', '2 個波長'], a:1, why:'DR 原本 500 m，「-2」表示 2 km 版本。'},
+    {q:'「800G 2×FR4」是什麼？', opts:['IEEE 正式名稱', '一顆模組裡裝兩組 400G-FR4 的 MSA 規格', '要用 2 km 以上光纖'], a:1, why:'2×FR4 是 MSA 名稱，模組上有兩個 LC 雙芯接頭，各跑 400G。'},
+  ]);
+  abbrify(null);
+})();
+</script>
+</body>
+</html>

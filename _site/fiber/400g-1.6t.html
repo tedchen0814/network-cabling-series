@@ -1,0 +1,186 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>F5 400G～1.6T 高速光模組｜網路線材系列</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@600;700;800&family=Noto+Sans+TC:wght@400;500;700;900&family=JetBrains+Mono:wght@400;600&display=swap">
+<link rel="stylesheet" href="../assets/series.css">
+<style>
+.calc-out{font-family:var(--display);font-weight:800;font-size:clamp(34px,6vw,54px);line-height:1;color:var(--accent)}
+.tl{display:flex;flex-direction:column;gap:0;border-left:3px solid var(--line);margin-left:8px}
+.tl div{position:relative;padding:4px 0 10px 18px;font-size:14px}
+.tl div::before{content:"";position:absolute;left:-9px;top:8px;width:13px;height:13px;border-radius:50%;background:var(--c,var(--ok));border:2px solid var(--paper)}
+.tl b{font-family:var(--mono)}
+</style>
+</head>
+<body class="sec-fiber">
+<div class="wrap">
+  <nav class="series" aria-label="網站分區 Sections"><span class="lab">網路線材 Series</span><a href="../index.html"><b>HOME</b>選型首頁</a><a data-sec="copper" href="../copper/basics.html"><b>COPPER</b>銅纜篇</a><a class="sec-on" data-sec="fiber" href="../fiber/basics.html"><b>FIBER</b>光纖篇</a><a href="../reference.html"><b>APPENDIX</b>附錄</a><a href="https://poe-pd-series.vercel.app/" target="_blank" rel="noopener"><b>↗ PoE PD</b>受電端系列</a></nav>
+  <nav class="series sub" aria-label="光纖篇"><span class="lab">光纖篇</span><a href="../fiber/basics.html"><b>F1 FIBER</b>光纖基礎</a><a href="../fiber/connectors.html"><b>F2 CONNECTOR</b>接頭與維護</a><a href="../fiber/transceivers.html"><b>F3 MODULE</b>光模組入門</a><a href="../fiber/module-codes.html"><b>F4 CODES</b>模組代號解碼</a><span class="cur" aria-current="page"><b>F5 400G–1.6T</b>高速光模組</span><a href="../fiber/light-source.html"><b>F6 OPTICS</b>光源與架構</a></nav>
+  <header>
+    <div>
+      <div class="eyebrow">Network Cabling Series · 光纖篇 F5</div>
+      <h1>400G～1.6T 高速光模組<small>Form factors · lanes &amp; SerDes · breakout · MPO</small></h1>
+    </div>
+    <div class="chip-dc">8 <span>×</span> 200G</div>
+    <p class="lede">400G 以上的模組，速率幾乎都是「通道數 × 每通道速率」疊出來的。看懂三件事就能讀懂規格表：<b>封裝有幾個電通道</b>、<b>每個通道跑多快</b>（SerDes 世代）、<b>光的那一側怎麼分</b>（平行光纖或多波長）。建議先看 F4 模組代號解碼。
+  <span class="en">Aggregate speed = lanes × per-lane rate. Read the cage, the SerDes generation and the optical split.</span></p>
+  </header>
+
+  <section class="panel" aria-labelledby="h1">
+    <h2 id="h1"><span class="step">1</span>封裝與電通道 <span class="en">Form factors</span></h2>
+    <div class="scroll-x"><table class="tbl">
+      <thead><tr><th>封裝</th><th>電通道數</th><th>代表速率</th><th>重點</th></tr></thead>
+      <tbody>
+        <tr><td><b>SFP 家族</b>（SFP+／SFP28／SFP56／SFP112）</td><td class="m">1</td><td>10G／25G／50G／100G</td><td>單通道，伺服器接入</td></tr>
+        <tr><td><b>SFP-DD</b></td><td class="m">2</td><td>100G（2×50G）</td><td>SFP 尺寸加一排金手指</td></tr>
+        <tr><td><b>QSFP 家族</b>（QSFP+／28／56／112）</td><td class="m">4</td><td>40G／100G／200G／400G</td><td>Q＝Quad，四通道</td></tr>
+        <tr><td><b>QSFP-DD</b>（含 QSFP-DD800／1600）</td><td class="m">8</td><td>400G／800G／1.6T</td><td>多一排金手指；<b>籠座可向下相容 QSFP28</b>，交換器埠可插舊模組</td></tr>
+        <tr><td><b>OSFP</b>（含 OSFP 1600）</td><td class="m">8</td><td>400G／800G／1.6T</td><td>體積較大、頂部可帶散熱鰭片，<b>散熱餘裕較好</b>；與 QSFP 不相容</td></tr>
+        <tr><td><b>OSFP-XD</b></td><td class="m">16</td><td>1.6T（16×100G）以上</td><td>加寬版，通道數加倍</td></tr>
+      </tbody></table></div>
+    <p class="note-key" style="margin-top:8px">耗電隨速率上升：400G 模組約 10 W 級、800G 約 15 W 級、1.6T 約 25 W 以上（依型號與光規格而異），所以 800G 以上的散熱設計越來越關鍵。</p>
+  </section>
+
+  <section class="panel" aria-labelledby="h2">
+    <h2 id="h2"><span class="step">2</span>通道計算器 <span class="en">Lanes × per-lane rate</span></h2>
+    <div class="grid-2">
+      <div>
+        <div class="grp-title">每通道速率（SerDes 世代）</div>
+        <div class="seg" id="lr" style="flex-wrap:wrap"><button data-v="0">10G NRZ</button><button data-v="1">25G NRZ</button><button data-v="2">50G PAM4</button><button data-v="3" aria-pressed="true">100G PAM4</button><button data-v="4">200G PAM4</button></div>
+        <div class="grp-title">通道數</div>
+        <div class="seg" id="ln"><button data-v="1">1</button><button data-v="2">2</button><button data-v="4">4</button><button data-v="8" aria-pressed="true">8</button><button data-v="16">16</button></div>
+        <p class="note-key" style="margin-top:10px">NRZ 每個符號 1 bit，PAM4 每個符號 2 bit；PAM4 讓頻寬不變的情況下速率加倍，但訊號眼圖變小，必須搭配 FEC。</p>
+      </div>
+      <div class="dec-card"><div class="calc-out" id="tot"></div><table class="spec" style="margin-top:10px"><tbody id="calc"></tbody></table></div>
+    </div>
+  </section>
+
+  <section class="panel" aria-labelledby="h3">
+    <h2 id="h3"><span class="step">3</span>拆分 Breakout <span class="en">One port, many links</span></h2>
+    <div class="controls"><div class="seg" id="bo" style="flex-wrap:wrap"><button data-v="0" aria-pressed="true">400G-DR4 → 4×100G</button><button data-v="1">800G-DR8 → 8×100G</button><button data-v="2">800G-DR8 → 2×400G</button><button data-v="3">800G 2×FR4 → 2×400G</button><button data-v="4">1.6T-DR8 → 8×200G</button></div></div>
+    <div class="svgbox scroll-x"><svg id="boSvg" viewBox="0 0 760 300" role="img" aria-label="拆分示意"></svg></div>
+    <div class="infobox" id="boInfo" style="--c:var(--accent);min-height:0;margin-top:8px"></div>
+  </section>
+
+  <section class="panel" aria-labelledby="h4">
+    <h2 id="h4"><span class="step">4</span>MPO-12 與 MPO-16 <span class="en">Which fibers are lit</span></h2>
+    <div class="controls"><div class="seg" id="mpo"><button data-v="12" aria-pressed="true">MPO-12（SR4、DR4）</button><button data-v="16">MPO-16（SR8、DR8）</button></div></div>
+    <div class="svgbox scroll-x"><svg id="mpoSvg" viewBox="0 0 760 130" role="img" aria-label="MPO 接頭芯位"></svg></div>
+    <ul style="font-size:14px;margin:8px 0 0;padding-left:18px">
+      <li><b>MPO-12 跑 4 通道</b>：左 4 芯發、右 4 芯收，中間 4 芯不用。</li>
+      <li><b>MPO-16 跑 8 通道</b>：16 芯全部使用；鍵槽位置和 MPO-12 不同，兩者<b>不能互插</b>。</li>
+      <li>單模 MPO 為 <b>APC 斜面研磨</b>；多芯端面更怕髒，清潔方式見 F2。</li>
+      <li>主幹光纜與跳線的極性（Type A／B／C）要整條鏈路一起規劃。</li>
+    </ul>
+  </section>
+
+  <section class="panel" aria-labelledby="h5">
+    <h2 id="h5"><span class="step">5</span>標準時間軸 <span class="en">IEEE 802.3 milestones</span></h2>
+    <div class="tl">
+      <div><b>2010　802.3ba</b>　40G／100G（SR4、LR4、ER4 等）</div>
+      <div><b>2015　802.3bm</b>　100GBASE-SR4（4×25G）、40GBASE-ER4</div>
+      <div><b>2017　802.3bs</b>　200G／400G：DR4、FR8、LR8（50G PAM4 時代開始）</div>
+      <div><b>2018　802.3cd</b>　50G／100G／200G：50GBASE-SR／FR／LR、100GBASE-DR、200GBASE-SR4</div>
+      <div><b>2019–2021　802.3cn／cm／cu</b>　400GBASE-ER8、SR8／SR4.2、FR4／LR4-6、100GBASE-FR1／LR1</div>
+      <div><b>2022　802.3ck／db</b>　100G／通道電介面；400GBASE-VR4／SR4、100GBASE-SR1</div>
+      <div><b>2024　802.3df</b>　800G：VR8、SR8、DR8、DR8-2，以及 400GBASE-DR4-2</div>
+      <div style="--c:#e3a400"><b>制定中　P802.3dj</b>　200G／通道與 1.6T：200GBASE-DR1、800GBASE-DR4／FR4／LR4、1.6TBASE-DR8 等；原定 2026 年完成，截至 2026-10 尚未查到核准紀錄</div>
+    </div>
+    <p class="note-key" style="margin-top:8px">相干光的 400ZR／800ZR 由 OIF 制定，不在 IEEE 802.3 時間軸內。</p>
+  </section>
+
+  <section class="panel" aria-labelledby="hq">
+    <h2 id="hq">小測驗 <span class="en">Quick check</span></h2>
+    <div class="quiz" id="quiz"></div>
+  </section>
+
+  <footer>
+依據 IEEE 802.3ba／bm／bs／cd／cm／cn／cu／ck／db／df 與 IEEE P802.3dj 公開資料、QSFP-DD MSA、OSFP MSA、OSFP-XD MSA。耗電為業界常見範圍，非規範值。
+  </footer>
+</div>
+<script src="../assets/common.js"></script>
+<script>
+(function(){
+  // ---------- 2. lane calculator ----------
+  // [label, Gb/s per lane, modulation, baud GBd, gen note]
+  const LR = [
+    ['10G NRZ', 10, 'NRZ', 10.3125, '40G 世代（XLAUI）'],
+    ['25G NRZ', 25, 'NRZ', 25.78125, '100G 世代（CAUI-4）'],
+    ['50G PAM4', 50, 'PAM4', 26.5625, '200G／400G 世代（400GAUI-8）'],
+    ['100G PAM4', 100, 'PAM4', 53.125, '400G／800G 世代（800GAUI-8）'],
+    ['200G PAM4', 200, 'PAM4', 106.25, '800G／1.6T 世代（P802.3dj，1.6TAUI-8）'],
+  ];
+  const EXM = {
+    '40': 'QSFP+（4×10G）', '100': 'QSFP28（4×25G）、SFP112（1×100G）', '200': 'QSFP56（4×50G）', '400': 'QSFP-DD／OSFP（8×50G）、QSFP112（4×100G）',
+    '800': 'OSFP／QSFP-DD800（8×100G）', '1600': 'OSFP 1600／QSFP-DD1600（8×200G）、OSFP-XD（16×100G）', '3200': 'OSFP-XD（16×200G，下一代）',
+    '10': 'SFP+', '25': 'SFP28', '50': 'SFP56', '20': '—', '80': '—', '160': '—', '1000': '—',
+  };
+  let li = 3, ln = 8;
+  function calc(){
+    const L = LR[li], tot = L[1] * ln;
+    $('tot').textContent = (tot >= 1000 ? (tot / 1000) + 'T' : tot + 'G');
+    const ff = EXM[String(tot)] || '非常見組合';
+    $('calc').innerHTML = [['每通道', `${L[0]}（${L[3]} GBd）`], ['通道數', ln], ['調變', L[2] === 'PAM4' ? 'PAM4：每符號 2 bit，需 FEC（RS(544,514)）' : 'NRZ：每符號 1 bit'], ['SerDes 世代', L[4]], ['常見封裝', ff]]
+      .map(r => `<tr><th>${r[0]}</th><td>${r[1]}</td></tr>`).join('');
+    abbrify(null, '#calc');
+  }
+  segGroup('lr', v => { li = +v; calc(); }); segGroup('ln', v => { ln = +v; calc(); }); calc();
+
+  // ---------- 3. breakout ----------
+  const BO = [
+    {src:'400G-DR4', n:4, dst:'100G-DR', cab:'MPO-12 → 4 條 LC 雙芯分支線（或配線盒）', note:'交換器 1 個 400G 埠接 4 台 100G 伺服器；兩端都是 1310 nm、500 m，所以 DR4 能直接對 100GBASE-DR。'},
+    {src:'800G-DR8', n:8, dst:'100G-DR', cab:'MPO-16 → 8 條 LC 雙芯分支線', note:'8 條平行光纖各 100G，可拆成 8 路 100G-DR。'},
+    {src:'800G-DR8', n:2, dst:'400G-DR4', cab:'MPO-16 → 2 條 MPO-12 分支線', note:'每 4 對光纖一組，對到兩顆 400G-DR4。'},
+    {src:'800G 2×FR4', n:2, dst:'400G-FR4', cab:'模組本身有 2 個 LC 雙芯接頭，各接一條', note:'2×FR4 本來就是兩組獨立的 400G-FR4，不需要分支線。'},
+    {src:'1.6T-DR8', n:8, dst:'200G-DR1', cab:'MPO-16 → 8 條 LC 雙芯分支線', note:'P802.3dj 制定中；也可拆成 2×800G-DR4。'},
+  ];
+  function bo(i){
+    const b = BO[i], s = $('boSvg'); s.innerHTML = '';
+    svgEl('rect', {x:20, y:110, width:170, height:80, rx:10, fill:'var(--paper-2)', stroke:'var(--accent)', 'stroke-width':2}, s);
+    svgEl('text', {x:105, y:146, 'text-anchor':'middle', class:'lbl'}, s, b.src);
+    svgEl('text', {x:105, y:168, 'text-anchor':'middle', class:'lbl-sm'}, s, '交換器 1 個埠');
+    const h = 260 / b.n;
+    for (let k = 0; k < b.n; k++){
+      const y = 20 + h * k + h / 2;
+      svgEl('path', {d:`M190 150 C 340 150, 400 ${y}, 540 ${y}`, fill:'none', stroke:'var(--accent)', 'stroke-width':b.n > 4 ? 2 : 3}, s);
+      svgEl('rect', {x:540, y:y - Math.min(16, h / 2 - 3), width:200, height:Math.min(32, h - 6), rx:6, fill:'var(--paper-2)', stroke:'var(--wire)', 'stroke-width':1.4}, s);
+      svgEl('text', {x:640, y:y + 4, 'text-anchor':'middle', class:'read'}, s, `${b.dst} #${k + 1}`);
+    }
+    $('boInfo').innerHTML = `<h3>${b.src} → ${b.n}×${b.dst}</h3><p><b>線材：</b>${b.cab}</p><p>${b.note}</p><p style="color:var(--muted);font-size:13px">交換器埠要支援拆分模式，並在設定中切換。</p>`;
+    abbrify(null, '#boInfo');
+  }
+  segGroup('bo', v => bo(+v)); bo(0);
+
+  // ---------- 4. MPO ----------
+  function mpo(n){
+    n = +n; const s = $('mpoSvg'); s.innerHTML = '';
+    const w = 40, x0 = 380 - n * w / 2;
+    svgEl('rect', {x:x0 - 30, y:30, width:n * w + 60, height:56, rx:10, fill:'var(--paper-2)', stroke:'var(--wire)', 'stroke-width':1.6}, s);
+    svgEl('rect', {x:n === 16 ? x0 + n * w * 0.62 : 360, y:18, width:40, height:12, rx:3, fill:'var(--wire)'}, s);
+    svgEl('text', {x:n === 16 ? x0 + n * w * 0.62 + 20 : 380, y:14, 'text-anchor':'middle', class:'tag-t'}, s, n === 16 ? '鍵槽（偏一側）' : '鍵槽（置中）');
+    for (let k = 0; k < n; k++){
+      const tx = n === 12 ? k < 4 : k < 8, rx = n === 12 ? k >= 8 : k >= 8;
+      const col = tx ? '#e5484d' : rx ? '#2d6bd8' : 'var(--line)';
+      svgEl('circle', {cx:x0 + w * k + w / 2, cy:58, r:9, fill:col}, s);
+      svgEl('text', {x:x0 + w * k + w / 2, y:106, 'text-anchor':'middle', class:'tick'}, s, k + 1);
+    }
+    svgEl('text', {x:x0 - 20, y:124, class:'tag-t', style:'fill:#e5484d'}, s, '● 發 Tx');
+    svgEl('text', {x:x0 + 50, y:124, class:'tag-t', style:'fill:#2d6bd8'}, s, '● 收 Rx');
+    if (n === 12) svgEl('text', {x:x0 + 120, y:124, class:'tag-t'}, s, '● 不使用');
+  }
+  segGroup('mpo', mpo); mpo(12);
+
+  quiz($('quiz'), [
+    {q:'800G 模組用 8 個通道，每通道多快？', opts:['50G', '100G', '200G'], a:1, why:'8×100G PAM4＝800G；若用 200G／通道，只要 4 個通道（800GBASE-DR4）。'},
+    {q:'QSFP-DD 交換器埠能插 QSFP28 模組嗎？', opts:['可以，籠座向下相容', '不行'], a:0, why:'QSFP-DD 在 QSFP 外型上多加一排接點，可插舊的 QSFP28／QSFP56。OSFP 則不相容。'},
+    {q:'400G-DR4 拆分成 4 路時，另一端應該接什麼？', opts:['100GBASE-LR4', '100GBASE-DR', '100GBASE-SR4'], a:1, why:'DR4 每條光纖是 1310 nm、100G PAM4、500 m，和 100GBASE-DR 相同。'},
+  ]);
+  abbrify(null);
+})();
+</script>
+</body>
+</html>

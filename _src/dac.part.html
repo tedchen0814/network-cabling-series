@@ -1,0 +1,90 @@
+<!--#TITLE-->
+C6 高速銅纜 DAC／AEC｜網路線材系列
+<!--#H1-->
+高速銅纜：DAC、ACC、AEC
+<!--#H1_EN-->
+Direct-attach copper for 10G → 1.6T
+<!--#CHIP-->
+CR <span>·</span> twinax
+<!--#LEDE-->
+<p class="lede">機櫃裡交換器接伺服器的短線，很多根本不用光纖，而是兩端直接做成模組外型的雙軸銅纜（twinax）。它不耗電、延遲最低、最便宜，但有一個硬限制：<b>每通道速率越高，能跑的長度越短</b>。這頁說明被動 DAC、主動 ACC／AEC 與 AOC 怎麼選。
+  <span class="en">Twinax copper is the cheapest, lowest-latency link in the rack — until per-lane speed outruns its reach.</span></p>
+<!--#STYLE-->
+.cmp td,.cmp th{text-align:center}
+.cmp td.l{text-align:left}
+<!--#BODY-->
+  <section class="panel" aria-labelledby="h1">
+    <h2 id="h1"><span class="step">1</span>四種短距直連線 <span class="en">DAC · ACC · AEC · AOC</span></h2>
+    <div class="scroll-x"><table class="mtx cmp">
+      <thead><tr><th></th><th>被動 DAC</th><th>ACC</th><th>AEC</th><th>AOC</th></tr></thead>
+      <tbody>
+        <tr><td class="l">線材</td><td>雙軸銅纜</td><td>雙軸銅纜</td><td>雙軸銅纜（可較細）</td><td>多模光纖</td></tr>
+        <tr><td class="l">線內電路</td><td>無</td><td>類比 redriver</td><td>retimer／DSP</td><td>光電轉換＋（多數）DSP</td></tr>
+        <tr><td class="l">耗電</td><td class="ok">≈ 0 W</td><td>低</td><td>中</td><td>中～高</td></tr>
+        <tr><td class="l">長度</td><td>最短（見下圖）</td><td>比 DAC 長一些</td><td>約 3–7 m</td><td>數公尺～約 100 m</td></tr>
+        <tr><td class="l">成本</td><td class="ok">最低</td><td>低</td><td>中</td><td>較高</td></tr>
+        <tr><td class="l">適合</td><td>同機櫃</td><td>同機櫃、略長</td><td>相鄰機櫃、AI 機櫃間</td><td>跨機櫃、同排</td></tr>
+      </tbody></table></div>
+    <p class="note-key" style="margin-top:8px">這四種都是「模組和線做成一體」，兩端直接插交換器或網卡的 SFP／QSFP／OSFP 埠，不需要另外買光模組，也沒有接頭要清潔；缺點是長度固定。</p>
+  </section>
+
+  <section class="panel" aria-labelledby="h2">
+    <h2 id="h2"><span class="step">2</span>速率越高，被動銅纜越短 <span class="en">Passive copper reach per lane</span></h2>
+    <div class="grid-2">
+      <div>
+        <div class="rbars" id="bars"></div>
+        <p class="note-key" style="margin-top:8px">長度為 IEEE 對各世代被動銅纜（CR）設定的目標長度；200G／通道為 P802.3dj 制定中的目標。實際產品依線徑（AWG）與廠商而異，10G SFP+ DAC 常見到 7 m。</p>
+      </div>
+      <div>
+        <div class="params"><div class="param"><div class="top"><label for="len">需要的長度<span class="en">length</span></label><output id="lenO"></output></div><input type="range" id="len" min="0.5" max="30" step="0.5" value="3"></div></div>
+        <div class="grp-title">每通道速率</div>
+        <div class="seg" id="lane"><button data-v="0">25G</button><button data-v="1">50G</button><button data-v="2" aria-pressed="true">100G</button><button data-v="3">200G</button></div>
+        <div class="rec" id="rec" style="margin-top:12px" aria-live="polite"></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="panel" aria-labelledby="h3">
+    <h2 id="h3"><span class="step">3</span>銅纜的名字怎麼讀 <span class="en">CR naming</span></h2>
+    <div class="scroll-x"><table class="tbl">
+      <thead><tr><th>規格</th><th>通道</th><th>常見外型</th><th>標準</th></tr></thead>
+      <tbody>
+        <tr><td class="m">25GBASE-CR</td><td>1×25G</td><td>SFP28 DAC</td><td><span class="std ieee">IEEE</span> 802.3by</td></tr>
+        <tr><td class="m">100GBASE-CR4</td><td>4×25G</td><td>QSFP28 DAC；可做成 QSFP28 → 4×SFP28 分支線</td><td><span class="std ieee">IEEE</span> 802.3bj</td></tr>
+        <tr><td class="m">200GBASE-CR4</td><td>4×50G</td><td>QSFP56 DAC</td><td><span class="std ieee">IEEE</span> 802.3cd</td></tr>
+        <tr><td class="m">400GBASE-CR4</td><td>4×100G</td><td>QSFP112 DAC</td><td><span class="std ieee">IEEE</span> 802.3ck</td></tr>
+        <tr><td class="m">800GBASE-CR8</td><td>8×100G</td><td>OSFP／QSFP-DD800 DAC</td><td><span class="std ieee">IEEE</span> 802.3df</td></tr>
+        <tr><td class="m">800GBASE-CR4、1.6TBASE-CR8</td><td>4×200G、8×200G</td><td>OSFP 1600 等</td><td><span class="std dj">制定中</span> P802.3dj</td></tr>
+      </tbody></table></div>
+    <p class="note-key" style="margin-top:8px">C＝Copper（直連銅纜），K（KR）＝背板，T＝BASE-T 網路線。線越長，DAC 要用越粗的導體（例如 26 AWG），線也越硬、越難整線；短線可用較細的 30 AWG。</p>
+  </section>
+
+  <section class="panel" aria-labelledby="hq">
+    <h2 id="hq">小測驗 <span class="en">Quick check</span></h2>
+    <div class="quiz" id="quiz"></div>
+  </section>
+<!--#FOOTER-->
+依據 IEEE 802.3by／bj／cd／ck／df 與 P802.3dj 的銅纜（CR）目標長度；ACC／AEC／AOC 為業界通用分類。延伸閱讀：《Ethernet 從 1G 到 800G》簡報第 3 頁（DAC、AEC、AOC）。
+<!--#SCRIPT-->
+(function(){
+  const R = [['25G／通道', 5, '25GBASE-CR'], ['50G／通道', 3, '50GBASE-CR'], ['100G／通道', 2, '802.3ck'], ['200G／通道', 1, 'P802.3dj 目標']];
+  $('bars').innerHTML = R.map((r, i) => `<div class="rbar" style="grid-template-columns:96px minmax(0,1fr) 54px"><span>${r[0]}<small style="display:block;color:var(--muted);font-size:11px">${r[2]}</small></span><div class="t"><div class="f" style="width:${r[1] / 5 * 100}%;background:var(--accent)"></div></div><b>${r[1]} m</b></div>`).join('');
+  let li = 2;
+  function run(){
+    const L = +$('len').value; $('lenO').textContent = L + ' m';
+    const max = R[li][1], out = [];
+    const c = (col, tag, t, l) => `<div class="rec-card" style="--c:${col}"><h3><span class="tag">${tag}</span>${t}</h3><p>${l}</p></div>`;
+    if (L <= max) out.push(c('var(--ok)', '建議', '被動 DAC', `在 ${R[li][0]} 下約 ${max} m 內可用，不耗電、最便宜。`));
+    else if (L <= 7) out.push(c('var(--ok)', '建議', 'AEC（或 ACC）', `超過被動 DAC 的約 ${max} m，加上主動晶片可延伸到約 3–7 m。`));
+    if (L > max && L <= 100) out.push(c(L > 7 ? 'var(--ok)' : 'var(--accent)', L > 7 ? '建議' : '可選', 'AOC 主動光纜', '光纖版的一體線，跨機櫃、同排都適用。'));
+    if (L > 30) out.push(c('var(--accent)', '可選', '光模組＋光纖', '距離再長或需要彈性（改線不必換整條），改用光模組加光纖跳線，見光纖篇 F3～F5。'));
+    else if (L > 7) out.push(c('var(--muted)', '也可以', '光模組＋光纖跳線', '長度可彈性調整，模組與光纖可分開更換。'));
+    $('rec').innerHTML = out.join(''); abbrify(null, '#rec');
+  }
+  $('len').addEventListener('input', run); segGroup('lane', v => { li = +v; run(); }); run();
+  quiz($('quiz'), [
+    {q:'同樣是被動 DAC，100G／通道比 25G／通道能跑的長度？', opts:['更長', '更短', '一樣'], a:1, why:'頻率越高銅線損耗越大，25G 約 5 m、100G 約 2 m、200G 約 1 m。'},
+    {q:'AEC 和被動 DAC 的差別？', opts:['AEC 用光纖', 'AEC 線內有 retimer，能跑更長、線可更細', 'AEC 不能插 QSFP 埠'], a:1, why:'AEC（Active Electrical Cable）在接頭內放 retimer／DSP 補償損耗。'},
+  ]);
+  abbrify(null);
+})();

@@ -24,17 +24,22 @@ SECTIONS = [  # (sec key, zh, en, body class, [(part key, code, nav name, zh, ne
         ("shield", "C3", "SHIELDING", "遮蔽代碼", "copper/shielding.html", "shielding.html"),
         ("awg", "C4", "AWG · JACKET", "線徑外被線序", "copper/awg-jacket.html", "awg-jacket.html"),
         ("install", "C5", "INSTALL", "佈線與驗收", "copper/install-test.html", "install-test.html"),
+        ("dac", "C6", "DAC · AEC", "高速銅纜", "copper/dac-aec.html", "dac-aec.html"),
     ]),
     ("fiber", "光纖篇", "FIBER", "sec-fiber", [
         ("fiber", "F1", "FIBER", "光纖基礎", "fiber/basics.html", "fiber-basics.html"),
         ("conn", "F2", "CONNECTOR", "接頭與維護", "fiber/connectors.html", "connectors.html"),
         ("module", "F3", "MODULE", "光模組入門", "fiber/transceivers.html", "transceivers.html"),
+        ("codes", "F4", "CODES", "模組代號解碼", "fiber/module-codes.html", "module-codes.html"),
+        ("hs", "F5", "400G–1.6T", "高速光模組", "fiber/400g-1.6t.html", "400g-1.6t.html"),
+        ("optics", "F6", "OPTICS", "光源與架構", "fiber/light-source.html", "light-source.html"),
     ]),
 ]
 SHARED = [  # (part key, nav label, new path, legacy name)
     ("home", "選型首頁", "index.html", "index.html"),
     ("ref", "附錄・總表與辭典", "reference.html", "reference.html"),
 ]
+NEW_PAGES = {"dac-aec.html", "module-codes.html", "400g-1.6t.html", "light-source.html"}  # alias names only, no redirect
 RELATED = [("https://poe-pd-series.vercel.app/", "↗ PoE PD", "受電端系列")]
 
 
@@ -140,7 +145,7 @@ def main():
         out.write_text(rewrite(html, depth), encoding="utf-8")
         print("wrote _site/" + path)
     redirects = [{"source": "/" + p[5], "destination": "/" + p[4], "permanent": True}
-                 for s in SECTIONS for p in s[4] if p[5] != p[4].split("/")[-1] or "/" in p[4]]
+                 for s in SECTIONS for p in s[4] if p[5] not in NEW_PAGES]
     (SITE / "vercel.json").write_text(json.dumps({"redirects": redirects}, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
     print(f"wrote _site/vercel.json ({len(redirects)} redirects)")
 

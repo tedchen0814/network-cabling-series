@@ -361,3 +361,18 @@ body.sec-fiber{--accent:#0e7f9a}
 .sec-head{display:flex;flex-wrap:wrap;align-items:baseline;gap:6px 14px;margin:6px 0 -6px}
 .sec-head h2{margin:0;font-family:var(--display);font-size:30px;letter-spacing:.04em;color:var(--c)}
 .sec-head p{margin:0;color:var(--muted);font-size:14px}
+/* ---- 光纖篇 F4–F6、銅纜篇 C6 ---- */
+.std{display:inline-block;font-size:11.5px;font-weight:800;border-radius:6px;padding:1px 7px;border:1.5px solid currentColor;white-space:nowrap;vertical-align:1px}
+.std.ieee{color:var(--ok)} .std.dj{color:#b57600} .std.msa{color:var(--accent)} .std.oif{color:#8a55c9} .std.ven{color:var(--muted)}
+@media (prefers-color-scheme: dark){ :root:not([data-theme="light"]) .std.dj{color:#e3c341} :root:not([data-theme="light"]) .std.oif{color:#b394f5} }
+.namebar{display:flex;flex-wrap:wrap;gap:4px;align-items:stretch;margin:10px 0}
+.namebar span{display:flex;flex-direction:column;align-items:center;border-radius:8px;padding:6px 10px;background:var(--paper-2);border:1.5px solid var(--c,var(--line))}
+.namebar b{font:800 22px var(--mono);color:var(--c,var(--ink))}
+.namebar small{font-size:11.5px;color:var(--muted);white-space:nowrap}
+.dec-card{border:1.5px solid var(--accent);border-radius:12px;padding:12px 14px;background:var(--paper-2)}
+.dec-card h3{margin:0 0 8px;font:800 20px var(--mono);display:flex;flex-wrap:wrap;gap:8px;align-items:center}
+.phy-list{display:flex;flex-wrap:wrap;gap:6px;margin:8px 0}
+.phy-list button{font-family:var(--mono);font-size:12.5px;padding:4px 9px}
+.phy-list button[aria-pressed="true"]{background:var(--accent);color:var(--paper);border-color:var(--accent)}
+.svgbox svg{width:100%;height:auto;display:block}
+.phy-list button[aria-pressed="true"] .std{color:var(--paper);border-color:var(--paper)}

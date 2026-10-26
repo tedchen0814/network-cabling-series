@@ -1,0 +1,209 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>F6 光源與架構｜網路線材系列</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@600;700;800&family=Noto+Sans+TC:wght@400;500;700;900&family=JetBrains+Mono:wght@400;600&display=swap">
+<link rel="stylesheet" href="../assets/series.css">
+<style>
+.src-cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:12px}
+.src-cards button{display:flex;flex-direction:column;align-items:flex-start;gap:4px;text-align:left;padding:10px 12px;background:var(--paper-2)}
+.src-cards button b{font-family:var(--display);font-size:22px;letter-spacing:.03em}
+.src-cards button small{color:var(--muted);font-weight:500}
+.src-cards button[aria-pressed="true"]{border-color:var(--accent);box-shadow:0 0 0 3px color-mix(in srgb,var(--accent) 25%,transparent)}
+.mtx2 td{text-align:center}
+</style>
+</head>
+<body class="sec-fiber">
+<div class="wrap">
+  <nav class="series" aria-label="網站分區 Sections"><span class="lab">網路線材 Series</span><a href="../index.html"><b>HOME</b>選型首頁</a><a data-sec="copper" href="../copper/basics.html"><b>COPPER</b>銅纜篇</a><a class="sec-on" data-sec="fiber" href="../fiber/basics.html"><b>FIBER</b>光纖篇</a><a href="../reference.html"><b>APPENDIX</b>附錄</a><a href="https://poe-pd-series.vercel.app/" target="_blank" rel="noopener"><b>↗ PoE PD</b>受電端系列</a></nav>
+  <nav class="series sub" aria-label="光纖篇"><span class="lab">光纖篇</span><a href="../fiber/basics.html"><b>F1 FIBER</b>光纖基礎</a><a href="../fiber/connectors.html"><b>F2 CONNECTOR</b>接頭與維護</a><a href="../fiber/transceivers.html"><b>F3 MODULE</b>光模組入門</a><a href="../fiber/module-codes.html"><b>F4 CODES</b>模組代號解碼</a><a href="../fiber/400g-1.6t.html"><b>F5 400G–1.6T</b>高速光模組</a><span class="cur" aria-current="page"><b>F6 OPTICS</b>光源與架構</span></nav>
+  <header>
+    <div>
+      <div class="eyebrow">Network Cabling Series · 光纖篇 F6</div>
+      <h1>光源與模組架構<small>VCSEL · DML · EML · silicon photonics · DSP / LPO / CPO · coherent</small></h1>
+    </div>
+    <div class="chip-dc">光 <span>←</span> 電</div>
+    <p class="lede">同樣是 800G 模組，價格和耗電可以差很多，關鍵在兩件事：<b>用什麼方式發光與調變</b>，以及<b>模組裡有沒有 DSP</b>。這頁整理四種主流光源、DSP／LPO／LRO／CPO 四種架構，以及長距用的相干光和資料中心用的 IM-DD 差在哪。
+  <span class="en">Same speed, different engines: how the light is made and modulated, and where the DSP lives.</span></p>
+  </header>
+
+  <section class="panel" aria-labelledby="h1">
+    <h2 id="h1"><span class="step">1</span>四種光源 <span class="en">Light sources &amp; modulators</span></h2>
+    <div class="src-cards" id="srcs"></div>
+    <div class="grid-2" style="margin-top:12px">
+      <div class="svgbox"><svg id="srcSvg" viewBox="0 0 420 200" role="img" aria-label="光源原理示意"></svg></div>
+      <div class="infobox" id="srcInfo" style="--c:var(--accent)"></div>
+    </div>
+  </section>
+
+  <section class="panel" aria-labelledby="h2">
+    <h2 id="h2"><span class="step">2</span>距離 × 光源對照 <span class="en">Which source for which reach</span></h2>
+    <div class="scroll-x"><table class="mtx mtx2">
+      <thead><tr><th>距離等級</th><th>VCSEL</th><th>DML</th><th>EML</th><th>CW＋矽光子</th><th>相干</th></tr></thead>
+      <tbody>
+        <tr><td class="l">VR／SR　多模 ≤ 100 m</td><td class="ok">主流</td><td>—</td><td>—</td><td>—</td><td>—</td></tr>
+        <tr><td class="l">DR　單模 500 m（平行）</td><td>—</td><td class="mid">低速可</td><td class="ok">常見</td><td class="ok">主流</td><td>—</td></tr>
+        <tr><td class="l">FR　單模 2 km</td><td>—</td><td class="mid">25G／通道可</td><td class="ok">主流</td><td class="ok">常見</td><td>—</td></tr>
+        <tr><td class="l">LR　單模 10 km</td><td>—</td><td class="mid">少</td><td class="ok">主流</td><td class="mid">可</td><td class="mid">800G LR1</td></tr>
+        <tr><td class="l">ER　單模 40 km</td><td>—</td><td>—</td><td class="ok">＋光放大</td><td>—</td><td class="mid">800G ER1</td></tr>
+        <tr><td class="l">ZR　80 km 以上</td><td>—</td><td>—</td><td>—</td><td>—</td><td class="ok">主流</td></tr>
+      </tbody></table></div>
+    <p class="note-key" style="margin-top:8px">每通道速率越高，直接調變（DML）越難做；100G／200G 每通道的單模模組多改用 EML 或矽光子。此表為一般趨勢，實際依廠商設計而定。</p>
+  </section>
+
+  <section class="panel" aria-labelledby="h3">
+    <h2 id="h3"><span class="step">3</span>模組內部架構 <span class="en">Where the DSP lives</span></h2>
+    <div class="controls"><div class="seg" id="arch" style="flex-wrap:wrap"><button data-v="dsp" aria-pressed="true">傳統 DSP 模組</button><button data-v="lro">LRO</button><button data-v="lpo">LPO</button><button data-v="cpo">CPO</button></div></div>
+    <div class="svgbox scroll-x"><svg id="archSvg" viewBox="0 0 760 210" role="img" aria-label="模組架構方塊圖"></svg></div>
+    <div class="grid-2" style="margin-top:8px">
+      <div class="infobox" id="archInfo" style="--c:var(--accent);min-height:0"></div>
+      <div><table class="spec" id="archTbl"></table></div>
+    </div>
+  </section>
+
+  <section class="panel" aria-labelledby="h4">
+    <h2 id="h4"><span class="step">4</span>IM-DD 與相干光 <span class="en">Intensity vs coherent</span></h2>
+    <div class="controls"><div class="seg" id="mod"><button data-v="nrz" aria-pressed="true">NRZ</button><button data-v="pam4">PAM4</button><button data-v="qam">DP-16QAM（相干）</button></div></div>
+    <div class="grid-2">
+      <div class="svgbox"><svg id="modSvg" viewBox="0 0 360 240" role="img" aria-label="調變方式示意"></svg></div>
+      <div class="infobox" id="modInfo" style="--c:var(--accent)"></div>
+    </div>
+  </section>
+
+  <section class="panel" aria-labelledby="hq">
+    <h2 id="hq">小測驗 <span class="en">Quick check</span></h2>
+    <div class="quiz" id="quiz"></div>
+  </section>
+
+  <footer>
+光源與架構為業界通用技術分類；LPO／LRO 參考 LPO MSA 公開資料，相干光參考 OIF 400ZR／800ZR。本頁不採用市場占有率與廠商排名等會快速過時的數據。
+  </footer>
+</div>
+<script src="../assets/common.js"></script>
+<script>
+(function(){
+  // ---------- 1. light sources ----------
+  const S = {
+    vcsel:['VCSEL', '垂直共振腔面射型雷射', '多模、850 nm，直接開關雷射電流來調變',
+      ['光從晶片表面垂直射出，容易和多模光纖對準、可晶圓級測試，成本最低、最省電', '只適合多模短距（SR、VR）', '每通道已到 100G PAM4（800G-SR8 就是 8 顆）']],
+    dml:['DML', '直接調變雷射', '單模 DFB 雷射，直接用電流調變',
+      ['結構簡單、比 EML 便宜省電', '速度變快時會有啁啾（chirp）與頻寬限制，距離與速率都受限', '甜蜜點在 25G／通道：100G-CWDM4、PON、LR']],
+    eml:['EML', '電吸收調變雷射', '雷射持續發光，旁邊整合一個電吸收調變器來開關光',
+      ['調變速度快、訊號乾淨，是 100G／200G 每通道單模的主力', '比 DML 貴、耗電較高', 'DR、FR、LR、ER 都能做']],
+    siph:['CW＋矽光子', '連續光雷射＋矽調變器', '外部雷射只發連續光（CW），在矽晶片上用 Mach-Zehnder 或微環調變',
+      ['矽製程可把多個通道整合在一顆晶片，適合 DR4、DR8 這類平行通道', '一顆雷射可分給多個通道使用', '也是 CPO 與相干光模組的基礎技術']],
+  };
+  $('srcs').innerHTML = Object.entries(S).map(([k, v]) => `<button type="button" data-k="${k}"><b>${v[0]}</b><small>${v[1]}</small></button>`).join('');
+  function src(k){
+    const v = S[k], s = $('srcSvg'); s.innerHTML = '';
+    $('srcs').querySelectorAll('button').forEach(b => b.setAttribute('aria-pressed', b.dataset.k === k));
+    const box = (x, y, w, h, t, c) => { svgEl('rect', {x, y, width:w, height:h, rx:8, fill:'var(--paper-2)', stroke:c || 'var(--wire)', 'stroke-width':1.6}, s); svgEl('text', {x:x + w / 2, y:y + h / 2 + 5, 'text-anchor':'middle', class:'lbl'}, s, t); };
+    const wave = (x1, y, len, on) => { let d = ''; for (let i = 0; i <= 60; i++){ const u = i / 60, a = on ? (Math.floor(u * 6) % 2 ? 14 : 3) : 10; d += (i ? 'L' : 'M') + (x1 + u * len) + ' ' + (y - a * Math.sin(u * 40)); } svgEl('path', {d, fill:'none', stroke:'#e5484d', 'stroke-width':2}, s); };
+    svgEl('text', {x:20, y:28, class:'lbl-sm'}, s, '電訊號');
+    svgEl('path', {d:'M20 50 h20 v-14 h20 v14 h20 v-14 h20 v14', fill:'none', stroke:'var(--accent)', 'stroke-width':2}, s);
+    if (k === 'vcsel' || k === 'dml'){
+      box(130, 70, 120, 60, k === 'vcsel' ? 'VCSEL' : 'DFB 雷射', 'var(--accent)');
+      svgEl('line', {x1:100, x2:130, y1:50, y2:90, stroke:'var(--accent)', 'stroke-width':2}, s);
+      wave(250, 100, 150, true);
+      svgEl('text', {x:190, y:160, 'text-anchor':'middle', class:'tag-t'}, s, '電流直接開關雷射 → 光一亮一暗');
+    } else if (k === 'eml'){
+      box(110, 75, 90, 50, 'DFB');
+      box(220, 75, 90, 50, 'EA 調變', 'var(--accent)');
+      wave(200, 100, 20, false);
+      svgEl('line', {x1:100, x2:265, y1:50, y2:75, stroke:'var(--accent)', 'stroke-width':2}, s);
+      wave(310, 100, 100, true);
+      svgEl('text', {x:210, y:160, 'text-anchor':'middle', class:'tag-t'}, s, '雷射一直亮，調變器負責開關');
+    } else {
+      box(20, 120, 80, 46, 'CW 雷射');
+      wave(100, 143, 40, false);
+      svgEl('rect', {x:140, y:70, width:170, height:110, rx:10, fill:'color-mix(in srgb,var(--accent) 12%,transparent)', stroke:'var(--accent)', 'stroke-width':1.6}, s);
+      svgEl('text', {x:225, y:90, 'text-anchor':'middle', class:'lbl-sm'}, s, '矽光晶片（多通道）');
+      for (let i = 0; i < 4; i++){ svgEl('rect', {x:180, y:100 + i * 19, width:90, height:13, rx:3, fill:'var(--paper-2)', stroke:'var(--wire)'}, s); wave(310, 106 + i * 19, 90, true); }
+      svgEl('line', {x1:100, x2:180, y1:50, y2:106, stroke:'var(--accent)', 'stroke-width':2}, s);
+      svgEl('text', {x:225, y:196, 'text-anchor':'middle', class:'tag-t'}, s, '一道連續光分給 4 個調變器');
+    }
+    $('srcInfo').innerHTML = `<h3>${v[0]}　${v[1]}</h3><p>${v[2]}</p><ul>${v[3].map(x => `<li>${x}</li>`).join('')}</ul>`;
+    abbrify(null, '#srcInfo');
+  }
+  $('srcs').addEventListener('click', e => { const b = e.target.closest('button[data-k]'); if (b) src(b.dataset.k); });
+  src('vcsel');
+
+  // ---------- 3. architecture ----------
+  const A = {
+    dsp:{t:'傳統 DSP 模組', blocks:[['主機 ASIC', 0], ['電路板走線', 0], ['DSP（收發）', 1], ['驅動／TIA', 0], ['光元件', 0]], d:'模組內的 DSP 負責時脈還原、等化與重新整形，把主機那段電路板走線的損耗「歸零」。互通性最好，是目前最普遍的做法。',
+      r:[['耗電', '最高（DSP 是模組耗電的主要來源之一）'], ['延遲', '較高'], ['互通性', '最好，任何主機都能用'], ['適用', '一般資料中心、長距']]},
+    lro:{t:'LRO 線性接收', blocks:[['主機 ASIC', 0], ['電路板走線', 0], ['DSP（只有發射）', 1], ['驅動／TIA', 0], ['光元件', 0]], d:'發射端保留 DSP 把光訊號整理乾淨，接收端改成線性放大，交給主機 ASIC 的 SerDes 處理。是 DSP 與 LPO 之間的折衷。',
+      r:[['耗電', '中'], ['延遲', '中'], ['互通性', '比 LPO 好'], ['適用', '想省電又顧及互通性']]},
+    lpo:{t:'LPO 線性可插拔', blocks:[['主機 ASIC（強化 SerDes）', 1], ['電路板走線', 0], ['線性驅動／TIA', 0], ['光元件', 0]], d:'拿掉模組內的 DSP，改由交換晶片本身的 SerDes 直接驅動。省電、低延遲，但主機 SerDes 要夠強、走線要短，互通測試較嚴格。',
+      r:[['耗電', '低'], ['延遲', '最低'], ['互通性', '要和特定主機搭配驗證'], ['適用', 'AI 叢集、機櫃內短距']]},
+    cpo:{t:'CPO 共封裝光學', blocks:[['主機 ASIC＋光引擎（同封裝）', 1], ['光纖直接出來', 0]], d:'光引擎和交換晶片封裝在一起，電訊號只走幾公釐，省掉可插拔模組。耗電最低，但光引擎故障時不能像模組一樣直接抽換，雷射常做成外部可插拔光源。',
+      r:[['耗電', '最低'], ['延遲', '最低'], ['維修', '光引擎不可熱插拔'], ['適用', '下一代高密度交換器']]},
+  };
+  function arch(k){
+    const a = A[k], s = $('archSvg'); s.innerHTML = '';
+    const n = a.blocks.length, w = (720 - (n - 1) * 30) / n;
+    a.blocks.forEach((b, i) => {
+      const x = 20 + i * (w + 30);
+      svgEl('rect', {x, y:60, width:w, height:70, rx:10, fill:b[1] ? 'color-mix(in srgb,var(--accent) 18%,transparent)' : 'var(--paper-2)', stroke:b[1] ? 'var(--accent)' : 'var(--wire)', 'stroke-width':b[1] ? 2.4 : 1.6}, s);
+      svgEl('text', {x:x + w / 2, y:100, 'text-anchor':'middle', class:'lbl'}, s, b[0]);
+      if (i < n - 1) svgEl('line', {x1:x + w, x2:x + w + 30, y1:95, y2:95, stroke:'var(--wire)', 'stroke-width':2}, s);
+    });
+    const modStart = k === 'cpo' ? null : (k === 'lpo' ? 2 : 2);
+    if (modStart != null){
+      const x = 20 + modStart * (w + 30) - 12;
+      svgEl('rect', {x, y:40, width:720 + 20 - x + 12, height:110, rx:12, fill:'none', stroke:'var(--muted)', 'stroke-width':1.4, 'stroke-dasharray':'6 5'}, s);
+      svgEl('text', {x:x + 10, y:34, class:'tag-t'}, s, '可插拔光模組');
+    } else {
+      svgEl('rect', {x:8, y:40, width:20 + w + 24, height:110, rx:12, fill:'none', stroke:'var(--muted)', 'stroke-width':1.4, 'stroke-dasharray':'6 5'}, s);
+      svgEl('text', {x:18, y:34, class:'tag-t'}, s, '同一個封裝');
+    }
+    svgEl('text', {x:380, y:190, 'text-anchor':'middle', class:'tag-t'}, s, '藍框＝做訊號處理（DSP／強化 SerDes）的位置');
+    $('archInfo').innerHTML = `<h3>${a.t}</h3><p>${a.d}</p>`;
+    $('archTbl').innerHTML = '<tbody>' + a.r.map(r => `<tr><th>${r[0]}</th><td>${r[1]}</td></tr>`).join('') + '</tbody>';
+    abbrify(null, '#archInfo, #archTbl');
+  }
+  segGroup('arch', arch); arch('dsp');
+
+  // ---------- 4. modulation ----------
+  function mod(k){
+    const s = $('modSvg'); s.innerHTML = '';
+    if (k === 'qam'){
+      svgEl('line', {x1:180, x2:180, y1:20, y2:220, class:'axis'}, s); svgEl('line', {x1:60, x2:300, y1:120, y2:120, class:'axis'}, s);
+      [-3, -1, 1, 3].forEach(i => [-3, -1, 1, 3].forEach(q => svgEl('circle', {cx:180 + i * 30, cy:120 - q * 30, r:6, fill:'var(--accent)'}, s)));
+      svgEl('text', {x:300, y:114, 'text-anchor':'end', class:'tag-t'}, s, 'I（同相）');
+      svgEl('text', {x:186, y:30, class:'tag-t'}, s, 'Q（正交）');
+      svgEl('text', {x:180, y:236, 'text-anchor':'middle', class:'tag-t'}, s, '16 個點＝每符號 4 bit，再乘 2 個偏振');
+    } else {
+      const lv = k === 'nrz' ? [0, 1] : [0, 1, 2, 3];
+      lv.forEach((l, i) => { const y = 200 - l * (160 / (lv.length - 1)); svgEl('line', {x1:40, x2:330, y1:y, y2:y, stroke:'var(--line)', 'stroke-dasharray':'4 4'}, s);
+        svgEl('text', {x:34, y:y + 4, 'text-anchor':'end', class:'tick'}, s, k === 'nrz' ? l : ['00', '01', '11', '10'][i]); });
+      const seq = k === 'nrz' ? [1, 0, 1, 1, 0, 0, 1, 0, 1, 1] : [3, 0, 2, 1, 3, 2, 0, 1, 3, 1];
+      let d = '', step = 290 / seq.length;
+      seq.forEach((v, i) => { const y = 200 - v * (160 / (lv.length - 1)); d += (i ? 'L' : 'M') + (40 + i * step) + ' ' + y + 'L' + (40 + (i + 1) * step) + ' ' + y; });
+      svgEl('path', {d, fill:'none', stroke:'var(--accent)', 'stroke-width':2.6}, s);
+      svgEl('text', {x:185, y:232, 'text-anchor':'middle', class:'tag-t'}, s, k === 'nrz' ? '2 階：每符號 1 bit' : '4 階：每符號 2 bit（格雷碼）');
+    }
+    const I = {
+      nrz:['NRZ（IM-DD）', '用光的「亮／暗」代表 1／0，接收端只量光強度（直接偵測）。10G、25G 每通道都是 NRZ。'],
+      pam4:['PAM4（IM-DD）', '光強度分 4 階，每個符號帶 2 bit，同樣頻寬速率加倍。代價是階與階之間的距離只剩三分之一，雜訊容忍度變差，所以 50G 以上每通道都要搭配 FEC（如 RS(544,514)）。資料中心 100G～1.6T 的主流。'],
+      qam:['相干光 DP-16QAM', '同時用光的振幅、相位和兩個偏振方向傳資料，接收端用本地雷射與 DSP 還原，靈敏度高、可跑 80 km 以上。400ZR、800ZR 都用這種方式，代價是 DSP 複雜、耗電高。資料中心內短距仍以 IM-DD 為主。'],
+    }[k];
+    $('modInfo').innerHTML = `<h3>${I[0]}</h3><p>${I[1]}</p>`;
+    abbrify(null, '#modInfo');
+  }
+  segGroup('mod', mod); mod('nrz');
+
+  quiz($('quiz'), [
+    {q:'800GBASE-SR8 這種多模短距模組，光源通常是？', opts:['VCSEL', 'EML', '相干雷射'], a:0, why:'多模 850 nm 短距用 VCSEL，便宜省電。'},
+    {q:'LPO 和傳統模組最大的差別？', opts:['波長不同', '拿掉模組內的 DSP，由主機 SerDes 直接驅動', '用多模光纖'], a:1, why:'LPO 省掉 DSP 的耗電與延遲，但需要主機 SerDes 夠強、互通要驗證。'},
+    {q:'為什麼 PAM4 一定要搭配 FEC？', opts:['因為速率太低', '4 階訊號間距變小，誤碼率較高', '因為用多模光纖'], a:1, why:'同樣振幅切成 4 階，階距只剩三分之一，需要 FEC 修正錯誤。'},
+  ]);
+  abbrify(null);
+})();
+</script>
+</body>
+</html>
