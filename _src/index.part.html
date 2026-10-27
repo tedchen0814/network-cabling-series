@@ -45,7 +45,7 @@ Cat <span>↔</span> Fiber
   <div class="cards" id="cardsC"></div>
   <div class="sec-head" style="--c:#118aa6"><h2>光纖篇 FIBER</h2><p>光纖、接頭、光模組，一路到 400G～1.6T</p></div>
   <div class="cards" id="cardsF"></div>
-  <div class="sec-head" style="--c:var(--muted)"><h2>附錄 APPENDIX</h2><p>兩篇共用的總表、辭典與勘誤</p></div>
+  <div class="sec-head" style="--c:var(--muted)"><h2>附錄 APPENDIX</h2><p>兩篇共用的總表、辭典與參考標準</p></div>
   <div class="cards" id="cardsA"></div>
 
   <section class="panel" aria-labelledby="h-rel">
@@ -61,8 +61,8 @@ Cat <span>↔</span> Fiber
 (function(){
   const C = [
     ['C1', '構造與雙絞', 'Construction & twisting', 'copper-basics.html', '一條網路線由哪些部分組成，為什麼要雙絞、絞距為什麼都不一樣。', ['可點選的剖面圖', '雙絞抵消雜訊模擬']],
-    ['C2', 'Cat 等級', 'Category 5e – 8', 'cat-grades.html', 'Cat 5e、6、6A、7、8 的頻寬、速率與距離，Cat 7 為什麼不規劃。', ['五種等級剖面切換', '速率 × 等級對照表']],
-    ['C3', '遮蔽代碼', 'Shielding codes', 'shielding.html', '看懂 U/UTP、F/UTP、S/FTP，什麼時候需要遮蔽線。', ['代碼解碼器', '要不要用遮蔽線']],
+    ['C2', '遮蔽代碼', 'Shielding codes', 'shielding.html', '看懂 U/UTP、F/UTP、S/FTP，什麼時候需要遮蔽線。', ['代碼解碼器', '要不要用遮蔽線']],
+    ['C3', 'Cat 等級', 'Category 5e – 8', 'cat-grades.html', 'Cat 5e、6、6A、7、8 的頻寬、速率與距離，Cat 7 為什麼不規劃。', ['五種等級剖面切換', '速率 × 等級對照表']],
     ['C4', '線徑、外被與線序', 'AWG · jacket · pinout', 'awg-jacket.html', 'AWG 與電阻、PVC／LSZH／PE、防火等級、T568A／B。', ['AWG 滑桿', '外被印字解讀', '線序切換']],
     ['C5', '佈線與驗收', 'Installation & testing', 'install-test.html', '永久鏈路與通道長度、施工要點、認證測試看什麼。', ['鏈路長度檢查器', '故障對照表']],
     ['C6', '高速銅纜', 'DAC · ACC · AEC', 'dac-aec.html', '機櫃內 25G～1.6T 的直連銅纜：速率越高能跑越短，什麼時候該換 AEC 或 AOC。', ['長度 × 速率選擇器', 'CR 命名對照']],
@@ -76,7 +76,7 @@ Cat <span>↔</span> Fiber
     ['F6', '光源與架構', 'VCSEL · EML · SiPh · LPO · CPO', 'light-source.html', '四種光源、DSP／LPO／LRO／CPO、PAM4 與相干光的差別。', ['光源原理圖', '架構切換圖']],
   ];
   const A = [
-    ['附錄', '選型總表與辭典', 'Reference', 'reference.html', '銅纜／DAC／AOC／光纖總表、名詞辭典、參考標準與勘誤說明。', ['縮寫全名對照', '原簡報勘誤']],
+    ['附錄', '選型總表與辭典', 'Reference', 'reference.html', '銅纜／DAC／AOC／光纖總表、名詞辭典與參考標準。', ['縮寫全名對照', '參考標準']],
   ];
   const mkCard = (s, c) => `<a class="card" style="--c:${c}" href="${s[3]}">
       <span class="no">${s[0]}</span><h2>${s[1]}<small>${s[2]}</small></h2><p>${s[4]}</p>

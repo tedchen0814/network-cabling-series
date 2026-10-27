@@ -6,13 +6,13 @@
       "permanent": true
     },
     {
-      "source": "/cat-grades.html",
-      "destination": "/copper/category.html",
+      "source": "/shielding.html",
+      "destination": "/copper/shielding.html",
       "permanent": true
     },
     {
-      "source": "/shielding.html",
-      "destination": "/copper/shielding.html",
+      "source": "/cat-grades.html",
+      "destination": "/copper/category.html",
       "permanent": true
     },
     {

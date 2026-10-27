@@ -20,8 +20,8 @@ SITE = SRC.parent / "_site"
 SECTIONS = [  # (sec key, zh, en, body class, [(part key, code, nav name, zh, new path, legacy flat name)])
     ("copper", "銅纜篇", "COPPER", "sec-copper", [
         ("basics", "C1", "BASICS", "構造與雙絞", "copper/basics.html", "copper-basics.html"),
-        ("cat", "C2", "CATEGORY", "Cat 等級", "copper/category.html", "cat-grades.html"),
-        ("shield", "C3", "SHIELDING", "遮蔽代碼", "copper/shielding.html", "shielding.html"),
+        ("shield", "C2", "SHIELDING", "遮蔽代碼", "copper/shielding.html", "shielding.html"),
+        ("cat", "C3", "CATEGORY", "Cat 等級", "copper/category.html", "cat-grades.html"),
         ("awg", "C4", "AWG · JACKET", "線徑外被線序", "copper/awg-jacket.html", "awg-jacket.html"),
         ("install", "C5", "INSTALL", "佈線與驗收", "copper/install-test.html", "install-test.html"),
         ("dac", "C6", "DAC · AEC", "高速銅纜", "copper/dac-aec.html", "dac-aec.html"),
