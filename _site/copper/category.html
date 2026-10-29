@@ -39,7 +39,7 @@
         </div>
       </div>
     </div>
-    <p class="note-key" style="margin-top:8px">剖面為典型結構示意；遮蔽層依 ISO/IEC 11801 代碼繪製，外被顏色沒有標準規定。</p>
+    <p class="note-key" style="margin-top:8px">Cat 等級（頻寬、電氣性能）和遮蔽結構是兩個獨立的規格，但等級越高、頻率越高，串音和外部干擾越難壓，遮蔽也就越完整：Cat 5e／6 以無遮蔽 U/UTP 為主，Cat 6A 開始常見遮蔽版，Cat 7／7A 每對必須鋁箔，Cat 8 全部是遮蔽線（對照見 <a href="../copper/shielding.html">C2 遮蔽代碼</a>）。剖面為典型結構示意；遮蔽層依 ISO/IEC 11801 代碼繪製，外被顏色沒有標準規定。</p>
   </section>
 
   <section class="panel" aria-labelledby="h2">
@@ -90,16 +90,16 @@
 (function(){
   const D = {
     '5e': {figs:[[{jacket:'#8e9aa0', rip:true}, 'U/UTP']],
-      spec:[['ISO/IEC 等級','Class D'],['頻寬','100 MHz'],['代表速率','1000BASE-T；2.5GBASE-T（802.3bz）'],['最長通道','100 m（永久鏈路 90 m）'],['常見結構','U/UTP，通常沒有十字骨架']],
+      spec:[['ISO/IEC 等級','Class D'],['頻寬','100 MHz'],['代表速率','1000BASE-T；2.5GBASE-T（802.3bz）'],['最長通道','100 m（永久鏈路 90 m）'],['常見結構','U/UTP 為主（通常沒有十字骨架）；也有 F/UTP、SF/UTP']],
       use:['家用、小型辦公室','既有建築沿用、預算有限'], note:['新佈線案建議至少用 Cat 6','避開 CCA 銅包鋁的低價線']},
     '6': {figs:[[{jacket:'#3f79b5', spline:true, rip:true}, 'U/UTP＋十字骨架']],
-      spec:[['ISO/IEC 等級','Class E'],['頻寬','250 MHz'],['代表速率','1000BASE-T；5GBASE-T（802.3bz）'],['10G 能力','<span class="hl-y">10GBASE-T 約 37–55 m（TIA TSB-155）</span>'],['常見結構','U/UTP（常見十字骨架）；也有 F/UTP']],
+      spec:[['ISO/IEC 等級','Class E'],['頻寬','250 MHz'],['代表速率','1000BASE-T；5GBASE-T（802.3bz）'],['10G 能力','<span class="hl-y">10GBASE-T 約 37–55 m（TIA TSB-155）</span>'],['常見結構','U/UTP（常見十字骨架）；也有 F/UTP、SF/UTP']],
       use:['企業辦公區水平佈線、一般機房','家用 1G～5G、Wi-Fi AP 上行'], note:['10G 要跑滿 100 m 請改用 Cat 6A','十字骨架並非標準強制，依廠牌設計']},
     '6A': {figs:[[{jacket:'#4e9a6a', pair:'F'}, 'U/FTP 每對鋁箔'], [{jacket:'#4e9a6a', overall:'F', drain:true}, 'F/UTP 總鋁箔＋地線']],
-      spec:[['ISO/IEC 等級','Class EA'],['頻寬','500 MHz'],['代表速率','10GBASE-T，100 m'],['最長通道','100 m（永久鏈路 90 m）'],['常見結構','U/UTP、F/UTP、U/FTP、S/FTP 皆有']],
+      spec:[['ISO/IEC 等級','Class EA'],['頻寬','500 MHz'],['代表速率','10GBASE-T，100 m'],['最長通道','100 m（永久鏈路 90 m）'],['常見結構','遮蔽版為主（U/FTP、F/UTP 最常見，也有 F/FTP、S/FTP）；U/UTP 也做得到，但線徑較粗']],
       use:['銀行、高科技廠房、資料機房','Wi-Fi 6／7 AP、大量 PoE 線束'], note:['遮蔽版要搭配金屬遮蔽模組並接地','線徑較粗，管路與線架容量要先算','500 MHz 時外部串音（AXT）變重要，常用遮蔽版']},
     '7': {figs:[[{jacket:'#c9803a', overall:'S', pair:'F'}, 'S/FTP']],
-      spec:[['ISO/IEC 等級','Class F（Cat 7）／Class FA（Cat 7A）'],['頻寬','600 MHz／1000 MHz'],['代表速率','10GBASE-T（與 Cat 6A 相同）'],['TIA','<span class="hl-y">不承認 Cat 7</span>'],['標準接頭','GG45、TERA 等，不是 RJ45']],
+      spec:[['ISO/IEC 等級','Class F（Cat 7）／Class FA（Cat 7A）'],['頻寬','600 MHz／1000 MHz'],['代表速率','10GBASE-T（與 Cat 6A 相同）'],['TIA','<span class="hl-y">不承認 Cat 7</span>'],['常見結構','S/FTP（每對都必須有鋁箔）'],['標準接頭','GG45、TERA 等，不是 RJ45']],
       use:['實務很少規劃：速率沒有比 Cat 6A 高','歐洲部分機房曾採用'], note:['市售「Cat 7 線＋RJ45 頭」整條通道最多算 Cat 6A','建議：10G 用 Cat 6A，更高速改用光纖']},
     '8': {figs:[[{jacket:'#7466a8', overall:'F', drain:true}, 'Cat 8.1 F/UTP（RJ45）'], [{jacket:'#7466a8', overall:'S', pair:'F'}, 'Cat 8.2 S/FTP（非 RJ45）']],
       spec:[['ISO/IEC 等級','Class I（8.1）／Class II（8.2）'],['頻寬','2000 MHz'],['代表速率','25GBASE-T、40GBASE-T（802.3bq）'],['最長通道','<span class="hl-y">30 m（永久鏈路 24 m＋跳線 6 m）</span>'],['接頭','8.1：RJ45；8.2：TERA、GG45 等']],
