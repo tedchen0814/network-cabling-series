@@ -16,6 +16,7 @@
 .gal button{display:flex;flex-direction:column;align-items:center;gap:4px;padding:10px;background:var(--paper-2)}
 .gal button svg{width:100%;max-width:120px;height:auto}
 .gal button b{font-family:var(--display);font-size:20px;letter-spacing:.04em}
+.gal .cats{margin-top:4px;padding:2px 8px;border-radius:999px;font-size:12px;font-weight:700;color:var(--accent);border:1px solid color-mix(in srgb,var(--accent) 45%,transparent)}
 .gal button[aria-pressed="true"]{border-color:var(--accent);box-shadow:0 0 0 3px color-mix(in srgb,var(--accent) 25%,transparent)}
 </style>
 </head>
@@ -53,6 +54,7 @@
   <section class="panel" aria-labelledby="h2">
     <h2 id="h2"><span class="step">2</span>六種常見結構 <span class="en">Six common constructions</span></h2>
     <div class="gal" id="gal"></div>
+    <p class="note-key" style="margin-top:6px">卡片下方橘色標籤為市售常見的 Cat 等級搭配，實際以廠牌規格為準。</p>
     <div class="scroll-x" style="margin-top:14px"><table class="tbl">
       <thead><tr><th>舊稱（市場俗名）</th><th>ISO/IEC 11801 代碼</th><th>說明</th></tr></thead>
       <tbody>
@@ -108,14 +110,14 @@
 (function(){
   const st = {ov:'U', pr:'U'};
   const INFO = {
-    'U/UTP': ['完全無遮蔽', '家用、一般辦公；成本最低、最好施工。'],
-    'F/UTP': ['整體鋁箔＋地線，線對不遮蔽', '舊稱 FTP／ScTP，俗稱「總隔」；Cat 6A、Cat 8.1 常見。'],
-    'S/UTP': ['整體編織網，線對不遮蔽', '較少見。'],
-    'SF/UTP': ['整體編織網＋鋁箔，線對不遮蔽', '對外部干擾的防護佳，線較粗。'],
-    'U/FTP': ['整體不遮蔽，每對鋁箔', '俗稱「個隔」；線對間串音最低，Cat 6A 常見。'],
-    'F/FTP': ['整體鋁箔＋每對鋁箔', '雙層遮蔽，線徑較粗。'],
-    'S/FTP': ['整體編織網＋每對鋁箔', 'Cat 7／7A、Cat 8.2 的標準結構；舊稱 S-STP、PiMF。'],
-    'SF/FTP': ['整體編織網＋鋁箔＋每對鋁箔', '三重遮蔽，最粗最硬。'],
+    'U/UTP': ['完全無遮蔽', '家用、一般辦公；成本最低、最好施工。', 'Cat 5e・6・6A'],
+    'F/UTP': ['整體鋁箔＋地線，線對不遮蔽', '舊稱 FTP／ScTP，俗稱「總隔」；Cat 6A、Cat 8.1 常見。', 'Cat 5e・6・6A・8.1'],
+    'S/UTP': ['整體編織網，線對不遮蔽', '較少見。', 'Cat 5e'],
+    'SF/UTP': ['整體編織網＋鋁箔，線對不遮蔽', '對外部干擾的防護佳，線較粗。', 'Cat 5e・6'],
+    'U/FTP': ['整體不遮蔽，每對鋁箔', '俗稱「個隔」；線對間串音最低，Cat 6A 常見。', 'Cat 6A・8.1'],
+    'F/FTP': ['整體鋁箔＋每對鋁箔', '雙層遮蔽，線徑較粗。', 'Cat 6A・7'],
+    'S/FTP': ['整體編織網＋每對鋁箔', 'Cat 7／7A、Cat 8.2 的標準結構；舊稱 S-STP、PiMF。', 'Cat 6A・7・7A・8.2'],
+    'SF/FTP': ['整體編織網＋鋁箔＋每對鋁箔', '三重遮蔽，最粗最硬。', 'Cat 7・7A'],
   };
   function render(){
     const code = `${st.ov}/${st.pr}TP`;
@@ -136,7 +138,7 @@
     else { $('ok').textContent = '格式：XX/YTP，例如 S/FTP'; $('ok').className = 'badge warn'; }
   });
   const G = ['U/UTP', 'F/UTP', 'SF/UTP', 'U/FTP', 'F/FTP', 'S/FTP'];
-  $('gal').innerHTML = G.map(c => { const [o, p] = c.split('/'); return `<button type="button" data-c="${c}">${cableSVG({jacket:'#7e8a90', overall:o, pair:p[0], drain:o === 'F', label:c})}<b>${c}</b><small>${INFO[c][0]}</small></button>`; }).join('');
+  $('gal').innerHTML = G.map(c => { const [o, p] = c.split('/'); return `<button type="button" data-c="${c}">${cableSVG({jacket:'#7e8a90', overall:o, pair:p[0], drain:o === 'F', label:c})}<b>${c}</b><small>${INFO[c][0]}</small><span class="cats">${INFO[c][2]}</span></button>`; }).join('');
   $('gal').addEventListener('click', e => { const b = e.target.closest('button'); if (!b) return; const [o, p] = b.dataset.c.split('/'); st.ov = o; st.pr = p[0]; render(); $('h1').scrollIntoView({behavior:'smooth'}); });
   render();
   function judge(){
