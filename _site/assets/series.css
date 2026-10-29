@@ -338,6 +338,9 @@ p.note-key{display:block}
 .photo img{display:block;width:100%;height:auto;aspect-ratio:4/3;object-fit:cover;background:#fff}
 .photo figcaption{padding:8px 10px 10px;font-size:13px;line-height:1.5}
 .photo figcaption b{display:block;font-size:14px}
+.photos.prints{grid-template-columns:repeat(auto-fit,minmax(min(420px,100%),1fr))}
+.photos.prints .photo img{aspect-ratio:auto;object-fit:contain}
+.photos.prints .full{grid-column:1/-1}
 .credit{display:block;margin-top:4px;font-size:11.5px;color:var(--muted);line-height:1.5}
 .credit a{color:inherit}
 .phase .ph{display:block;width:100%;height:auto;aspect-ratio:4/3;object-fit:cover;border-radius:8px;margin:2px 0 4px;background:#fff}
