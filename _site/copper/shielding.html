@@ -95,10 +95,27 @@
       <div class="rec" id="ans" aria-live="polite"></div>
     </div>
     <div class="steps" style="margin-top:14px">
-      <div><h3>金屬遮蔽元件</h3><p>模組、配線架、接頭都要用遮蔽（金屬）版本，塑膠模組無法讓遮蔽層導通。</p></div>
+      <div><h3>金屬遮蔽元件</h3><p>水晶頭、模組、配線架都要用遮蔽（金屬）版本，塑膠件無法讓遮蔽層導通。</p></div>
       <div><h3>配線架端接地</h3><p>遮蔽層透過金屬配線架連到機櫃接地排；沒接地等於沒有遮蔽。</p></div>
       <div><h3>全程遮蔽連續</h3><p>從配線架、水平線、資訊插座到跳線，任何一段斷掉，效果都會打折。</p></div>
     </div>
+    <div class="errata" id="rj" style="margin-top:14px;border-color:var(--accent);background:color-mix(in srgb,var(--accent) 6%,transparent)"><b style="color:var(--accent)">有整體遮蔽（F、S、SF）的線，一定要配帶金屬外殼的 RJ45 水晶頭</b>：金屬外殼會壓住線材的鋁箔、編織網或地線，插進遮蔽插座後，再經金屬配線架連到機櫃接地。用一般透明塑膠水晶頭，遮蔽層在線尾就斷了、沒有接地，等於買了遮蔽線卻沒有遮蔽效果；懸空的遮蔽層甚至可能像天線一樣把雜訊帶進來，比 U/UTP 還差。只有每對鋁箔的 U/FTP 一般也搭配遮蔽水晶頭，端接方式依廠牌說明。</div>
+    <div class="grp-title" style="margin-top:16px">遮蔽水晶頭與插座實體 <span class="en">Shielded RJ45</span></div>
+    <div class="photos">
+      <figure class="photo"><img src="../assets/img/rj45-utp-vs-ftp.jpg" alt="上方為一般透明塑膠 RJ45 水晶頭，下方為 FTP 線用的帶金屬外殼水晶頭" loading="lazy" width="555" height="417">
+        <figcaption><b>塑膠 vs. 金屬外殼</b>上：一般透明塑膠水晶頭，給 U/UTP 用；下：FTP 線（外被印 26AWG FTP）用的金屬外殼水晶頭。照片經裁切。
+          <span class="credit">Photo: <a href="https://commons.wikimedia.org/wiki/File:RJ45-Stecker-Netzwerk.jpg" target="_blank" rel="noopener">Uwe Schwöbel</a> · <a href="https://creativecommons.org/licenses/by-sa/3.0/" target="_blank" rel="noopener">CC BY-SA 3.0</a></span></figcaption></figure>
+      <figure class="photo"><img src="../assets/img/rj45-shielded-plugs.jpg" alt="兩顆未壓接的遮蔽 RJ45 水晶頭，外面包覆金屬外殼" loading="lazy" width="750" height="514">
+        <figcaption><b>遮蔽水晶頭（未壓接）</b>整顆包金屬外殼，尾端的金屬片壓接時會夾住線材的遮蔽層。
+          <span class="credit">Photo: <a href="https://commons.wikimedia.org/wiki/File:RJ-45_male_shielded.jpg" target="_blank" rel="noopener">Baran Ivo</a> · <a href="https://creativecommons.org/publicdomain/mark/1.0/" target="_blank" rel="noopener">Public domain</a></span></figcaption></figure>
+      <figure class="photo"><img src="../assets/img/rj45-shielded-patch.jpg" alt="遮蔽跳線的 RJ45 接頭，可見金屬外殼" loading="lazy" width="960" height="720">
+        <figcaption><b>遮蔽跳線</b>成品遮蔽跳線，接頭兩側可見金屬外殼，插入遮蔽插座後與插座外殼接觸導通。
+          <span class="credit">Photo: <a href="https://commons.wikimedia.org/wiki/File:Rj45.jpg" target="_blank" rel="noopener">Michiel1972</a> · <a href="https://creativecommons.org/licenses/by-sa/3.0/" target="_blank" rel="noopener">CC BY-SA 3.0</a></span></figcaption></figure>
+      <figure class="photo"><img src="../assets/img/rj45-shielded-jack.jpg" alt="遮蔽型雙孔 RJ45 資訊插座，金屬壓鑄外殼" loading="lazy" width="750" height="739">
+        <figcaption><b>遮蔽資訊插座</b>插座這端也要用金屬外殼的遮蔽模組，遮蔽層才能一路導通到配線架與接地。
+          <span class="credit">Photo: <a href="https://commons.wikimedia.org/wiki/File:RJ-45_female_shielded_double.jpg" target="_blank" rel="noopener">Baran Ivo</a> · <a href="https://creativecommons.org/publicdomain/mark/1.0/" target="_blank" rel="noopener">Public domain</a></span></figcaption></figure>
+    </div>
+    <p class="note-key" style="margin-top:8px">實物照片取自 Wikimedia Commons，依原授權條款標示作者；本站縮圖，部分照片經裁切（已註明）。</p>
   </section>
 
   <footer>
@@ -124,7 +141,9 @@
     $('code').innerHTML = `<span class="o">${st.ov}</span><span class="s">/</span><span class="p">${st.pr}</span><span class="s">TP</span>`;
     $('fig').innerHTML = cableSVG({jacket:'#7e8a90', overall:st.ov, pair:st.pr, drain:st.ov === 'F', label:code});
     const i = INFO[code];
-    $('desc').innerHTML = `<h3>${code}</h3><p><b>${i[0]}</b></p><p>${i[1]}</p>`;
+    const rj = st.ov !== 'U' ? '<p class="hl-y">接頭：必須用帶金屬外殼的遮蔽 RJ45 水晶頭與遮蔽模組，並接地。<a href="#rj">看實體圖</a></p>'
+      : st.pr !== 'U' ? '<p>接頭：一般也搭配遮蔽水晶頭，端接依廠牌說明。<a href="#rj">看實體圖</a></p>' : '';
+    $('desc').innerHTML = `<h3>${code}</h3><p><b>${i[0]}</b></p><p>${i[1]}</p>${rj}`;
     $('inp').value = code; $('ok').textContent = ''; $('ok').className = 'badge';
     setSeg('ov', st.ov); setSeg('pr', st.pr);
     document.querySelectorAll('#gal button').forEach(b => b.setAttribute('aria-pressed', b.dataset.c === code));
