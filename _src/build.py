@@ -40,7 +40,7 @@ SHARED = [  # (part key, nav label, new path, legacy name)
     ("ref", "附錄・總表與辭典", "reference.html", "reference.html"),
 ]
 NEW_PAGES = {"dac-aec.html", "module-codes.html", "400g-1.6t.html", "light-source.html"}  # alias names only, no redirect
-RELATED = [("https://poe-pd-series.vercel.app/", "↗ PoE PD", "受電端系列")]
+RELATED = [("https://poe-pd-series.vercel.app/", "↗ PoE", "乙太網路供電")]
 
 
 def pages():
